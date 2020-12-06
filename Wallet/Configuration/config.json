@@ -1,0 +1,5 @@
+{
+  "Database": {
+    "ConnectionString": "User ID=bobolink;Host=localhost;Port=5432;Database=Wallet;Pooling=true;MaxPoolSize=100;"
+  }
+}
