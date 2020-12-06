@@ -1,5 +1,5 @@
 {
   "Database": {
-    "ConnectionString": "User ID=bobolink;Host=localhost;Port=5432;Database=Wallet;Pooling=true;MaxPoolSize=100;"
+    "ConnectionString": "User ID=postgres;Host=localhost;Port=5432;Database=Wallet;Pooling=true;MaxPoolSize=100;"
   }
 }

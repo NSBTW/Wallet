@@ -6,7 +6,6 @@ namespace Wallet
     {
         public int CommissionId { get; set; }
         
-        public Currency Currency { get; set; }
         public abstract double CalculateCommission(double value);
     }
 }

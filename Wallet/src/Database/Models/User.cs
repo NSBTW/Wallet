@@ -9,5 +9,6 @@ namespace Wallet
         public UserType Type { get; set; }
         
         public List<Account> Accounts { get; set; }
+        public List<PersonalCommission> PersonalCommissions { get; set; }
     }
 }

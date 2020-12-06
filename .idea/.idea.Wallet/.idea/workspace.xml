@@ -9,26 +9,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af8e0a30-0a7f-46c3-a15f-044ea4c01201" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Wallet/Configuration/config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/src/Controllers/AccountController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Account.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/AbsoluteCommission.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/Commission.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/ICommission.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/RelativeCommission.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Currency.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/User.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/UserType.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Wallet.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/src/Database/WalletDbContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/PersonalCommission.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/dataSources.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/Controllers/WeatherForecastController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wallet/Configuration/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/Configuration/config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wallet/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/Wallet.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/Wallet.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/WeatherForecast.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/Commission.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/Commission.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wallet/src/Database/WalletDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/WalletDbContext.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,19 +52,21 @@
         <option value="$PROJECT_DIR$/Wallet/Database/WalletDbContext.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Helpers/DbContextExtensions.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Helpers/StringExtensions.cs" />
-        <option value="$PROJECT_DIR$/Wallet/Configuration/config.json" />
-        <option value="$PROJECT_DIR$/Wallet/Program.cs" />
         <option value="$PROJECT_DIR$/Wallet/Startup.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Controllers/AccountController.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/ICommission.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/PersonalCommission.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Currency.cs" />
         <option value="$PROJECT_DIR$/Wallet/Properties/launchSettings.json" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/CommissionBase.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/User.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/Commission.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/RelativeCommission.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/AbsoluteCommission.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/Commission.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/PersonalCommission.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/User.cs" />
+        <option value="$PROJECT_DIR$/Wallet/Configuration/config.json" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/094148a8-3633-4447-ad35-71e8fb00e38f/console.sql" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/WalletDbContextInitializer.cs" />
+        <option value="$PROJECT_DIR$/Wallet/Program.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/WalletDbContext.cs" />
       </list>
     </option>
@@ -142,7 +134,8 @@
       <workItem from="1607259757882" duration="6962000" />
       <workItem from="1607267299618" duration="324000" />
       <workItem from="1607267681192" duration="3012000" />
-      <workItem from="1607271364944" duration="3989000" />
+      <workItem from="1607271364944" duration="7904000" />
+      <workItem from="1607279611751" duration="4166000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1607260514044</created>
@@ -181,30 +174,38 @@
       <screen x="0" y="0" width="1366" height="731" />
     </state>
     <state x="549" y="150" width="429" height="432" key="#Web_Browsers/0.0.1366.731@0.0.1366.731" timestamp="1607271746487" />
-    <state x="278" y="0" width="977" height="731" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607272955473">
+    <state x="278" y="0" width="977" height="731" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607278215911">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
-    <state x="278" y="0" width="977" height="731" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.731@0.0.1366.731" timestamp="1607272955473" />
+    <state x="278" y="0" width="977" height="731" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.731@0.0.1366.731" timestamp="1607278215911" />
+    <state width="254" height="195" key="DatabaseViewActions_Filter" timestamp="1607278158968">
+      <screen x="0" y="0" width="1366" height="731" />
+    </state>
+    <state width="254" height="195" key="DatabaseViewActions_Filter/0.0.1366.731@0.0.1366.731" timestamp="1607278158968" />
     <state x="466" y="124" width="428" height="484" key="FileChooserDialogImpl" timestamp="1607267056139">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
     <state x="466" y="124" width="428" height="484" key="FileChooserDialogImpl/0.0.1366.731@0.0.1366.731" timestamp="1607267056139" />
-    <state width="1320" height="153" key="GridCell.Tab.0.bottom" timestamp="1607274819099">
+    <state width="1320" height="370" key="GridCell.Tab.0.bottom" timestamp="1607284774263">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
-    <state width="1320" height="153" key="GridCell.Tab.0.bottom/0.0.1366.731@0.0.1366.731" timestamp="1607274819099" />
-    <state width="1320" height="153" key="GridCell.Tab.0.center" timestamp="1607274819099">
+    <state width="1320" height="370" key="GridCell.Tab.0.bottom/0.0.1366.731@0.0.1366.731" timestamp="1607284774263" />
+    <state width="1320" height="370" key="GridCell.Tab.0.center" timestamp="1607284774262">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
-    <state width="1320" height="153" key="GridCell.Tab.0.center/0.0.1366.731@0.0.1366.731" timestamp="1607274819099" />
-    <state width="1320" height="153" key="GridCell.Tab.0.left" timestamp="1607274819098">
+    <state width="1320" height="370" key="GridCell.Tab.0.center/0.0.1366.731@0.0.1366.731" timestamp="1607284774262" />
+    <state width="1320" height="370" key="GridCell.Tab.0.left" timestamp="1607284774262">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
-    <state width="1320" height="153" key="GridCell.Tab.0.left/0.0.1366.731@0.0.1366.731" timestamp="1607274819098" />
-    <state width="1320" height="153" key="GridCell.Tab.0.right" timestamp="1607274819099">
+    <state width="1320" height="370" key="GridCell.Tab.0.left/0.0.1366.731@0.0.1366.731" timestamp="1607284774262" />
+    <state width="1320" height="370" key="GridCell.Tab.0.right" timestamp="1607284774262">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
-    <state width="1320" height="153" key="GridCell.Tab.0.right/0.0.1366.731@0.0.1366.731" timestamp="1607274819099" />
+    <state width="1320" height="370" key="GridCell.Tab.0.right/0.0.1366.731@0.0.1366.731" timestamp="1607284774262" />
+    <state width="235" height="498" key="HiddenNamespacesPopup" timestamp="1607279092208">
+      <screen x="0" y="0" width="1366" height="731" />
+    </state>
+    <state width="235" height="498" key="HiddenNamespacesPopup/0.0.1366.731@0.0.1366.731" timestamp="1607279092208" />
     <state x="278" y="101" width="804" height="530" key="Rider.ProjectTemplateDialog.Size" timestamp="1607260408798">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
@@ -213,9 +214,17 @@
       <screen x="0" y="0" width="1366" height="731" />
     </state>
     <state x="179" y="1" key="SettingsEditor/0.0.1366.731@0.0.1366.731" timestamp="1607267443191" />
-    <state x="346" y="52" width="672" height="678" key="search.everywhere.popup" timestamp="1607271405472">
+    <state x="572" y="256" width="332" height="248" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1607278085653">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
-    <state x="346" y="52" width="672" height="678" key="search.everywhere.popup/0.0.1366.731@0.0.1366.731" timestamp="1607271405472" />
+    <state x="572" y="256" width="332" height="248" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1366.731@0.0.1366.731" timestamp="1607278085653" />
+    <state x="345" y="160" key="run.anything.popup" timestamp="1607278701578">
+      <screen x="0" y="0" width="1366" height="731" />
+    </state>
+    <state x="345" y="160" key="run.anything.popup/0.0.1366.731@0.0.1366.731" timestamp="1607278701578" />
+    <state x="346" y="52" width="672" height="678" key="search.everywhere.popup" timestamp="1607284072326">
+      <screen x="0" y="0" width="1366" height="731" />
+    </state>
+    <state x="346" y="52" width="672" height="678" key="search.everywhere.popup/0.0.1366.731@0.0.1366.731" timestamp="1607284072326" />
   </component>
 </project>
