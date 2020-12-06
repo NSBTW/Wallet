@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Wallet.Database;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.AspNetCore.Identity;
 
 namespace Wallet
 {
@@ -20,8 +22,9 @@ namespace Wallet
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            
+            services.AddMvc();
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<WalletDbContext>();
             services.AddEntityFrameworkNpgsql();
             services.AddDbContext<WalletDbContext>((provider, options) =>
             {
@@ -40,6 +43,9 @@ namespace Wallet
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }

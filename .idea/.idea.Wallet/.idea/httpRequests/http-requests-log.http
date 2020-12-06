@@ -1,0 +1,12 @@
+POST http://localhost:5001/User/Register?Email=user@gmail.com&Password=123&PasswordConfirm=123
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+POST http://localhost:5001/User/Register?Email=user@gmail.com&Password=123&PasswordConfirm=123
+Accept: */*
+Cache-Control: no-cache
+
+###
+

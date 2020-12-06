@@ -2,7 +2,7 @@ namespace Wallet
 {
     public class Wallet
     {
-        public int WalletId { get; set; }
+        public string Id { get; set; }
         public Account Account { get; set; }
         
         public Currency Currency { get; set; }
