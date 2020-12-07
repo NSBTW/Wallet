@@ -1,6 +1,7 @@
 using System.Linq;
+using Wallet.Database.Models.Commissions;
 
-namespace Wallet
+namespace Wallet.Database.Models
 {
     public class Wallet
     {
@@ -28,8 +29,8 @@ namespace Wallet
 
         public bool TryPut(double value)
         {
-            var personalCommission = GetPersonalCommissionsStack().InCommission;
-            var commission = personalCommission ?? Currency.CommissionsStack.InCommission;
+            var personalCommission = GetPersonalCommissionsStack().DepositCommission;
+            var commission = personalCommission ?? Currency.CommissionsStack.DepositCommission;
             var commissionValue = commission.CalculateCommission(value);
             if (commissionValue > value)
                 return false;

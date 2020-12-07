@@ -1,6 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-
-namespace Wallet
+namespace Wallet.Database.Models.Commissions
 {
     public abstract class Commission : ICommission
     {

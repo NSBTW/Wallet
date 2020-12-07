@@ -1,4 +1,4 @@
-namespace Wallet
+namespace Wallet.Database.Models.Commissions
 {
     public interface ICommission
     {

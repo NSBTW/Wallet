@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Wallet.Database;
+using Wallet.Database.Models;
 
 namespace Wallet.Controllers
 {
@@ -73,7 +74,8 @@ namespace Wallet.Controllers
             return Ok();
         }
 
-        private async Task<Wallet> GetWallet(string accountId, string currencyId)
+        //need refactor(q)
+        private async Task<Database.Models.Wallet> GetWallet(string accountId, string currencyId)
         {
             var user = await _userManager.GetUserAsync(User);
 
@@ -86,6 +88,9 @@ namespace Wallet.Controllers
                 .ThenInclude(c => c.CommissionsStack)
                 .Include(w => w.Account)
                 .ThenInclude(a => a.User)
+                .Include(w => w.Currency.CommissionsStack.TransferCommission)
+                .Include(w => w.Currency.CommissionsStack.DepositCommission)
+                .Include(w => w.Currency.CommissionsStack.OutCommission)
                 .FirstOrDefaultAsync();
         }
 
@@ -98,6 +103,7 @@ namespace Wallet.Controllers
             await _walletDbContext.SaveChangesAsync();
         }
 
+        //Need refactor(q)
         [Authorize]
         [HttpGet("{accountName}")]
         public async Task<Account> Get(string accountName)
@@ -108,9 +114,17 @@ namespace Wallet.Controllers
                 .ThenInclude(w => w.Currency)
                 .ThenInclude(c => c.CommissionsStack)
                 .ThenInclude(s => s.TransferCommission)
+                .Include(a => a.Wallets)
+                .ThenInclude(w => w.Currency)
+                .ThenInclude(c => c.CommissionsStack)
+                .ThenInclude(s => s.DepositCommission)
+                .Include(a => a.Wallets)
+                .ThenInclude(w => w.Currency)
+                .ThenInclude(c => c.CommissionsStack)
+                .ThenInclude(s => s.OutCommission)
                 .FirstOrDefaultAsync();
             var wallets =
-                account.Wallets.Select(wallet => new Wallet {Currency = wallet.Currency, Value = wallet.Value})
+                account.Wallets.Select(wallet => new Database.Models.Wallet {Currency = wallet.Currency, Value = wallet.Value})
                     .ToList();
             return new Account {Name = account.Name, Wallets = wallets};
         }
@@ -121,8 +135,6 @@ namespace Wallet.Controllers
             var accounts = await _walletDbContext.Accounts
                 .Where(a => a.User.Id == _userManager.GetUserId(User)).ToListAsync();
 
-            // DbInitializer.InitializeUser(_walletDbContext, await _userManager.GetUserAsync(User));
-            
             return accounts.Select(a => a.Name).ToList();
         }
     }

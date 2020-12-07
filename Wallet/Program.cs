@@ -5,17 +5,50 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Wallet.Database.Models;
 
 namespace Wallet
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            var host = CreateWebHostBuilder(args).Build();
+ 
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var userManager = services.GetRequiredService<UserManager<User>>();
+                    var rolesManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                    if (await rolesManager.FindByNameAsync("admin") == null)
+                        await rolesManager.CreateAsync(new IdentityRole("admin"));
+
+                    var email = "admin@gmail.com";
+                    var password = "Qwe123!";
+                    if (await userManager.FindByNameAsync(email) == null)
+                    {
+                        var admin = new User { Email = email, UserName = email };
+                        var result = await userManager.CreateAsync(admin, password);
+                        if (result.Succeeded)
+                            await userManager.AddToRoleAsync(admin, "admin");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred while seeding the database.");
+                }
+            }
+ 
+            host.Run();
+            
         }
 
 

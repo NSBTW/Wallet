@@ -1,4 +1,6 @@
-namespace Wallet
+using Wallet.Database.Models.Commissions;
+
+namespace Wallet.Database.Models
 {
     public class PersonalCommission
     {

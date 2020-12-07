@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Wallet.Helpers;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Wallet.Database.Models;
+using Wallet.Database.Models.Commissions;
 
 namespace Wallet.Database
 {
@@ -10,7 +12,7 @@ namespace Wallet.Database
     {
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Currency> Currencies { get; set; }
-        public DbSet<Wallet> Wallets { get; set; }
+        public DbSet<Models.Wallet> Wallets { get; set; }
         public DbSet<Commission> Commissions { get; set; }
         public DbSet<PersonalCommission> PersonalCommissions { get; set; }
 

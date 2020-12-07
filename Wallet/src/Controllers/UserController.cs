@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Wallet.Database.Models;
 using Wallet.ViewModels;
 
 namespace Wallet.Controllers

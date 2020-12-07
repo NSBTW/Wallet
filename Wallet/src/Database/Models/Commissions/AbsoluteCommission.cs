@@ -1,7 +1,6 @@
 using System;
-using Microsoft.EntityFrameworkCore;
 
-namespace Wallet
+namespace Wallet.Database.Models.Commissions
 {
     public class AbsoluteCommission : Commission
     {

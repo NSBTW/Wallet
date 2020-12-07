@@ -12,24 +12,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af8e0a30-0a7f-46c3-a15f-044ea4c01201" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Wallet/src/Database/DbInitializer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/CommissionsStack.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wallet/src/Controllers/AdminController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wallet/src/ViewModels/CommissionArea.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/dataSources/094148a8-3633-4447-ad35-71e8fb00e38f.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/dataSources/094148a8-3633-4447-ad35-71e8fb00e38f.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/dataSources/094148a8-3633-4447-ad35-71e8fb00e38f/storage_v2/_src_/database/Wallet.GUD_mQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/dataSources/094148a8-3633-4447-ad35-71e8fb00e38f/storage_v2/_src_/database/Wallet.GUD_mQ/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wallet/Migrations/WalletDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/Migrations/WalletDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wallet/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wallet/src/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Controllers/AccountController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/src/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Controllers/UserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/AbsoluteCommission.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/AbsoluteCommission.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/Commission.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/Commission.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/RelativeCommission.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/RelativeCommission.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/Currency.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Currency.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/PersonalCommission.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/PersonalCommission.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/CommissionsStack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/CommissionsStack.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/Wallet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Wallet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/src/Database/WalletDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/WalletDbContext.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,8 +40,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Wallet/WeatherForecast.cs" />
-        <option value="$PROJECT_DIR$/Wallet/Controllers/WeatherForecastController.cs" />
         <option value="$PROJECT_DIR$/Wallet/Controllers/AccountController.cs" />
         <option value="$PROJECT_DIR$/Wallet/UserType.cs" />
         <option value="$PROJECT_DIR$/Wallet/Commission.cs" />
@@ -73,7 +62,6 @@
         <option value="$PROJECT_DIR$/Wallet/Configuration/config.json" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/094148a8-3633-4447-ad35-71e8fb00e38f/console.sql" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/WalletDbContextInitializer.cs" />
-        <option value="$PROJECT_DIR$/Wallet/Program.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/Models/User.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Account.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/ViewModels/RegisterViewModel.cs" />
@@ -99,7 +87,10 @@
         <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/RelativeCommission.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/CommissionsStack.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/DbInitializer.cs" />
+        <option value="$PROJECT_DIR$/Wallet/Program.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/ViewModels/CommissionArea.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Controllers/AccountController.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Controllers/AdminController.cs" />
       </list>
     </option>
   </component>
@@ -313,7 +304,7 @@
       <workItem from="1607271364944" duration="7904000" />
       <workItem from="1607279611751" duration="9527000" />
       <workItem from="1607328286036" duration="7111000" />
-      <workItem from="1607338285436" duration="18433000" />
+      <workItem from="1607338285436" duration="23739000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1607260514044</created>
@@ -364,22 +355,22 @@
       <screen x="0" y="0" width="1366" height="731" />
     </state>
     <state x="466" y="124" width="428" height="484" key="FileChooserDialogImpl/0.0.1366.731@0.0.1366.731" timestamp="1607267056139" />
-    <state width="1320" height="110" key="GridCell.Tab.0.bottom" timestamp="1607358426403">
+    <state width="1320" height="209" key="GridCell.Tab.0.bottom" timestamp="1607361967520">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
-    <state width="1320" height="110" key="GridCell.Tab.0.bottom/0.0.1366.731@0.0.1366.731" timestamp="1607358426403" />
-    <state width="1320" height="110" key="GridCell.Tab.0.center" timestamp="1607358426402">
+    <state width="1320" height="209" key="GridCell.Tab.0.bottom/0.0.1366.731@0.0.1366.731" timestamp="1607361967520" />
+    <state width="1320" height="209" key="GridCell.Tab.0.center" timestamp="1607361967519">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
-    <state width="1320" height="110" key="GridCell.Tab.0.center/0.0.1366.731@0.0.1366.731" timestamp="1607358426402" />
-    <state width="1320" height="110" key="GridCell.Tab.0.left" timestamp="1607358426402">
+    <state width="1320" height="209" key="GridCell.Tab.0.center/0.0.1366.731@0.0.1366.731" timestamp="1607361967519" />
+    <state width="1320" height="209" key="GridCell.Tab.0.left" timestamp="1607361967519">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
-    <state width="1320" height="110" key="GridCell.Tab.0.left/0.0.1366.731@0.0.1366.731" timestamp="1607358426402" />
-    <state width="1320" height="110" key="GridCell.Tab.0.right" timestamp="1607358426403">
+    <state width="1320" height="209" key="GridCell.Tab.0.left/0.0.1366.731@0.0.1366.731" timestamp="1607361967519" />
+    <state width="1320" height="209" key="GridCell.Tab.0.right" timestamp="1607361967520">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
-    <state width="1320" height="110" key="GridCell.Tab.0.right/0.0.1366.731@0.0.1366.731" timestamp="1607358426403" />
+    <state width="1320" height="209" key="GridCell.Tab.0.right/0.0.1366.731@0.0.1366.731" timestamp="1607361967520" />
     <state width="235" height="498" key="HiddenNamespacesPopup" timestamp="1607279092208">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
@@ -400,10 +391,10 @@
       <screen x="0" y="0" width="1366" height="731" />
     </state>
     <state x="572" y="256" width="332" height="248" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1366.731@0.0.1366.731" timestamp="1607358248960" />
-    <state x="345" y="160" key="run.anything.popup" timestamp="1607286325261">
+    <state x="345" y="160" key="run.anything.popup" timestamp="1607360737997">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
-    <state x="345" y="160" key="run.anything.popup/0.0.1366.731@0.0.1366.731" timestamp="1607286325261" />
+    <state x="345" y="160" key="run.anything.popup/0.0.1366.731@0.0.1366.731" timestamp="1607360737997" />
     <state x="346" y="52" width="672" height="678" key="search.everywhere.popup" timestamp="1607342409730">
       <screen x="0" y="0" width="1366" height="731" />
     </state>

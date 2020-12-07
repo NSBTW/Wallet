@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Wallet.Database;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.AspNetCore.Identity;
+using Wallet.Database.Models;
 
 namespace Wallet
 {

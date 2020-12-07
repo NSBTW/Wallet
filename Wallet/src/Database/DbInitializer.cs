@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Wallet.Database.Models;
+using Wallet.Database.Models.Commissions;
 
 namespace Wallet.Database
 {
@@ -14,14 +16,14 @@ namespace Wallet.Database
                 CommissionsStack = new CommissionsStack(relativeCommission){Id = Guid.NewGuid().ToString()}, Name = "USD",
                 Id = Guid.NewGuid().ToString()
             };
-            var wallet = new Wallet {Currency = currency, Value = 666, Id = Guid.NewGuid().ToString()};
-            var wallet2 = new Wallet {Currency = currency, Value = 1000, Id = Guid.NewGuid().ToString()};
+            var wallet = new Models.Wallet {Currency = currency, Value = 666, Id = Guid.NewGuid().ToString()};
+            var wallet2 = new Models.Wallet {Currency = currency, Value = 1000, Id = Guid.NewGuid().ToString()};
 
             var account = new Account
-                {Name = "Main", Wallets = new List<Wallet> {wallet}, Id = Guid.NewGuid().ToString()};
+                {Name = "Main", Wallets = new List<Models.Wallet> {wallet}, Id = Guid.NewGuid().ToString()};
             
             var account2 = new Account
-                {Name = "Second", Wallets = new List<Wallet> {wallet2}, Id = Guid.NewGuid().ToString()};
+                {Name = "Second", Wallets = new List<Models.Wallet> {wallet2}, Id = Guid.NewGuid().ToString()};
             user.Accounts = new List<Account> {account, account2};
             var personalCommission = new PersonalCommission
             {

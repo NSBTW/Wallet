@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
-
-namespace Wallet
+namespace Wallet.Database.Models
 {
     public class User : IdentityUser
     {

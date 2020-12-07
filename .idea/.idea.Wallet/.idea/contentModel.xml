@@ -17,6 +17,8 @@
           <e p="20201207113312_IdentityUser.cs" t="Include" />
           <e p="20201207160422_CommissionsStack.Designer.cs" t="Include" />
           <e p="20201207160422_CommissionsStack.cs" t="Include" />
+          <e p="20201207171542_DepositColumnRename.Designer.cs" t="Include" />
+          <e p="20201207171542_DepositColumnRename.cs" t="Include" />
           <e p="WalletDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />
@@ -51,6 +53,7 @@
         <e p="src" t="Include">
           <e p="Controllers" t="Include">
             <e p="AccountController.cs" t="Include" />
+            <e p="AdminController.cs" t="Include" />
             <e p="UserController.cs" t="Include" />
           </e>
           <e p="Database" t="Include">
@@ -76,6 +79,7 @@
             <e p="StringExtensions.cs" t="Include" />
           </e>
           <e p="ViewModels" t="Include">
+            <e p="CommissionArea.cs" t="Include" />
             <e p="LoginViewModel.cs" t="Include" />
             <e p="RegisterViewModel.cs" t="Include" />
           </e>

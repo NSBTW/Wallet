@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Wallet
+namespace Wallet.Database.Models
 {
     public class Account
     {
@@ -8,6 +8,6 @@ namespace Wallet
         public string Name { get; set; }
 
         public User User { get; set; }
-        public List<Wallet> Wallets { get; set; }
+        public List<Database.Models.Wallet> Wallets { get; set; }
     }
 }
