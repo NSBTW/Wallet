@@ -22,7 +22,7 @@ namespace Wallet.Database.Models
             if (cost > value)
                 return false;
 
-            value -= cost;
+            Value -= cost;
             target.Value += cost;
             return true;
         }

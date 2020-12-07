@@ -60,9 +60,20 @@ namespace Wallet.Controllers
         {
             if (await _walletDbContext.Currencies.Where(c => c.Name == name).FirstOrDefaultAsync() != null)
                 return BadRequest();
-            var currency = new Currency {CommissionsStack = new CommissionsStack(commission), Name = name};
+            var currency = new Currency
+                {CommissionsStack = new CommissionsStack(commission), Name = name, Id = Guid.NewGuid().ToString()};
             await _walletDbContext.Currencies.AddAsync(currency);
             await _walletDbContext.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpPost("MakeOperation")]
+        public async Task<IActionResult> MakeOperation([FromQuery] string operationId)
+        {
+            var operation = await _walletDbContext.Operations.Where(o => o.Id == operationId).FirstOrDefaultAsync();
+            if (operation == null)
+                return BadRequest();
+            operation.TryDoOperation();
             return Ok();
         }
 
@@ -85,6 +96,7 @@ namespace Wallet.Controllers
             if (currency == null)
                 return BadRequest();
 
+            commission.Id = Guid.NewGuid().ToString();
             ChangeCommissionOnArea(area, currency.CommissionsStack, commission);
 
             await _walletDbContext.SaveChangesAsync();
@@ -110,7 +122,8 @@ namespace Wallet.Controllers
             var personalCommission = await secondQuery.FirstOrDefaultAsync();
             if (personalCommission == null)
                 return BadRequest();
-
+            
+            commission.Id = Guid.NewGuid().ToString();
             ChangeCommissionOnArea(area, personalCommission.CommissionsStack, commission);
 
             await _walletDbContext.SaveChangesAsync();

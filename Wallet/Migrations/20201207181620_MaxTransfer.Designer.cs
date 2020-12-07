@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Wallet.Database;
@@ -9,9 +10,10 @@ using Wallet.Database;
 namespace Wallet.Migrations
 {
     [DbContext(typeof(WalletDbContext))]
-    partial class WalletDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201207181620_MaxTransfer")]
+    partial class MaxTransfer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -273,35 +275,6 @@ namespace Wallet.Migrations
                     b.ToTable("currencies");
                 });
 
-            modelBuilder.Entity("Wallet.Database.Models.Operations.Operation", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text")
-                        .HasColumnName("id");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("discriminator");
-
-                    b.Property<double>("Value")
-                        .HasColumnType("double precision")
-                        .HasColumnName("value");
-
-                    b.Property<string>("WalletId")
-                        .HasColumnType("text")
-                        .HasColumnName("wallet_id");
-
-                    b.HasKey("Id")
-                        .HasName("pk_operations");
-
-                    b.HasIndex("WalletId");
-
-                    b.ToTable("operations");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Operation");
-                });
-
             modelBuilder.Entity("Wallet.Database.Models.PersonalCommission", b =>
                 {
                     b.Property<string>("Id")
@@ -472,39 +445,6 @@ namespace Wallet.Migrations
                     b.HasDiscriminator().HasValue("RelativeCommission");
                 });
 
-            modelBuilder.Entity("Wallet.Database.Models.Operations.DepositOperation", b =>
-                {
-                    b.HasBaseType("Wallet.Database.Models.Operations.Operation");
-
-                    b.ToTable("operations");
-
-                    b.HasDiscriminator().HasValue("DepositOperation");
-                });
-
-            modelBuilder.Entity("Wallet.Database.Models.Operations.OutOperation", b =>
-                {
-                    b.HasBaseType("Wallet.Database.Models.Operations.Operation");
-
-                    b.ToTable("operations");
-
-                    b.HasDiscriminator().HasValue("OutOperation");
-                });
-
-            modelBuilder.Entity("Wallet.Database.Models.Operations.TransferOperation", b =>
-                {
-                    b.HasBaseType("Wallet.Database.Models.Operations.Operation");
-
-                    b.Property<string>("TargetWalletId")
-                        .HasColumnType("text")
-                        .HasColumnName("target_wallet_id");
-
-                    b.HasIndex("TargetWalletId");
-
-                    b.ToTable("operations");
-
-                    b.HasDiscriminator().HasValue("TransferOperation");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -606,16 +546,6 @@ namespace Wallet.Migrations
                     b.Navigation("CommissionsStack");
                 });
 
-            modelBuilder.Entity("Wallet.Database.Models.Operations.Operation", b =>
-                {
-                    b.HasOne("Wallet.Database.Models.Wallet", "Wallet")
-                        .WithMany()
-                        .HasForeignKey("WalletId")
-                        .HasConstraintName("fk_operations_wallets_wallet_id");
-
-                    b.Navigation("Wallet");
-                });
-
             modelBuilder.Entity("Wallet.Database.Models.PersonalCommission", b =>
                 {
                     b.HasOne("Wallet.Database.Models.Commissions.CommissionsStack", "CommissionsStack")
@@ -655,16 +585,6 @@ namespace Wallet.Migrations
                     b.Navigation("Account");
 
                     b.Navigation("Currency");
-                });
-
-            modelBuilder.Entity("Wallet.Database.Models.Operations.TransferOperation", b =>
-                {
-                    b.HasOne("Wallet.Database.Models.Wallet", "TargetWallet")
-                        .WithMany()
-                        .HasForeignKey("TargetWalletId")
-                        .HasConstraintName("fk_operations_wallets_target_wallet_id");
-
-                    b.Navigation("TargetWallet");
                 });
 
             modelBuilder.Entity("Wallet.Database.Models.Account", b =>

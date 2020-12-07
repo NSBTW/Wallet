@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Wallet.Database;
@@ -9,9 +10,10 @@ using Wallet.Database;
 namespace Wallet.Migrations
 {
     [DbContext(typeof(WalletDbContext))]
-    partial class WalletDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201207183235_Operations")]
+    partial class Operations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -275,9 +277,9 @@ namespace Wallet.Migrations
 
             modelBuilder.Entity("Wallet.Database.Models.Operations.Operation", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("OperationId")
                         .HasColumnType("text")
-                        .HasColumnName("id");
+                        .HasColumnName("operation_id");
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
@@ -292,7 +294,7 @@ namespace Wallet.Migrations
                         .HasColumnType("text")
                         .HasColumnName("wallet_id");
 
-                    b.HasKey("Id")
+                    b.HasKey("OperationId")
                         .HasName("pk_operations");
 
                     b.HasIndex("WalletId");

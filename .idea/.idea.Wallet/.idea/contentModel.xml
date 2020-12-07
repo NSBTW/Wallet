@@ -19,6 +19,12 @@
           <e p="20201207160422_CommissionsStack.cs" t="Include" />
           <e p="20201207171542_DepositColumnRename.Designer.cs" t="Include" />
           <e p="20201207171542_DepositColumnRename.cs" t="Include" />
+          <e p="20201207181620_MaxTransfer.Designer.cs" t="Include" />
+          <e p="20201207181620_MaxTransfer.cs" t="Include" />
+          <e p="20201207183235_Operations.Designer.cs" t="Include" />
+          <e p="20201207183235_Operations.cs" t="Include" />
+          <e p="20201207184650_OperationsIdRename.Designer.cs" t="Include" />
+          <e p="20201207184650_OperationsIdRename.cs" t="Include" />
           <e p="WalletDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />
@@ -68,6 +74,12 @@
                 <e p="RelativeCommission.cs" t="Include" />
               </e>
               <e p="Currency.cs" t="Include" />
+              <e p="Operations" t="Include">
+                <e p="DepositOperation.cs" t="Include" />
+                <e p="Operation.cs" t="Include" />
+                <e p="OutOperation.cs" t="Include" />
+                <e p="TransferOperation.cs" t="Include" />
+              </e>
               <e p="PersonalCommission.cs" t="Include" />
               <e p="User.cs" t="Include" />
               <e p="Wallet.cs" t="Include" />

@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Wallet.Database;
 using Wallet.Database.Models;
+using Wallet.Database.Models.Operations;
 
 namespace Wallet.Controllers
 {
@@ -17,6 +18,9 @@ namespace Wallet.Controllers
     [Route("[controller]")]
     public class AccountController : ControllerBase
     {
+        //1) include
+        //2) cache
+        //3) dictionaries
         private readonly WalletDbContext _walletDbContext;
         private readonly UserManager<User> _userManager;
 
@@ -41,6 +45,16 @@ namespace Wallet.Controllers
             if (targetWallet == null)
                 return BadRequest();
 
+            var currency = await _walletDbContext.Currencies.Where(c => c.Id == currencyId).FirstOrDefaultAsync();
+            if (value >= currency.MaxTransfer)
+            {
+                var operation = new TransferOperation
+                    {Wallet = wallet, TargetWallet = targetWallet, Value = value, Id = Guid.NewGuid().ToString()};
+                await _walletDbContext.Operations.AddAsync(operation);
+                await _walletDbContext.SaveChangesAsync();
+                return Ok();
+            }
+
             if (!wallet.TryTransferTo(targetWallet, value)) return BadRequest();
             await _walletDbContext.SaveChangesAsync();
             return Ok();
@@ -55,6 +69,15 @@ namespace Wallet.Controllers
             if (wallet == null)
                 return BadRequest();
 
+            var currency = await _walletDbContext.Currencies.Where(c => c.Id == currencyId).FirstOrDefaultAsync();
+            if (value >= currency.MaxTransfer)
+            {
+                var operation = new DepositOperation {Wallet = wallet, Value = value, Id = Guid.NewGuid().ToString()};
+                await _walletDbContext.Operations.AddAsync(operation);
+                await _walletDbContext.SaveChangesAsync();
+                return Ok();
+            }
+
             if (!wallet.TryPut(value)) return BadRequest();
             await _walletDbContext.SaveChangesAsync();
             return Ok();
@@ -68,6 +91,15 @@ namespace Wallet.Controllers
             var wallet = await GetWallet(accountId, currencyId);
             if (wallet == null)
                 return BadRequest();
+
+            var currency = await _walletDbContext.Currencies.Where(c => c.Id == currencyId).FirstOrDefaultAsync();
+            if (value >= currency.MaxTransfer)
+            {
+                var operation = new OutOperation {Wallet = wallet, Value = value, Id = Guid.NewGuid().ToString()};
+                await _walletDbContext.Operations.AddAsync(operation);
+                await _walletDbContext.SaveChangesAsync();
+                return Ok();
+            }
 
             if (!wallet.TryGet(value)) return BadRequest();
             await _walletDbContext.SaveChangesAsync();
@@ -99,7 +131,7 @@ namespace Wallet.Controllers
         public async void CreateAccount([FromQuery] string name)
         {
             var user = await _userManager.GetUserAsync(User);
-            user.Accounts.Add(new Account {Name = name});
+            user.Accounts.Add(new Account {Name = name, Id = Guid.NewGuid().ToString()});
             await _walletDbContext.SaveChangesAsync();
         }
 
@@ -124,7 +156,8 @@ namespace Wallet.Controllers
                 .ThenInclude(s => s.OutCommission)
                 .FirstOrDefaultAsync();
             var wallets =
-                account.Wallets.Select(wallet => new Database.Models.Wallet {Currency = wallet.Currency, Value = wallet.Value})
+                account.Wallets.Select(wallet => new Database.Models.Wallet
+                        {Currency = wallet.Currency, Value = wallet.Value})
                     .ToList();
             return new Account {Name = account.Name, Wallets = wallets};
         }
