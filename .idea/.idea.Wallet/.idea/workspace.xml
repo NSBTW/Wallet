@@ -12,15 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af8e0a30-0a7f-46c3-a15f-044ea4c01201" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Wallet/src/Controllers/AdminController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/src/ViewModels/CommissionArea.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/Migrations/WalletDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/Migrations/WalletDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/src/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Controllers/AccountController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/CommissionsStack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/CommissionsStack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/Wallet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Wallet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wallet/src/Controllers/AdminController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Controllers/AdminController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,15 +48,12 @@
         <option value="$PROJECT_DIR$/Wallet/Database/WalletDbContext.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Helpers/DbContextExtensions.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Helpers/StringExtensions.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/ICommission.cs" />
         <option value="$PROJECT_DIR$/Wallet/Properties/launchSettings.json" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/CommissionBase.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/PersonalCommission.cs" />
         <option value="$PROJECT_DIR$/Wallet/Configuration/config.json" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/094148a8-3633-4447-ad35-71e8fb00e38f/console.sql" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/WalletDbContextInitializer.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/User.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Account.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/ViewModels/RegisterViewModel.cs" />
         <option value="$PROJECT_DIR$/Wallet/Views/Shared/_LoginPartial.cshtml" />
         <option value="$PROJECT_DIR$/Wallet/Views/Shared/Error.cshtml" />
@@ -79,17 +69,20 @@
         <option value="$PROJECT_DIR$/Wallet/src/Controllers/UserController.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/WalletDbContext.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/StackCommission.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Currency.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/PersonalCommission.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Wallet.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/Commission.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/AbsoluteCommission.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/RelativeCommission.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/CommissionsStack.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/DbInitializer.cs" />
         <option value="$PROJECT_DIR$/Wallet/Program.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/ViewModels/CommissionArea.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Controllers/AccountController.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Wallet.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/User.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/PersonalCommission.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Currency.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Account.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/AbsoluteCommission.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/Commission.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/CommissionsStack.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/ICommission.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/RelativeCommission.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Controllers/AdminController.cs" />
       </list>
     </option>
@@ -304,7 +297,7 @@
       <workItem from="1607271364944" duration="7904000" />
       <workItem from="1607279611751" duration="9527000" />
       <workItem from="1607328286036" duration="7111000" />
-      <workItem from="1607338285436" duration="23739000" />
+      <workItem from="1607338285436" duration="24461000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1607260514044</created>

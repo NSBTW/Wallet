@@ -41,6 +41,31 @@ namespace Wallet.Controllers
             return Ok();
         }
 
+        // what about the accounts?
+        [HttpPost("DeleteCurrency")]
+        public async Task<IActionResult> DeleteCurrency([FromQuery] string currencyId)
+        {
+            var currency = await _walletDbContext.Currencies
+                .Where(c => c.Id == currencyId)
+                .FirstOrDefaultAsync();
+            if (currency == null)
+                return BadRequest();
+            _walletDbContext.Currencies.Remove(currency);
+            await _walletDbContext.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpPost("AddCurrency")]
+        public async Task<IActionResult> AddCurrency([FromQuery] string name, [FromQuery] Commission commission)
+        {
+            if (await _walletDbContext.Currencies.Where(c => c.Name == name).FirstOrDefaultAsync() != null)
+                return BadRequest();
+            var currency = new Currency {CommissionsStack = new CommissionsStack(commission), Name = name};
+            await _walletDbContext.Currencies.AddAsync(currency);
+            await _walletDbContext.SaveChangesAsync();
+            return Ok();
+        }
+
         //Need refactor
         [HttpPost("CurrencyDepositCommission")]
         public async Task<IActionResult> ChangeCurrencyDepositCommission([FromQuery] string currencyId,
@@ -59,7 +84,7 @@ namespace Wallet.Controllers
             var currency = await secondQuery.FirstOrDefaultAsync();
             if (currency == null)
                 return BadRequest();
-            
+
             ChangeCommissionOnArea(area, currency.CommissionsStack, commission);
 
             await _walletDbContext.SaveChangesAsync();
