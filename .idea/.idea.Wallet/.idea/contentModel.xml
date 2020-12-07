@@ -15,6 +15,8 @@
           <e p="20201207090516_InitialCreate.cs" t="Include" />
           <e p="20201207113312_IdentityUser.Designer.cs" t="Include" />
           <e p="20201207113312_IdentityUser.cs" t="Include" />
+          <e p="20201207160422_CommissionsStack.Designer.cs" t="Include" />
+          <e p="20201207160422_CommissionsStack.cs" t="Include" />
           <e p="WalletDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />
@@ -52,11 +54,13 @@
             <e p="UserController.cs" t="Include" />
           </e>
           <e p="Database" t="Include">
+            <e p="DbInitializer.cs" t="Include" />
             <e p="Models" t="Include">
               <e p="Account.cs" t="Include" />
               <e p="Commissions" t="Include">
                 <e p="AbsoluteCommission.cs" t="Include" />
                 <e p="Commission.cs" t="Include" />
+                <e p="CommissionsStack.cs" t="Include" />
                 <e p="ICommission.cs" t="Include" />
                 <e p="RelativeCommission.cs" t="Include" />
               </e>

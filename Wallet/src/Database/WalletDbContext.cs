@@ -12,6 +12,7 @@ namespace Wallet.Database
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<Wallet> Wallets { get; set; }
         public DbSet<Commission> Commissions { get; set; }
+        public DbSet<PersonalCommission> PersonalCommissions { get; set; }
 
         public WalletDbContext(DbContextOptions<WalletDbContext> options):base(options){}
 

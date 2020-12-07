@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +26,8 @@ namespace Wallet
             services.AddMvc();
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<WalletDbContext>();
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/User/Login");
+            
             services.AddEntityFrameworkNpgsql();
             services.AddDbContext<WalletDbContext>((provider, options) =>
             {

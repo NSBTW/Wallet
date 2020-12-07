@@ -12,28 +12,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af8e0a30-0a7f-46c3-a15f-044ea4c01201" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Wallet/Views/Shared/_Layout.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/Views/Shared/_ValidationScriptsPartial.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/Views/User/Login.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/Views/User/Register.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/Views/_ViewImports.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/Views/_ViewStart.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/src/Controllers/UserController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/src/ViewModels/LoginViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wallet/src/ViewModels/RegisterViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wallet/src/Database/DbInitializer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/CommissionsStack.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/dataSources/094148a8-3633-4447-ad35-71e8fb00e38f.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/dataSources/094148a8-3633-4447-ad35-71e8fb00e38f.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/dataSources/094148a8-3633-4447-ad35-71e8fb00e38f/storage_v2/_src_/database/Wallet.GUD_mQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/dataSources/094148a8-3633-4447-ad35-71e8fb00e38f/storage_v2/_src_/database/Wallet.GUD_mQ/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wallet/Migrations/WalletDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/Migrations/WalletDbContextModelSnapshot.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wallet/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/Wallet.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/Wallet.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wallet/src/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Controllers/AccountController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/Account.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Account.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wallet/src/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/AbsoluteCommission.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/AbsoluteCommission.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/Commission.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/Commission.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/RelativeCommission.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/RelativeCommission.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/Currency.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Currency.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/PersonalCommission.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/PersonalCommission.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/UserType.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Wallet/src/Database/Models/Wallet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/Models/Wallet.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wallet/src/Database/WalletDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wallet/src/Database/WalletDbContext.cs" afterDir="false" />
     </list>
@@ -46,11 +40,11 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Wallet/obj/Debug/netcoreapp3.1/Razor/Views/User/Register.cshtml.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/A646A1B6-9A6B-4695-9F2B-93D08BF1D8F7/322/IMutableModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/A646A1B6-9A6B-4695-9F2B-93D08BF1D8F7/EE/IMutableEntityType.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Wallet/obj/Debug/netcoreapp3.1/Razor/Views/User/Register.cshtml.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1615A5E5-9EB0-4DCB-8CAC-E02210D4E807/3/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="dummy://restClient/response3.txt" root0="SKIP_INSPECTION" />
+    <setting file="dummy://restClient/response17.txt" root0="SKIP_INSPECTION" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -75,8 +69,6 @@
         <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/ICommission.cs" />
         <option value="$PROJECT_DIR$/Wallet/Properties/launchSettings.json" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/CommissionBase.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/RelativeCommission.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/AbsoluteCommission.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/PersonalCommission.cs" />
         <option value="$PROJECT_DIR$/Wallet/Configuration/config.json" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/094148a8-3633-4447-ad35-71e8fb00e38f/console.sql" />
@@ -84,14 +76,7 @@
         <option value="$PROJECT_DIR$/Wallet/Program.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/Models/User.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Account.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Currency.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/PersonalCommission.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Wallet.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/Commission.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Controllers/AccountController.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/ViewModels/RegisterViewModel.cs" />
-        <option value="$PROJECT_DIR$/Wallet/Startup.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Database/WalletDbContext.cs" />
         <option value="$PROJECT_DIR$/Wallet/Views/Shared/_LoginPartial.cshtml" />
         <option value="$PROJECT_DIR$/Wallet/Views/Shared/Error.cshtml" />
         <option value="$PROJECT_DIR$/Wallet/Views/Shared/_Layout.cshtml" />
@@ -101,7 +86,20 @@
         <option value="$PROJECT_DIR$/Wallet/Views/User/Register.cshtml" />
         <option value="$PROJECT_DIR$/Wallet/src/ViewModels/LoginViewModel.cs" />
         <option value="$PROJECT_DIR$/Wallet/Views/User/Login.cshtml" />
+        <option value="$PROJECT_DIR$/Wallet/Startup.cs" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/rest-api.http" />
         <option value="$PROJECT_DIR$/Wallet/src/Controllers/UserController.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/WalletDbContext.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/StackCommission.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Currency.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/PersonalCommission.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Wallet.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/Commission.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/AbsoluteCommission.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/RelativeCommission.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/Models/Commissions/CommissionsStack.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Database/DbInitializer.cs" />
+        <option value="$PROJECT_DIR$/Wallet/src/Controllers/AccountController.cs" />
       </list>
     </option>
   </component>
@@ -124,7 +122,138 @@
     <property name="settings.editor.selected.configurable" value="SolutionBuilderGeneralOptionsPageId" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RestClientSettings">
+    <option name="REQUEST_HISTORY">
+      <list>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="https://localhost:5001/Account/Create" />
+          <option name="urlPath" value="" />
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="name" />
+                <option name="value" value="Main" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="https://localhost:5001/User/Login" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="multipart/form-data; boundary=WebAppBoundary" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="isFileUpload" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="https://localhost:5001/User/Login" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="multipart/form-data; boundary=WebAppBoundary" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="isFileUpload" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="https://localhost:5001/User/Login" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="multipart/form-data; boundary=WebAppBoundary" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="isFileUpload" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="https://localhost:5001/User/Login" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="multipart/form-data; boundary=WebAppBoundary" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="isFileUpload" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="https://localhost:5001/User/Login" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="multipart/form-data; boundary=WebAppBoundary" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="isFileUpload" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="https://localhost:5001/User/Login" />
+          <option name="urlPath" value="" />
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Email" />
+                <option name="value" value="user@gmail.com" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="password" />
+                <option name="value" value="Qwe123!" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+      </list>
+    </option>
+  </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Wallet">
+    <configuration name="All in rest-api" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/rest-api.http">
+      <method v="2" />
+    </configuration>
+    <configuration name="rest-api#1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/rest-api.http" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="rest-api#2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/rest-api.http" index="2" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="Wallet" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Wallet/Wallet.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value=".NETCoreApp,Version=v3.1" />
@@ -158,7 +287,17 @@
     <list>
       <item itemvalue=".NET Launch Settings Profile.Wallet" />
       <item itemvalue=".NET Launch Settings Profile.Wallet: IIS Express" />
+      <item itemvalue="HTTP Request.rest-api#1" />
+      <item itemvalue="HTTP Request.rest-api#2" />
+      <item itemvalue="HTTP Request.All in rest-api" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.All in rest-api" />
+        <item itemvalue="HTTP Request.rest-api#2" />
+        <item itemvalue="HTTP Request.rest-api#1" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -174,7 +313,7 @@
       <workItem from="1607271364944" duration="7904000" />
       <workItem from="1607279611751" duration="9527000" />
       <workItem from="1607328286036" duration="7111000" />
-      <workItem from="1607338285436" duration="5830000" />
+      <workItem from="1607338285436" duration="18433000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1607260514044</created>
@@ -225,26 +364,30 @@
       <screen x="0" y="0" width="1366" height="731" />
     </state>
     <state x="466" y="124" width="428" height="484" key="FileChooserDialogImpl/0.0.1366.731@0.0.1366.731" timestamp="1607267056139" />
-    <state width="1320" height="225" key="GridCell.Tab.0.bottom" timestamp="1607345741838">
+    <state width="1320" height="110" key="GridCell.Tab.0.bottom" timestamp="1607358426403">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
-    <state width="1320" height="225" key="GridCell.Tab.0.bottom/0.0.1366.731@0.0.1366.731" timestamp="1607345741838" />
-    <state width="1320" height="225" key="GridCell.Tab.0.center" timestamp="1607345741836">
+    <state width="1320" height="110" key="GridCell.Tab.0.bottom/0.0.1366.731@0.0.1366.731" timestamp="1607358426403" />
+    <state width="1320" height="110" key="GridCell.Tab.0.center" timestamp="1607358426402">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
-    <state width="1320" height="225" key="GridCell.Tab.0.center/0.0.1366.731@0.0.1366.731" timestamp="1607345741836" />
-    <state width="1320" height="225" key="GridCell.Tab.0.left" timestamp="1607345741835">
+    <state width="1320" height="110" key="GridCell.Tab.0.center/0.0.1366.731@0.0.1366.731" timestamp="1607358426402" />
+    <state width="1320" height="110" key="GridCell.Tab.0.left" timestamp="1607358426402">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
-    <state width="1320" height="225" key="GridCell.Tab.0.left/0.0.1366.731@0.0.1366.731" timestamp="1607345741835" />
-    <state width="1320" height="225" key="GridCell.Tab.0.right" timestamp="1607345741837">
+    <state width="1320" height="110" key="GridCell.Tab.0.left/0.0.1366.731@0.0.1366.731" timestamp="1607358426402" />
+    <state width="1320" height="110" key="GridCell.Tab.0.right" timestamp="1607358426403">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
-    <state width="1320" height="225" key="GridCell.Tab.0.right/0.0.1366.731@0.0.1366.731" timestamp="1607345741837" />
+    <state width="1320" height="110" key="GridCell.Tab.0.right/0.0.1366.731@0.0.1366.731" timestamp="1607358426403" />
     <state width="235" height="498" key="HiddenNamespacesPopup" timestamp="1607279092208">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
     <state width="235" height="498" key="HiddenNamespacesPopup/0.0.1366.731@0.0.1366.731" timestamp="1607279092208" />
+    <state x="266" y="112" width="828" height="508" key="IDE.errors.dialog" timestamp="1607348352444">
+      <screen x="0" y="0" width="1366" height="731" />
+    </state>
+    <state x="266" y="112" width="828" height="508" key="IDE.errors.dialog/0.0.1366.731@0.0.1366.731" timestamp="1607348352444" />
     <state x="278" y="101" width="804" height="530" key="Rider.ProjectTemplateDialog.Size" timestamp="1607341777459">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
@@ -253,10 +396,10 @@
       <screen x="0" y="0" width="1366" height="731" />
     </state>
     <state x="179" y="1" key="SettingsEditor/0.0.1366.731@0.0.1366.731" timestamp="1607267443191" />
-    <state x="572" y="256" width="332" height="248" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1607340487118">
+    <state x="572" y="256" width="332" height="248" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1607358248960">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
-    <state x="572" y="256" width="332" height="248" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1366.731@0.0.1366.731" timestamp="1607340487118" />
+    <state x="572" y="256" width="332" height="248" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1366.731@0.0.1366.731" timestamp="1607358248960" />
     <state x="345" y="160" key="run.anything.popup" timestamp="1607286325261">
       <screen x="0" y="0" width="1366" height="731" />
     </state>

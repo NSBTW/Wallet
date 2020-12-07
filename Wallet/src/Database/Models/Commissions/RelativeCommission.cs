@@ -1,8 +1,9 @@
+using System;
 using Microsoft.EntityFrameworkCore;
 
 namespace Wallet
 {
-    public class RelativeCommission:Commission
+    public class RelativeCommission : Commission
     {
         public double Rate { get; set; }
         public double MinimalCommission { get; set; }
@@ -22,5 +23,8 @@ namespace Wallet
                 return MinimalCommission;
             return commission > MaximalCommission ? MaximalCommission : commission;
         }
+
+        public override Commission Clone() => new RelativeCommission(Rate, MinimalCommission, MaximalCommission)
+            {Id = Guid.NewGuid().ToString()};
     }
 }

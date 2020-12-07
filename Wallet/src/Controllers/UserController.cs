@@ -36,7 +36,7 @@ namespace Wallet.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
-                return RedirectToAction("", "Account");
+                return Ok();
             }
             else
             {
@@ -62,7 +62,7 @@ namespace Wallet.Controllers
             var result = await _signInManager
                 .PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
             if (result.Succeeded)
-                return RedirectToAction("", "Account");
+                return Ok();
             else
                 ModelState.AddModelError("", "Incorrect password or login");
 
@@ -74,7 +74,7 @@ namespace Wallet.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("", "Account");
+            return Ok();
         }
     }
 }

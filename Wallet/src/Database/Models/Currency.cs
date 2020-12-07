@@ -4,6 +4,6 @@ namespace Wallet
     {
         public  string Id { get; set; }
         public string Name { get; set; }
-        public Commission Commission { get; set; }
+        public CommissionsStack CommissionsStack { get; set; }
     }
 }

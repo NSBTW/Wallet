@@ -7,5 +7,6 @@ namespace Wallet
         public string Id { get; set; }
         
         public abstract double CalculateCommission(double value);
+        public abstract Commission Clone();
     }
 }

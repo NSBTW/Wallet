@@ -1,3 +1,259 @@
+GET http://<>%202020-12-07T042137.400.json
+
+###
+
+POST https://localhost:5001/Account/Create?name=Main
+
+###
+
+POST https://localhost:5001/User/Login
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="Email"
+
+user@gmail.com
+--WebAppBoundary
+Content-Disposition: form-data; name="Password"
+
+Qwe123!
+--WebAppBoundary
+Content-Disposition: form-data; name="RememberMe"
+
+true
+--WebAppBoundary--
+
+###
+
+POST https://localhost:5001/Account/Create?name=Main
+
+###
+
+POST https://localhost:5001/User/Login
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="Email"
+
+user@gmail.com
+--WebAppBoundary
+Content-Disposition: form-data; name="Password"
+
+Qwe123!
+--WebAppBoundary
+Content-Disposition: form-data; name="RememberMe"
+
+true
+--WebAppBoundary--
+
+###
+
+POST https://localhost:5001/User/Login
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="Email"
+
+user@gmail.com
+--WebAppBoundary
+Content-Disposition: form-data; name="Password"
+
+Qwe123!
+--WebAppBoundary
+Content-Disposition: form-data; name="RememberMe"
+
+true
+--WebAppBoundary--
+
+###
+
+POST https://localhost:5001/Account/Create?name=Main
+
+###
+
+POST https://localhost:5001/User/Login
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="Email"
+
+user@gmail.com
+--WebAppBoundary
+Content-Disposition: form-data; name="Password"
+
+Qwe123!
+--WebAppBoundary
+Content-Disposition: form-data; name="RememberMe"
+
+true
+--WebAppBoundary--
+
+###
+
+POST https://localhost:5001/Account/Create?name=Main
+
+###
+
+POST https://localhost:5001/User/Login
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="Email"
+
+user@gmail.com
+--WebAppBoundary
+Content-Disposition: form-data; name="Password"
+
+Qwe123!
+--WebAppBoundary
+Content-Disposition: form-data; name="RememberMe"
+
+true
+--WebAppBoundary--
+
+###
+
+POST https://localhost:5001/User/Login
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="Email"
+
+user@gmail.com
+--WebAppBoundary
+Content-Disposition: form-data; name="Password"
+
+Qwe123!
+--WebAppBoundary--
+
+<> 2020-12-07T044043.500.txt
+
+###
+
+POST https://localhost:5001/Account/Create?name=Main
+
+###
+
+POST https://localhost:5001/User/Login
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="Email"
+
+user@gmail.com
+--WebAppBoundary
+Content-Disposition: form-data; name="Password"
+
+Qwe123!
+--WebAppBoundary--
+
+<> 2020-12-07T043122.500.txt
+
+###
+
+POST https://localhost:5001/User/Login
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="Email"
+
+user@gmail.com
+--WebAppBoundary
+Content-Disposition: form-data; name="Password"
+
+Qwe123!
+--WebAppBoundary--
+
+<> 2020-12-07T043037.500.txt
+
+###
+
+POST https://localhost:5001/User/Login
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="Email"
+
+user@gmail.com
+Content-Disposition: form-data; name="Password"
+
+Qwe123!
+--WebAppBoundary--
+
+<> 2020-12-07T043013.400.json
+
+###
+
+POST https://localhost:5001/User/Login
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="Email"
+
+user@gmail.com
+--WebAppBoundary--
+
+<> 2020-12-07T042931.400.json
+
+###
+
+POST http://localhost:5001/User/Login
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; Email="user@gmail.com"
+
+field-value
+--WebAppBoundary--
+
+###
+
+POST https://localhost:5001/User/Login?Email=user@gmail.com&password=Qwe123!
+
+<> 2020-12-07T042137.400.json
+
+###
+
+POST https://localhost:5001/Account/Create?name=Main
+
+###
+
+POST http://localhost:5001/Account/Create?name=Main
+
+###
+
+POST http://localhost:5001/Account/Create?name=Main
+
+###
+
+POST http://localhost:5001/Account?name=Main
+
+###
+
+POST http://localhost:5001/Account/Create?name=Main
+
+###
+
+POST http://localhost:5001/Account/Create?name=Main
+
+###
+
+POST http://localhost:5001/Account/Create?name=Main
+
+###
+
+POST http://localhost:5001/Account/Create?Email=user@gmail.com&Password=123&PasswordConfirm=123&name=Main&name=Main
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+POST http://localhost:5001/Account/Create?Email=user@gmail.com&Password=123&PasswordConfirm=123&name=Main
+Accept: */*
+Cache-Control: no-cache
+
+###
+
 POST http://localhost:5001/User/Register?Email=user@gmail.com&Password=123&PasswordConfirm=123
 Accept: */*
 Cache-Control: no-cache

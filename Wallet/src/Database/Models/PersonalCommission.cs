@@ -6,6 +6,6 @@ namespace Wallet
         
         public User User { get; set; }
         public Currency Currency { get; set; }
-        public Commission Commission { get; set; }
+        public CommissionsStack CommissionsStack { get; set; }
     }
 }
