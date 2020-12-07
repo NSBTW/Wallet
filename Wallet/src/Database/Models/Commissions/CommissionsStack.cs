@@ -1,5 +1,6 @@
 namespace Wallet.Database.Models.Commissions
 {
+    //need refactor. Dictionary<enum, Comission> ? 
     public class CommissionsStack
     {
         public string Id { get; set; }

@@ -19,7 +19,7 @@ namespace Wallet.Controllers
     public class AccountController : ControllerBase
     {
         //1) include
-        //2) cache
+        //2) cache, Service? 
         //3) dictionaries
         private readonly WalletDbContext _walletDbContext;
         private readonly UserManager<User> _userManager;

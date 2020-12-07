@@ -14,7 +14,8 @@ namespace Wallet.Database
             var currency = new Currency
             {
                 CommissionsStack = new CommissionsStack(relativeCommission){Id = Guid.NewGuid().ToString()}, Name = "USD",
-                Id = Guid.NewGuid().ToString()
+                Id = Guid.NewGuid().ToString(),
+                MaxTransfer = 100
             };
             var wallet = new Models.Wallet {Currency = currency, Value = 666, Id = Guid.NewGuid().ToString()};
             var wallet2 = new Models.Wallet {Currency = currency, Value = 1000, Id = Guid.NewGuid().ToString()};
