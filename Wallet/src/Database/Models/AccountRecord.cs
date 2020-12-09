@@ -2,12 +2,12 @@ using System.Collections.Generic;
 
 namespace Wallet.Database.Models
 {
-    public class Account
+    public class AccountRecord
     {
         public string Id { get; set; }
         public string Name { get; set; }
 
-        public User User { get; set; }
-        public List<Database.Models.Wallet> Wallets { get; set; }
+        public UserRecord UserRecord { get; set; }
+        public List<WalletRecord> Wallets { get; set; }
     }
 }

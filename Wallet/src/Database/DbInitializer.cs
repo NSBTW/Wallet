@@ -1,39 +1,34 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Wallet.Database.Models;
 using Wallet.Database.Models.Commissions;
 
 namespace Wallet.Database
 {
-    public static class DbInitializer
+    public static class IdentityDbInitializer
     {
-        public static void InitializeUser(WalletDbContext context, User user)
+        public static async Task Initialize(WalletDbContext context, UserManager<UserRecord> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
-            var absoluteCommission = new AbsoluteCommission(1) {Id = Guid.NewGuid().ToString()};
-            var relativeCommission = new RelativeCommission(0.1, 1, 100) {Id = Guid.NewGuid().ToString()};
-            var currency = new Currency
-            {
-                CommissionsStack = new CommissionsStack(relativeCommission){Id = Guid.NewGuid().ToString()}, Name = "USD",
-                Id = Guid.NewGuid().ToString(),
-                MaxTransfer = 100
-            };
-            var wallet = new Models.Wallet {Currency = currency, Value = 666, Id = Guid.NewGuid().ToString()};
-            var wallet2 = new Models.Wallet {Currency = currency, Value = 1000, Id = Guid.NewGuid().ToString()};
+            var admin = await AddUser(userManager, roleManager, "admin@gmail.com", "Qwe123!", "admin");
+            var user = await AddUser(userManager, roleManager, "user@gmail.com", "Qwe123!", "user");
+        }
+    
+        private static async Task<UserRecord> AddUser(UserManager<UserRecord> userManager, RoleManager<IdentityRole> roleManager,
+            string email, string password, string role)
+        {
+            if (await roleManager.FindByNameAsync(role) == null)
+                await roleManager.CreateAsync(new IdentityRole(role));
 
-            var account = new Account
-                {Name = "Main", Wallets = new List<Models.Wallet> {wallet}, Id = Guid.NewGuid().ToString()};
-            
-            var account2 = new Account
-                {Name = "Second", Wallets = new List<Models.Wallet> {wallet2}, Id = Guid.NewGuid().ToString()};
-            user.Accounts = new List<Account> {account, account2};
-            var personalCommission = new PersonalCommission
-            {
-                Currency = currency,
-                CommissionsStack = new CommissionsStack(absoluteCommission) {Id = Guid.NewGuid().ToString()},
-                Id = Guid.NewGuid().ToString()
-            };
-            user.PersonalCommissions = new List<PersonalCommission> {personalCommission};
-            context.SaveChanges();
+            var user = await userManager.FindByNameAsync(email);
+            if (user != null) return user;
+
+            user = new UserRecord {Email = email, UserName = email};
+            if ((await userManager.CreateAsync(user, password)).Succeeded)
+                await userManager.AddToRoleAsync(user, role);
+            return user;
         }
     }
 }

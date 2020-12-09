@@ -25,10 +25,9 @@ namespace Wallet
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<WalletDbContext>();
+            services.AddIdentity<UserRecord, IdentityRole>().AddEntityFrameworkStores<WalletDbContext>();
             services.ConfigureApplicationCookie(options => options.LoginPath = "/User/Login");
-            
+
             services.AddEntityFrameworkNpgsql();
             services.AddDbContext<WalletDbContext>((provider, options) =>
             {

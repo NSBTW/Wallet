@@ -11,27 +11,24 @@ namespace Wallet.Controllers
     [Route("[controller]")]
     public class UserController : Controller
     {
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<UserRecord> _userManager;
+        private readonly SignInManager<UserRecord> _signInManager;
 
-        public UserController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public UserController(UserManager<UserRecord> userManager, SignInManager<UserRecord> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
         }
 
         [HttpGet("Register")]
-        public IActionResult Register()
-        {
-            return View();
-        }
+        public IActionResult Register() => View();
 
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromForm] RegisterViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
 
-            var user = new User {Email = model.Email, UserName = model.Email};
+            var user = new UserRecord {Email = model.Email, UserName = model.Email};
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
@@ -51,10 +48,7 @@ namespace Wallet.Controllers
         }
 
         [HttpGet("Login")]
-        public IActionResult Login()
-        {
-            return View();
-        }
+        public IActionResult Login() => View();
 
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromForm] LoginViewModel model)

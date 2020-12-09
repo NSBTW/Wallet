@@ -5,6 +5,7 @@
     <e p="$USER_HOME$/.cache/JetBrains/Rider2020.2/resharper-host/local/Transient/Rider/v202/SolutionCaches/_Wallet.-910436940.00" t="ExcludeRecursive" />
     <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
     <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/scratches" t="IncludeRecursive" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="Wallet" t="IncludeRecursive">
         <e p="Configuration" t="Include">
@@ -25,6 +26,8 @@
           <e p="20201207183235_Operations.cs" t="Include" />
           <e p="20201207184650_OperationsIdRename.Designer.cs" t="Include" />
           <e p="20201207184650_OperationsIdRename.cs" t="Include" />
+          <e p="20201209171906_Refactor.Designer.cs" t="Include" />
+          <e p="20201209171906_Refactor.cs" t="Include" />
           <e p="WalletDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />
@@ -65,24 +68,19 @@
           <e p="Database" t="Include">
             <e p="DbInitializer.cs" t="Include" />
             <e p="Models" t="Include">
-              <e p="Account.cs" t="Include" />
+              <e p="AccountRecord.cs" t="Include" />
               <e p="Commissions" t="Include">
-                <e p="AbsoluteCommission.cs" t="Include" />
-                <e p="Commission.cs" t="Include" />
-                <e p="CommissionsStack.cs" t="Include" />
-                <e p="ICommission.cs" t="Include" />
-                <e p="RelativeCommission.cs" t="Include" />
+                <e p="CommissionCase.cs" t="Include" />
+                <e p="CommissionRecord.cs" t="Include" />
+                <e p="CommissionType.cs" t="Include" />
               </e>
-              <e p="Currency.cs" t="Include" />
+              <e p="CurrencyRecord.cs" t="Include" />
               <e p="Operations" t="Include">
-                <e p="DepositOperation.cs" t="Include" />
-                <e p="Operation.cs" t="Include" />
-                <e p="OutOperation.cs" t="Include" />
-                <e p="TransferOperation.cs" t="Include" />
+                <e p="OperationRecord.cs" t="Include" />
+                <e p="OperationType.cs" t="Include" />
               </e>
-              <e p="PersonalCommission.cs" t="Include" />
-              <e p="User.cs" t="Include" />
-              <e p="Wallet.cs" t="Include" />
+              <e p="UserRecord.cs" t="Include" />
+              <e p="WalletRecord.cs" t="Include" />
             </e>
             <e p="WalletDbContext.cs" t="Include" />
           </e>
