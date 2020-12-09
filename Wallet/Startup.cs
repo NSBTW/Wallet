@@ -9,6 +9,7 @@ using Wallet.Database;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.AspNetCore.Identity;
 using Wallet.Database.Models;
+using Wallet.Services;
 
 namespace Wallet
 {
@@ -27,6 +28,8 @@ namespace Wallet
             services.AddMvc();
             services.AddIdentity<UserRecord, IdentityRole>().AddEntityFrameworkStores<WalletDbContext>();
             services.ConfigureApplicationCookie(options => options.LoginPath = "/User/Login");
+
+            services.AddScoped<AccountsManager>();
 
             services.AddEntityFrameworkNpgsql();
             services.AddDbContext<WalletDbContext>((provider, options) =>

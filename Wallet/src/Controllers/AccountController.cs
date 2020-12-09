@@ -11,6 +11,8 @@ using Microsoft.Extensions.Logging;
 using Wallet.Database;
 using Wallet.Database.Models;
 using Wallet.Database.Models.Operations;
+using Wallet.Models;
+using Wallet.Services;
 
 namespace Wallet.Controllers
 {
@@ -18,17 +20,52 @@ namespace Wallet.Controllers
     [Route("[controller]")]
     public class AccountController : ControllerBase
     {
-        //1) include
-        //2) cache, Service? 
-        //3) dictionaries
-        private readonly WalletDbContext _walletDbContext;
         private readonly UserManager<UserRecord> _userManager;
+        private readonly AccountsManager _accountsManager;
 
-        public AccountController(WalletDbContext walletDbContext, UserManager<UserRecord> userManager)
+        public AccountController(WalletDbContext walletDbContext, UserManager<UserRecord> userManager,
+            AccountsManager accountsManager)
         {
-            _walletDbContext = walletDbContext;
             _userManager = userManager;
+            _accountsManager = accountsManager;
         }
+
+        [Authorize]
+        public async Task<List<Account>> Get() =>
+            await _accountsManager.Accounts(_userManager.GetUserId(User));
+
+        [Authorize]
+        [HttpPost("Create")]
+        public async void CreateAccount([FromQuery] string name) =>
+            await _accountsManager.TryAddAccount(_userManager.GetUserId(User), name);
+
+        // //Need refactor(q)
+        // [Authorize]
+        // [HttpGet("{accountName}")]
+        // public async Task<Account> Get(string accountName)
+        // {
+        //     var account = await _walletDbContext.Accounts
+        //         .Where(a => a.Name == accountName && a.User.Id == _userManager.GetUserId(User))
+        //         .Include(a => a.Wallets)
+        //         .ThenInclude(w => w.Currency)
+        //         .ThenInclude(c => c.CommissionsStack)
+        //         .ThenInclude(s => s.TransferCommission)
+        //         .Include(a => a.Wallets)
+        //         .ThenInclude(w => w.Currency)
+        //         .ThenInclude(c => c.CommissionsStack)
+        //         .ThenInclude(s => s.DepositCommission)
+        //         .Include(a => a.Wallets)
+        //         .ThenInclude(w => w.Currency)
+        //         .ThenInclude(c => c.CommissionsStack)
+        //         .ThenInclude(s => s.OutCommission)
+        //         .FirstOrDefaultAsync();
+        //     var wallets =
+        //         account.Wallets.Select(wallet => new Database.Models.Wallet
+        //                 {Currency = wallet.Currency, Value = wallet.Value})
+        //             .ToList();
+        //     return new Account {Name = account.Name, Wallets = wallets};
+        // }
+        //
 
         // [Authorize]
         // [HttpPost("Transfer")]
@@ -124,51 +161,6 @@ namespace Wallet.Controllers
         //         .Include(w => w.Currency.CommissionsStack.DepositCommission)
         //         .Include(w => w.Currency.CommissionsStack.OutCommission)
         //         .FirstOrDefaultAsync();
-        // }
-        //
-        // [Authorize]
-        // [HttpPost("Create")]
-        // public async void CreateAccount([FromQuery] string name)
-        // {
-        //     var user = await _userManager.GetUserAsync(User);
-        //     user.Accounts.Add(new Account {Name = name, Id = Guid.NewGuid().ToString()});
-        //     await _walletDbContext.SaveChangesAsync();
-        // }
-        //
-        // //Need refactor(q)
-        // [Authorize]
-        // [HttpGet("{accountName}")]
-        // public async Task<Account> Get(string accountName)
-        // {
-        //     var account = await _walletDbContext.Accounts
-        //         .Where(a => a.Name == accountName && a.User.Id == _userManager.GetUserId(User))
-        //         .Include(a => a.Wallets)
-        //         .ThenInclude(w => w.Currency)
-        //         .ThenInclude(c => c.CommissionsStack)
-        //         .ThenInclude(s => s.TransferCommission)
-        //         .Include(a => a.Wallets)
-        //         .ThenInclude(w => w.Currency)
-        //         .ThenInclude(c => c.CommissionsStack)
-        //         .ThenInclude(s => s.DepositCommission)
-        //         .Include(a => a.Wallets)
-        //         .ThenInclude(w => w.Currency)
-        //         .ThenInclude(c => c.CommissionsStack)
-        //         .ThenInclude(s => s.OutCommission)
-        //         .FirstOrDefaultAsync();
-        //     var wallets =
-        //         account.Wallets.Select(wallet => new Database.Models.Wallet
-        //                 {Currency = wallet.Currency, Value = wallet.Value})
-        //             .ToList();
-        //     return new Account {Name = account.Name, Wallets = wallets};
-        // }
-        //
-        // [Authorize]
-        // public async Task<List<string>> Get()
-        // {
-        //     var accounts = await _walletDbContext.Accounts
-        //         .Where(a => a.User.Id == _userManager.GetUserId(User)).ToListAsync();
-        //
-        //     return accounts.Select(a => a.Name).ToList();
         // }
     }
 }

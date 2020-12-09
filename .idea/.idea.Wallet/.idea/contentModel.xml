@@ -85,8 +85,25 @@
             <e p="WalletDbContext.cs" t="Include" />
           </e>
           <e p="Helpers" t="Include">
+            <e p="AccountRecordExtensions.cs" t="Include" />
             <e p="DbContextExtensions.cs" t="Include" />
             <e p="StringExtensions.cs" t="Include" />
+          </e>
+          <e p="Models" t="Include">
+            <e p="Account.cs" t="Include" />
+            <e p="Commissions" t="Include">
+              <e p="AbsoluteCommission.cs" t="Include" />
+              <e p="AbsoluteCommissionRecordReader.cs" t="Include" />
+              <e p="ICommission.cs" t="Include" />
+              <e p="ICommissionRecordReader.cs" t="Include" />
+              <e p="IRecordableCommission.cs" t="Include" />
+              <e p="RelativeCommission.cs" t="Include" />
+              <e p="RelativeCommissionRecordReader.cs" t="Include" />
+            </e>
+            <e p="Wallet.cs" t="Include" />
+          </e>
+          <e p="Services" t="Include">
+            <e p="AccountsManager.cs" t="Include" />
           </e>
           <e p="ViewModels" t="Include">
             <e p="CommissionArea.cs" t="Include" />
