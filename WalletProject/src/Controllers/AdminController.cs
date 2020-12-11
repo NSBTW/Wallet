@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.Query;
 using Wallet.Database;
 using Wallet.Database.Models;
 using Wallet.Database.Models.Commissions;
+using Wallet.Database.Models.Operations;
 using Wallet.Helpers;
 using Wallet.Services;
 using Wallet.ViewModels;
@@ -16,6 +17,7 @@ using Wallet.ViewModels;
 namespace Wallet.Controllers
 {
     [ApiController]
+    [Authorize(Roles = "admin")]
     [Route("[controller]")]
     public class AdminController : ControllerBase
     {
@@ -28,7 +30,6 @@ namespace Wallet.Controllers
             _accountsManager = accountsManager;
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost("ChangeAccountValue")]
         public async Task<IActionResult> ChangeAccountValue([FromQuery] string userName, [FromQuery] string accountName,
             [FromQuery] string currencyName, [FromQuery] double value) =>
@@ -54,58 +55,32 @@ namespace Wallet.Controllers
         public async Task ConfirmOperation([FromQuery] string operationId,
             [FromServices] OperationManager operationManager) => await operationManager.ConfirmOperation(operationId);
 
-        // //Need refactor
-        // [HttpPost("CurrencyDepositCommission")]
-        // public async Task<IActionResult> ChangeCurrencyDepositCommission([FromQuery] string currencyId,
-        //     [FromQuery] Commission commission, [FromQuery] CommissionArea area)
-        // {
-        //     var query = _walletDbContext.Currencies
-        //         .Where(c => c.Id == currencyId)
-        //         .Include(c => c.CommissionsStack);
-        //     var secondQuery = area switch
-        //     {
-        //         CommissionArea.Transfer => query.ThenInclude(c => c.TransferCommission),
-        //         CommissionArea.Deposit => query.ThenInclude(c => c.DepositCommission),
-        //         CommissionArea.Out => query.ThenInclude(c => c.OutCommission),
-        //         _ => throw new ArgumentOutOfRangeException(nameof(area), area, null)
-        //     };
-        //     var currency = await secondQuery.FirstOrDefaultAsync();
-        //     if (currency == null)
-        //         return BadRequest();
-        //
-        //     commission.Id = Guid.NewGuid().ToString();
-        //     ChangeCommissionOnArea(area, currency.CommissionsStack, commission);
-        //
-        //     await _walletDbContext.SaveChangesAsync();
-        //     return Ok();
-        // }
-        //
-        //
-        // //Need refactor
-        // [HttpPost("UserOutCommission")]
-        // public async Task<IActionResult> ChangeUserOutCommission([FromQuery] string userId,
-        //     [FromQuery] string currencyId, [FromQuery] Commission commission, [FromQuery] CommissionArea area)
-        // {
-        //     var query = _walletDbContext.PersonalCommissions
-        //         .Where(c => c.User.Id == userId && c.Currency.Id == currencyId)
-        //         .Include(c => c.CommissionsStack);
-        //     var secondQuery = area switch
-        //     {
-        //         CommissionArea.Transfer => query.ThenInclude(c => c.TransferCommission),
-        //         CommissionArea.Deposit => query.ThenInclude(c => c.DepositCommission),
-        //         CommissionArea.Out => query.ThenInclude(c => c.OutCommission),
-        //         _ => throw new ArgumentOutOfRangeException(nameof(area), area, null)
-        //     };
-        //     var personalCommission = await secondQuery.FirstOrDefaultAsync();
-        //     if (personalCommission == null)
-        //         return BadRequest();
-        //     
-        //     commission.Id = Guid.NewGuid().ToString();
-        //     ChangeCommissionOnArea(area, personalCommission.CommissionsStack, commission);
-        //
-        //     await _walletDbContext.SaveChangesAsync();
-        //     return Ok();
-        // }
-        
+        [HttpPost("CurrencyCommission")]
+        public async Task<IActionResult> ChangeCurrencyCommission([FromQuery] string currencyName,
+            [FromQuery] CommissionViewModel model, [FromServices] WalletDbContext context)
+        {
+            var currency = await context.Currencies
+                .Where(c => c.Name == currencyName)
+                .Include(c => c.Commissions)
+                .FirstOrDefaultAsync();
+            if (currency == null)
+                return BadRequest();
+            var commission =
+                currency.Commissions.FirstOrDefault(c => c.OperationType == model.OperationType && !c.IsUserCommission);
+            if (commission == null)
+                throw new Exception();
+            CopyCommissionViewToRecord(model, commission);
+            await context.SaveChangesAsync();
+            return Ok();
+        }
+
+        private static void CopyCommissionViewToRecord(CommissionViewModel model, CommissionRecord commission)
+        {
+            commission.Rate = model.Rate;
+            commission.Type = model.Type;
+            commission.Value = model.Value;
+            commission.MaxValue = model.MaximalValue;
+            commission.MinValue = model.MinimalValue;
+        }
     }
 }

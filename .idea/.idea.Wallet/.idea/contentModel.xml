@@ -121,6 +121,7 @@
             <e p="OperationManager.cs" t="Include" />
           </e>
           <e p="ViewModels" t="Include">
+            <e p="CommissionViewModel.cs" t="Include" />
             <e p="LoginViewModel.cs" t="Include" />
             <e p="RegisterViewModel.cs" t="Include" />
           </e>
