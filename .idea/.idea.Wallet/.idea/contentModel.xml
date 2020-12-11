@@ -91,6 +91,7 @@
             <e p="WalletDbContext.cs" t="Include" />
           </e>
           <e p="Helpers" t="Include">
+            <e p="CommissionCreator.cs" t="Include" />
             <e p="DbContextExtensions.cs" t="Include" />
             <e p="RecordExtensions.cs" t="Include" />
             <e p="StringExtensions.cs" t="Include" />
@@ -105,6 +106,12 @@
               <e p="IRecordableCommission.cs" t="Include" />
               <e p="RelativeCommission.cs" t="Include" />
               <e p="RelativeCommissionRecordReader.cs" t="Include" />
+            </e>
+            <e p="Operations" t="Include">
+              <e p="DepositOperation.cs" t="Include" />
+              <e p="IOperation.cs" t="Include" />
+              <e p="TransferOperation.cs" t="Include" />
+              <e p="WithdrawOperation.cs" t="Include" />
             </e>
             <e p="Wallet.cs" t="Include" />
           </e>

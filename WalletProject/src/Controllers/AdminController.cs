@@ -9,74 +9,51 @@ using Microsoft.EntityFrameworkCore.Query;
 using Wallet.Database;
 using Wallet.Database.Models;
 using Wallet.Database.Models.Commissions;
+using Wallet.Helpers;
+using Wallet.Services;
 using Wallet.ViewModels;
 
 namespace Wallet.Controllers
 {
     [ApiController]
-    [Authorize(Roles = "admin")]
     [Route("[controller]")]
     public class AdminController : ControllerBase
     {
-        private readonly WalletDbContext _walletDbContext;
         private readonly UserManager<UserRecord> _userManager;
+        private readonly AccountsManager _accountsManager;
 
-        public AdminController(WalletDbContext walletDbContext, UserManager<UserRecord> userManager)
+        public AdminController(UserManager<UserRecord> userManager, AccountsManager accountsManager)
         {
-            _walletDbContext = walletDbContext;
             _userManager = userManager;
+            _accountsManager = accountsManager;
         }
 
-        // [HttpPost("ChangeAccountValue")]
-        // public async Task<IActionResult> ChangeAccountValue([FromQuery] string accountId, [FromQuery] string currencyId,
-        //     [FromQuery] double value)
-        // {
-        //     var wallet = await _walletDbContext.Wallets
-        //         .Where(w => w.Account.Id == accountId && w.Currency.Id == currencyId)
-        //         .FirstOrDefaultAsync();
-        //     if (wallet == null)
-        //         return BadRequest();
-        //     wallet.Value = value;
-        //     await _walletDbContext.SaveChangesAsync();
-        //     return Ok();
-        // }
-        //
-        // // what about the accounts?
-        // [HttpPost("DeleteCurrency")]
-        // public async Task<IActionResult> DeleteCurrency([FromQuery] string currencyId)
-        // {
-        //     var currency = await _walletDbContext.Currencies
-        //         .Where(c => c.Id == currencyId)
-        //         .FirstOrDefaultAsync();
-        //     if (currency == null)
-        //         return BadRequest();
-        //     _walletDbContext.Currencies.Remove(currency);
-        //     await _walletDbContext.SaveChangesAsync();
-        //     return Ok();
-        // }
-        //
-        // [HttpPost("AddCurrency")]
-        // public async Task<IActionResult> AddCurrency([FromQuery] string name, [FromQuery] Commission commission)
-        // {
-        //     if (await _walletDbContext.Currencies.Where(c => c.Name == name).FirstOrDefaultAsync() != null)
-        //         return BadRequest();
-        //     var currency = new Currency
-        //         {CommissionsStack = new CommissionsStack(commission), Name = name, Id = Guid.NewGuid().ToString()};
-        //     await _walletDbContext.Currencies.AddAsync(currency);
-        //     await _walletDbContext.SaveChangesAsync();
-        //     return Ok();
-        // }
-        //
-        // [HttpPost("MakeOperation")]
-        // public async Task<IActionResult> MakeOperation([FromQuery] string operationId)
-        // {
-        //     var operation = await _walletDbContext.Operations.Where(o => o.Id == operationId).FirstOrDefaultAsync();
-        //     if (operation == null)
-        //         return BadRequest();
-        //     operation.TryDoOperation();
-        //     return Ok();
-        // }
-        //
+        [Authorize(Roles = "admin")]
+        [HttpPost("ChangeAccountValue")]
+        public async Task<IActionResult> ChangeAccountValue([FromQuery] string userName, [FromQuery] string accountName,
+            [FromQuery] string currencyName, [FromQuery] double value) =>
+            await _accountsManager.TryChangeAccountValue(userName, accountName, currencyName, value)
+                ? (IActionResult) Ok()
+                : BadRequest();
+
+
+        [HttpPost("DeleteCurrency")]
+        public async Task<IActionResult> DeleteCurrency([FromQuery] string name,
+            [FromServices] CurrencyManager currencyManager) =>
+            await currencyManager.TryDeleteCurrency(name) ? (IActionResult) Ok() : BadRequest();
+
+        [HttpPost("AddCurrency")]
+        public async Task AddCurrency([FromQuery] string name,
+            [FromServices] CurrencyManager currencyManager) => await currencyManager.CreateCurrency(name,
+            CommissionCreator.CreateRelativeCommission(0.01),
+            CommissionCreator.CreateRelativeCommission(0.01),
+            CommissionCreator.CreateRelativeCommission(0.01));
+
+
+        [HttpPost("ConfirmOperation")]
+        public async Task ConfirmOperation([FromQuery] string operationId,
+            [FromServices] OperationManager operationManager) => await operationManager.ConfirmOperation(operationId);
+
         // //Need refactor
         // [HttpPost("CurrencyDepositCommission")]
         // public async Task<IActionResult> ChangeCurrencyDepositCommission([FromQuery] string currencyId,
@@ -129,24 +106,6 @@ namespace Wallet.Controllers
         //     await _walletDbContext.SaveChangesAsync();
         //     return Ok();
         // }
-        //
-        // //need refactor
-        // private static void ChangeCommissionOnArea(CommissionArea area, CommissionsStack stack, Commission commission)
-        // {
-        //     switch (area)
-        //     {
-        //         case CommissionArea.Transfer:
-        //             stack.TransferCommission = commission;
-        //             break;
-        //         case CommissionArea.Deposit:
-        //             stack.DepositCommission = commission;
-        //             break;
-        //         case CommissionArea.Out:
-        //             stack.OutCommission = commission;
-        //             break;
-        //         default:
-        //             throw new ArgumentOutOfRangeException(nameof(area), area, null);
-        //     }
-        // }
+        
     }
 }

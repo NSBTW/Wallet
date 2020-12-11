@@ -7,6 +7,7 @@ using Wallet.Database;
 using Wallet.Database.Models;
 using Wallet.Database.Models.Commissions;
 using Wallet.Database.Models.Operations;
+using Wallet.Helpers;
 using Wallet.Models;
 using Wallet.Models.Commissions;
 using Wallet.ViewModels;
@@ -137,6 +138,16 @@ namespace Wallet.Services
             };
             await _context.SaveChangesAsync();
             return account.Wallets[0];
+        }
+
+        public async Task ConfirmOperation(string operationId)
+        {
+            var operationRecord = await _context.Operations.FirstOrDefaultAsync(o => o.Id == operationId);
+            if (operationRecord == null)
+                return;
+            var operation = operationRecord.ToOperation();
+            if (await operation.TryDoOperation(_context))
+                _context.Operations.Remove(operationRecord);
         }
     }
 }

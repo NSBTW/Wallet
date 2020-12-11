@@ -29,6 +29,7 @@ namespace Wallet
             services.AddMvc();
             services.AddIdentity<UserRecord, IdentityRole>().AddEntityFrameworkStores<WalletDbContext>();
             services.ConfigureApplicationCookie(options => options.LoginPath = "/User/Login");
+            services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/User/Login");
 
             services.AddScoped<AccountsManager>();
             services.AddScoped<OperationManager>();
