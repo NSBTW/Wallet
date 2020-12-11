@@ -1379,12 +1379,12 @@ false posix/WET
 false posix/Zulu
 false posixrules
 </TimeZones>
-      <StartupTime>1607520449</StartupTime>
+      <StartupTime>1607692077</StartupTime>
     </root>
     <database id="2" parent="1" name="Wallet">
       <ObjectId>18900</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>770</IntrospectionStateNumber>
+      <IntrospectionStateNumber>790</IntrospectionStateNumber>
       <Relations>sequence|table|27390|27392|1
 sequence|table|27431|27433|1
 </Relations>
@@ -1444,7 +1444,7 @@ sequence|table|27431|27433|1
       <Comment>standard public schema</Comment>
       <StateNumber>275</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>771</IntrospectionStateNumber>
+      <IntrospectionStateNumber>791</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="16" parent="2" name="heap">
@@ -1579,7 +1579,7 @@ sequence|table|27431|27433|1
     <table id="40" parent="15" name="currencies">
       <ObjectId>27216</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>766</StateNumber>
+      <StateNumber>789</StateNumber>
     </table>
     <table id="41" parent="15" name="operations">
       <ObjectId>27560</ObjectId>
@@ -2142,11 +2142,11 @@ name</ColNames>
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="120" parent="39" name="case">
+    <column id="120" parent="39" name="operation_type">
       <Position>8</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>769</StateNumber>
+      <StateNumber>789</StateNumber>
       <DefaultExpression>0</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
@@ -2270,53 +2270,63 @@ name</ColNames>
       <DefaultExpression>0.0</DefaultExpression>
       <TypeId>701</TypeId>
     </column>
-    <index id="137" parent="40" name="pk_currencies">
+    <column id="137" parent="40" name="max_deposit">
+      <Position>6</Position>
+      <DataType>double precision|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>789</StateNumber>
+      <DefaultExpression>0.0</DefaultExpression>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="138" parent="40" name="max_withdrawal">
+      <Position>7</Position>
+      <DataType>double precision|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>789</StateNumber>
+      <DefaultExpression>0.0</DefaultExpression>
+      <TypeId>701</TypeId>
+    </column>
+    <index id="139" parent="40" name="pk_currencies">
       <ObjectId>27374</ObjectId>
       <StateNumber>763</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="138" parent="40" name="pk_currencies">
+    <key id="140" parent="40" name="pk_currencies">
       <ObjectId>27375</ObjectId>
       <StateNumber>763</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>pk_currencies</UnderlyingIndexName>
     </key>
-    <column id="139" parent="41" name="id">
+    <column id="141" parent="41" name="id">
       <Position>1</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>768</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="140" parent="41" name="wallet_record_id">
+    <column id="142" parent="41" name="wallet_record_id">
       <Position>2</Position>
       <DataType>text|0s</DataType>
       <StateNumber>769</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="141" parent="41" name="value">
+    <column id="143" parent="41" name="value">
       <Position>3</Position>
       <DataType>double precision|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>767</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="142" parent="41" name="target_wallet_record_id">
+    <column id="144" parent="41" name="target_wallet_record_id">
       <Position>5</Position>
       <DataType>text|0s</DataType>
       <StateNumber>769</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="143" parent="41" name="commission_record_id">
-      <Position>6</Position>
-      <DataType>text|0s</DataType>
-      <StateNumber>769</StateNumber>
-      <TypeId>25</TypeId>
-    </column>
-    <column id="144" parent="41" name="type">
+    <column id="145" parent="41" name="type">
       <Position>7</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -2324,27 +2334,22 @@ name</ColNames>
       <DefaultExpression>0</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <index id="145" parent="41" name="pk_operations">
+    <index id="146" parent="41" name="pk_operations">
       <ObjectId>27566</ObjectId>
       <StateNumber>767</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="146" parent="41" name="IX_operations_wallet_record_id">
+    <index id="147" parent="41" name="IX_operations_wallet_record_id">
       <ObjectId>27579</ObjectId>
       <StateNumber>769</StateNumber>
       <ColNames>wallet_record_id</ColNames>
     </index>
-    <index id="147" parent="41" name="IX_operations_target_wallet_record_id">
+    <index id="148" parent="41" name="IX_operations_target_wallet_record_id">
       <ObjectId>27578</ObjectId>
       <StateNumber>769</StateNumber>
       <ColNames>target_wallet_record_id</ColNames>
-    </index>
-    <index id="148" parent="41" name="IX_operations_commission_record_id">
-      <ObjectId>27588</ObjectId>
-      <StateNumber>769</StateNumber>
-      <ColNames>commission_record_id</ColNames>
     </index>
     <key id="149" parent="41" name="pk_operations">
       <ObjectId>27567</ObjectId>
@@ -2375,37 +2380,26 @@ name</ColNames>
       <RefColNames>id</RefColNames>
       <OnDelete>restrict</OnDelete>
     </foreign-key>
-    <foreign-key id="152" parent="41" name="fk_operations_commissions_commission_record_id">
-      <ObjectId>27606</ObjectId>
-      <StateNumber>769</StateNumber>
-      <ColNames>commission_record_id</ColNames>
-      <RefTableId>27196</RefTableId>
-      <RefColPositions>7</RefColPositions>
-      <RefTableName>commissions</RefTableName>
-      <RefKeyName>pk_commissions</RefKeyName>
-      <RefColNames>id</RefColNames>
-      <OnDelete>restrict</OnDelete>
-    </foreign-key>
-    <column id="153" parent="42" name="account_record_id">
+    <column id="152" parent="42" name="account_record_id">
       <Position>2</Position>
       <DataType>text|0s</DataType>
       <StateNumber>769</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="154" parent="42" name="currency_record_id">
+    <column id="153" parent="42" name="currency_record_id">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <StateNumber>769</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="155" parent="42" name="value">
+    <column id="154" parent="42" name="value">
       <Position>4</Position>
       <DataType>double precision|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>762</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="156" parent="42" name="id">
+    <column id="155" parent="42" name="id">
       <Position>5</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
@@ -2413,31 +2407,31 @@ name</ColNames>
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <index id="157" parent="42" name="pk_wallets">
+    <index id="156" parent="42" name="pk_wallets">
       <ObjectId>27370</ObjectId>
       <StateNumber>763</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="158" parent="42" name="IX_wallets_account_record_id">
+    <index id="157" parent="42" name="IX_wallets_account_record_id">
       <ObjectId>27302</ObjectId>
       <StateNumber>769</StateNumber>
       <ColNames>account_record_id</ColNames>
     </index>
-    <index id="159" parent="42" name="IX_wallets_currency_record_id">
+    <index id="158" parent="42" name="IX_wallets_currency_record_id">
       <ObjectId>27290</ObjectId>
       <StateNumber>769</StateNumber>
       <ColNames>currency_record_id</ColNames>
     </index>
-    <key id="160" parent="42" name="pk_wallets">
+    <key id="159" parent="42" name="pk_wallets">
       <ObjectId>27371</ObjectId>
       <StateNumber>763</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>pk_wallets</UnderlyingIndexName>
     </key>
-    <foreign-key id="161" parent="42" name="fk_wallets_accounts_account_record_id">
+    <foreign-key id="160" parent="42" name="fk_wallets_accounts_account_record_id">
       <ObjectId>27621</ObjectId>
       <StateNumber>769</StateNumber>
       <ColNames>account_record_id</ColNames>
@@ -2448,7 +2442,7 @@ name</ColNames>
       <RefColNames>id</RefColNames>
       <OnDelete>restrict</OnDelete>
     </foreign-key>
-    <foreign-key id="162" parent="42" name="fk_wallets_currencies_currency_record_id">
+    <foreign-key id="161" parent="42" name="fk_wallets_currencies_currency_record_id">
       <ObjectId>27626</ObjectId>
       <StateNumber>769</StateNumber>
       <ColNames>currency_record_id</ColNames>

@@ -7,7 +7,8 @@
     <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
     <e p="$APPLICATION_CONFIG_DIR$/scratches" t="IncludeRecursive" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
-      <e p="Wallet" t="IncludeRecursive">
+      <e p="Wallet.sln" t="IncludeFlat" />
+      <e p="WalletProject" t="IncludeRecursive">
         <e p="Configuration" t="Include">
           <e p="config.json" t="Include" />
         </e>
@@ -28,6 +29,12 @@
           <e p="20201207184650_OperationsIdRename.cs" t="Include" />
           <e p="20201209171906_Refactor.Designer.cs" t="Include" />
           <e p="20201209171906_Refactor.cs" t="Include" />
+          <e p="20201211103802_addedId.Designer.cs" t="Include" />
+          <e p="20201211103802_addedId.cs" t="Include" />
+          <e p="20201211135743_refactorOperations.Designer.cs" t="Include" />
+          <e p="20201211135743_refactorOperations.cs" t="Include" />
+          <e p="20201211170610_addCommissionInOperation.Designer.cs" t="Include" />
+          <e p="20201211170610_addCommissionInOperation.cs" t="Include" />
           <e p="WalletDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />
@@ -47,15 +54,15 @@
           <e p="_ViewImports.cshtml" t="Include" />
           <e p="_ViewStart.cshtml" t="Include" />
         </e>
-        <e p="Wallet.csproj" t="IncludeRecursive" />
+        <e p="WalletProject.csproj" t="IncludeRecursive" />
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
-              <e p="Wallet.AssemblyInfo.cs" t="Include" />
-              <e p="Wallet.RazorAssemblyInfo.cs" t="Include" />
+              <e p="WalletProject.AssemblyInfo.cs" t="Include" />
+              <e p="WalletProject.RazorAssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
@@ -70,7 +77,6 @@
             <e p="Models" t="Include">
               <e p="AccountRecord.cs" t="Include" />
               <e p="Commissions" t="Include">
-                <e p="CommissionCase.cs" t="Include" />
                 <e p="CommissionRecord.cs" t="Include" />
                 <e p="CommissionType.cs" t="Include" />
               </e>
@@ -85,8 +91,8 @@
             <e p="WalletDbContext.cs" t="Include" />
           </e>
           <e p="Helpers" t="Include">
-            <e p="AccountRecordExtensions.cs" t="Include" />
             <e p="DbContextExtensions.cs" t="Include" />
+            <e p="RecordExtensions.cs" t="Include" />
             <e p="StringExtensions.cs" t="Include" />
           </e>
           <e p="Models" t="Include">
@@ -104,9 +110,10 @@
           </e>
           <e p="Services" t="Include">
             <e p="AccountsManager.cs" t="Include" />
+            <e p="CurrencyManager.cs" t="Include" />
+            <e p="OperationManager.cs" t="Include" />
           </e>
           <e p="ViewModels" t="Include">
-            <e p="CommissionArea.cs" t="Include" />
             <e p="LoginViewModel.cs" t="Include" />
             <e p="RegisterViewModel.cs" t="Include" />
           </e>
@@ -174,7 +181,6 @@
           </e>
         </e>
       </e>
-      <e p="Wallet.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />
     </e>
   </component>
