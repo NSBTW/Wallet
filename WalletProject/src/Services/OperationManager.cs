@@ -5,23 +5,20 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Wallet.Database;
 using Wallet.Database.Models;
-using Wallet.Database.Models.Commissions;
 using Wallet.Database.Models.Operations;
 using Wallet.Helpers;
-using Wallet.Models;
 using Wallet.Models.Commissions;
-using Wallet.ViewModels;
 
 namespace Wallet.Services
 {
     public class OperationManager
     {
         private readonly ICommissionRecordReader<ICommission>[] _commissionRecordReaders;
-        private readonly WalletDbContext _context;
+        private readonly WalletContext _context;
 
         public OperationManager(AbsoluteCommissionRecordReader absoluteCommissionRecordReader,
             RelativeCommissionRecordReader relativeCommissionRecordReader,
-            WalletDbContext context)
+            WalletContext context)
         {
             _commissionRecordReaders = new ICommissionRecordReader<ICommission>[]
                 {absoluteCommissionRecordReader, relativeCommissionRecordReader};
@@ -32,21 +29,20 @@ namespace Wallet.Services
         {
             var wallet = await _context.Wallets
                              .FirstOrDefaultAsync(w =>
-                                 w.CurrencyRecordId == currencyId && w.AccountRecordId == accountId) ??
+                                 w.CurrencyId == currencyId && w.AccountId == accountId) ??
                          await CreateWallet(currencyId, accountId);
-            var commission =
-                await CalculateCommission(currencyId, wallet.AccountRecord.Id, OperationType.Withdrawal, value);
-            if (commission + value > wallet.Value)
+            var commission = await GetCommission(currencyId, wallet.Account.Id, OperationType.Withdrawal);
+            var commissionValue = commission.Calculate(value);
+            if (commissionValue + value > wallet.Value)
                 return false;
-            var currency = await _context.Currencies.FirstOrDefaultAsync(c => c.Id == currencyId);
-            if (currency.MaxWithdrawal != 0 && value > currency.MaxDeposit)
+            if (commission.MaxOperationValue != 0 && value > commission.MaxOperationValue)
                 await _context.Operations.AddAsync(new OperationRecord
                 {
-                    Id = Guid.NewGuid().ToString(), WalletRecord = wallet, Type = OperationType.Withdrawal,
-                    Value = value, Commission = commission
+                    Id = Guid.NewGuid().ToString(), Wallet = wallet, Type = OperationType.Withdrawal,
+                    Value = value, Commission = commissionValue
                 });
             else
-                wallet.Value -= commission + value;
+                wallet.Value -= commissionValue + value;
             await _context.SaveChangesAsync();
             return true;
         }
@@ -55,21 +51,20 @@ namespace Wallet.Services
         {
             var wallet = await _context.Wallets
                              .FirstOrDefaultAsync(w =>
-                                 w.CurrencyRecordId == currencyId && w.AccountRecordId == accountId) ??
+                                 w.CurrencyId == currencyId && w.AccountId == accountId) ??
                          await CreateWallet(currencyId, accountId);
-            var commission =
-                await CalculateCommission(currencyId, wallet.AccountRecord.Id, OperationType.Deposit, value);
-            if (value - commission < 0)
+            var commission = await GetCommission(currencyId, wallet.Account.Id, OperationType.Deposit);
+            var commissionValue = commission.Calculate(value);
+            if (value - commissionValue < 0)
                 return false;
-            var currency = await _context.Currencies.FirstOrDefaultAsync(c => c.Id == currencyId);
-            if (currency.MaxDeposit != 0 && value > currency.MaxDeposit)
+            if (commission.MaxOperationValue != 0 && value > commission.MaxOperationValue)
                 await _context.Operations.AddAsync(new OperationRecord
                 {
-                    Id = Guid.NewGuid().ToString(), TargetWalletRecord = wallet, Type = OperationType.Deposit,
-                    Value = value, Commission = commission
+                    Id = Guid.NewGuid().ToString(), TargetWallet = wallet, Type = OperationType.Deposit,
+                    Value = value, Commission = commissionValue
                 });
             else
-                wallet.Value += value - commission;
+                wallet.Value += value - commissionValue;
             await _context.SaveChangesAsync();
             return true;
         }
@@ -78,27 +73,26 @@ namespace Wallet.Services
         {
             var wallet = await _context.Wallets
                 .FirstOrDefaultAsync(w =>
-                    w.CurrencyRecordId == currencyId && w.AccountRecordId == accountId);
+                    w.CurrencyId == currencyId && w.AccountId == accountId);
             if (wallet == null)
                 return false;
             var targetWallet = await _context.Wallets
                                    .FirstOrDefaultAsync(w =>
-                                       w.CurrencyRecordId == currencyId && w.AccountRecordId == targetAccountId) ??
+                                       w.CurrencyId == currencyId && w.AccountId == targetAccountId) ??
                                await CreateWallet(currencyId, accountId);
-            var commission =
-                await CalculateCommission(currencyId, accountId, OperationType.Transfer, value);
-            if (commission + value > wallet.Value)
+            var commission = await GetCommission(currencyId, accountId, OperationType.Transfer);
+            var commissionValue = commission.Calculate(value);
+            if (commissionValue + value > wallet.Value)
                 return false;
-            var currency = await _context.Currencies.FirstOrDefaultAsync(c => c.Id == currencyId);
-            if (currency.MaxTransfer != 0 && value > currency.MaxDeposit)
+            if (commission.MaxOperationValue != 0 && value > commission.MaxOperationValue)
                 await _context.Operations.AddAsync(new OperationRecord
                 {
-                    Id = Guid.NewGuid().ToString(), WalletRecord = wallet, TargetWalletRecord = targetWallet,
-                    Type = OperationType.Transfer, Value = value, Commission = commission
+                    Id = Guid.NewGuid().ToString(), Wallet = wallet, TargetWallet = targetWallet,
+                    Type = OperationType.Transfer, Value = value, Commission = commissionValue
                 });
             else
             {
-                wallet.Value -= commission + value;
+                wallet.Value -= commissionValue + value;
                 targetWallet.Value += value;
             }
 
@@ -106,25 +100,24 @@ namespace Wallet.Services
             return true;
         }
 
-        private async Task<double> CalculateCommission(string currencyId, string userId, OperationType type,
-            double value)
+        private async Task<ICommission> GetCommission(string currencyId, string userId, OperationType type)
         {
             var commissionRecord = await _context.Commissions
                                        .FirstOrDefaultAsync(c =>
-                                           c.IsUserCommission && c.UserRecordId == userId &&
-                                           c.CurrencyRecordId == currencyId &&
+                                           c.UserId != null && c.UserId == userId &&
+                                           c.CurrencyId == currencyId &&
                                            c.OperationType == type)
                                    ?? await _context.Commissions.FirstOrDefaultAsync(c =>
-                                       c.CurrencyRecordId == currencyId && c.OperationType == type);
+                                       c.CurrencyId == currencyId && c.OperationType == type);
             if (commissionRecord == null)
                 throw new Exception("Object not found");
 
             var commission = _commissionRecordReaders
                 .FirstOrDefault(c => c.CommissionType == commissionRecord.Type)?
                 .ReadFromRecord(commissionRecord);
-            if (commission != null) return commission.Calculate(value);
+            if (commission != null) return commission;
 
-            return 0;
+            throw new Exception("Object not found");
         }
 
         private async Task<WalletRecord> CreateWallet(string currencyId, string accountId)
@@ -134,7 +127,7 @@ namespace Wallet.Services
             account.Wallets = new List<WalletRecord>
             {
                 new WalletRecord
-                    {CurrencyRecordId = currencyId, Id = Guid.NewGuid().ToString(), AccountRecord = account}
+                    {CurrencyId = currencyId, Id = Guid.NewGuid().ToString(), Account = account}
             };
             await _context.SaveChangesAsync();
             return account.Wallets[0];

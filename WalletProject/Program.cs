@@ -18,30 +18,7 @@ namespace Wallet
 {
     public class Program
     {
-        public static async Task Main(string[] args)
-        {
-            var host = CreateWebHostBuilder(args).Build();
-
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                try
-                {
-                    var userManager = services.GetRequiredService<UserManager<UserRecord>>();
-                    var rolesManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-                    var currencyManager = services.GetRequiredService<CurrencyManager>();
-                    var context = services.GetRequiredService<WalletDbContext>();
-                    await IdentityDbInitializer.Initialize(context, userManager, rolesManager, currencyManager);
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred while seeding the database.");
-                }
-            }
-
-            await host.RunAsync();
-        }
+        public static void Main(string[] args) => CreateWebHostBuilder(args).Build().Run();
 
 
         private static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

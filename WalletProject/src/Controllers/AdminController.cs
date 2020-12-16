@@ -57,7 +57,7 @@ namespace Wallet.Controllers
 
         [HttpPost("CurrencyCommission")]
         public async Task<IActionResult> ChangeCurrencyCommission([FromQuery] string currencyName,
-            [FromQuery] CommissionViewModel model, [FromServices] WalletDbContext context)
+            [FromQuery] CommissionViewModel model, [FromServices] WalletContext context)
         {
             var currency = await context.Currencies
                 .Where(c => c.Name == currencyName)
@@ -66,7 +66,7 @@ namespace Wallet.Controllers
             if (currency == null)
                 return BadRequest();
             var commission =
-                currency.Commissions.FirstOrDefault(c => c.OperationType == model.OperationType && !c.IsUserCommission);
+                currency.Commissions.FirstOrDefault(c => c.OperationType == model.OperationType && c.UserId != null);
             if (commission == null)
                 throw new Exception();
             CopyCommissionViewToRecord(model, commission);
@@ -79,8 +79,8 @@ namespace Wallet.Controllers
             commission.Rate = model.Rate;
             commission.Type = model.Type;
             commission.Value = model.Value;
-            commission.MaxValue = model.MaximalValue;
-            commission.MinValue = model.MinimalValue;
+            commission.MaxCommission = model.MaximalValue;
+            commission.MinCommission = model.MinimalValue;
         }
     }
 }

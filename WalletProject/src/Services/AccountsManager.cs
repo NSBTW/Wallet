@@ -13,25 +13,25 @@ namespace Wallet.Services
 {
     public class AccountsManager
     {
-        private readonly WalletDbContext _walletDbContext;
+        private readonly WalletContext _walletContext;
         private readonly UserManager<UserRecord> _userManager;
 
-        public AccountsManager(WalletDbContext walletDbContext, UserManager<UserRecord> userManager)
+        public AccountsManager(WalletContext walletContext, UserManager<UserRecord> userManager)
         {
-            _walletDbContext = walletDbContext;
+            _walletContext = walletContext;
             _userManager = userManager;
         }
 
         public async Task<List<Account>> Accounts(string userId) =>
-            await _walletDbContext.Accounts
-                .Where(a => a.UserRecordId == userId)
+            await _walletContext.Accounts
+                .Where(a => a.UserId == userId)
                 .Select(a => new Account(a.Id, a.Name))
                 .ToListAsync();
 
         public async Task<bool> TryAddAccountAsync(UserRecord record, string accountName)
         {
-            if (await _walletDbContext.Accounts.FirstOrDefaultAsync(a =>
-                a.UserRecordId == record.Id && a.Name == accountName) != null)
+            if (await _walletContext.Accounts.FirstOrDefaultAsync(a =>
+                a.UserId == record.Id && a.Name == accountName) != null)
                 return false;
             record.Accounts = new List<AccountRecord> {new Account(Guid.NewGuid().ToString(), accountName).ToRecord()};
             await _userManager.UpdateAsync(record);
@@ -39,8 +39,8 @@ namespace Wallet.Services
         }
 
         public async Task<Account> GetAccount(string userId, string accountName) =>
-            (await _walletDbContext.Accounts.FirstOrDefaultAsync(a =>
-                a.UserRecordId == userId && a.Name == accountName))?.ToAccount();
+            (await _walletContext.Accounts.FirstOrDefaultAsync(a =>
+                a.UserId == userId && a.Name == accountName))?.ToAccount();
 
         public async Task<bool> TryChangeAccountValue(string userName, string accountName, string currencyName,
             double value)
@@ -49,16 +49,20 @@ namespace Wallet.Services
             var account = await GetAccount(user.Id, accountName);
             if (account == null)
                 return false;
-            var currency = await _walletDbContext.Currencies
+            var currency = await _walletContext.Currencies
                 .FirstOrDefaultAsync(c => c.Name == currencyName);
 
-            var wallet = await _walletDbContext.Wallets.FirstOrDefaultAsync(w =>
-                w.AccountRecordId == account.Id && w.CurrencyRecordId == currency.Id);
+            var wallet = await _walletContext.Wallets.FirstOrDefaultAsync(w =>
+                w.AccountId == account.Id && w.CurrencyId == currency.Id);
             if (wallet == null)
-                wallet = new WalletRecord {CurrencyRecord = currency, Value = value, Id = Guid.NewGuid().ToString()};
+            {
+                wallet = new WalletRecord {Currency = currency, Value = value, Id = Guid.NewGuid().ToString()};
+                await _walletContext.Wallets.AddAsync(wallet);
+            }
             else
                 wallet.Value = value;
-            await _walletDbContext.SaveChangesAsync();
+
+            await _walletContext.SaveChangesAsync();
             return true;
         }
     }

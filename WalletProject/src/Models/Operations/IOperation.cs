@@ -5,6 +5,6 @@ namespace Wallet.Models.Operations
 {
     public interface IOperation
     {
-        public Task<bool> TryDoOperation(WalletDbContext context);
+        public Task<bool> TryDoOperation(WalletContext context);
     }
 }

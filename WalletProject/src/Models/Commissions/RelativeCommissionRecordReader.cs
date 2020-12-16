@@ -7,6 +7,6 @@ namespace Wallet.Models.Commissions
         public CommissionType CommissionType => CommissionType.Relative;
 
         public RelativeCommission ReadFromRecord(CommissionRecord record) =>
-            new RelativeCommission(record.Id,record.Rate, record.MinValue, record.MaxValue);
+            new RelativeCommission(record.Id, record.Rate, record.MinCommission, record.MaxCommission, record.MaxValue);
     }
 }

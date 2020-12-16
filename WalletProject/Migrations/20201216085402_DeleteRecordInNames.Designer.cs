@@ -10,8 +10,8 @@ using Wallet.Database;
 namespace Wallet.Migrations
 {
     [DbContext(typeof(WalletContext))]
-    [Migration("20201207160422_CommissionsStack")]
-    partial class CommissionsStack
+    [Migration("20201216085402_DeleteRecordInNames")]
+    partial class DeleteRecordInNames
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -178,7 +178,7 @@ namespace Wallet.Migrations
                     b.ToTable("asp_net_user_tokens");
                 });
 
-            modelBuilder.Entity("WalletProject.Account", b =>
+            modelBuilder.Entity("Wallet.Database.Models.AccountRecord", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text")
@@ -200,64 +200,71 @@ namespace Wallet.Migrations
                     b.ToTable("accounts");
                 });
 
-            modelBuilder.Entity("WalletProject.Commission", b =>
+            modelBuilder.Entity("Wallet.Database.Models.Commissions.CommissionRecord", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text")
                         .HasColumnName("id");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
+                    b.Property<string>("CurrencyId")
                         .HasColumnType("text")
-                        .HasColumnName("discriminator");
+                        .HasColumnName("currency_id");
+
+                    b.Property<double>("MaxValue")
+                        .HasColumnType("double precision")
+                        .HasColumnName("max_value");
+
+                    b.Property<double>("MinValue")
+                        .HasColumnType("double precision")
+                        .HasColumnName("min_value");
+
+                    b.Property<int>("OperationType")
+                        .HasColumnType("integer")
+                        .HasColumnName("operation_type");
+
+                    b.Property<double>("Rate")
+                        .HasColumnType("double precision")
+                        .HasColumnName("rate");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer")
+                        .HasColumnName("type");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("text")
+                        .HasColumnName("user_id");
+
+                    b.Property<double>("Value")
+                        .HasColumnType("double precision")
+                        .HasColumnName("value");
 
                     b.HasKey("Id")
                         .HasName("pk_commissions");
 
+                    b.HasIndex("CurrencyId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("commissions");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Commission");
                 });
 
-            modelBuilder.Entity("WalletProject.CommissionsStack", b =>
+            modelBuilder.Entity("Wallet.Database.Models.CurrencyRecord", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text")
                         .HasColumnName("id");
 
-                    b.Property<string>("InCommissionId")
-                        .HasColumnType("text")
-                        .HasColumnName("in_commission_id");
+                    b.Property<double>("MaxDeposit")
+                        .HasColumnType("double precision")
+                        .HasColumnName("max_deposit");
 
-                    b.Property<string>("OutCommissionId")
-                        .HasColumnType("text")
-                        .HasColumnName("out_commission_id");
+                    b.Property<double>("MaxTransfer")
+                        .HasColumnType("double precision")
+                        .HasColumnName("max_transfer");
 
-                    b.Property<string>("TransferCommissionId")
-                        .HasColumnType("text")
-                        .HasColumnName("transfer_commission_id");
-
-                    b.HasKey("Id")
-                        .HasName("pk_commissions_stack");
-
-                    b.HasIndex("InCommissionId");
-
-                    b.HasIndex("OutCommissionId");
-
-                    b.HasIndex("TransferCommissionId");
-
-                    b.ToTable("commissions_stack");
-                });
-
-            modelBuilder.Entity("WalletProject.Currency", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text")
-                        .HasColumnName("id");
-
-                    b.Property<string>("CommissionsStackId")
-                        .HasColumnType("text")
-                        .HasColumnName("commissions_stack_id");
+                    b.Property<double>("MaxWithdrawal")
+                        .HasColumnType("double precision")
+                        .HasColumnName("max_withdrawal");
 
                     b.Property<string>("Name")
                         .HasColumnType("text")
@@ -266,42 +273,46 @@ namespace Wallet.Migrations
                     b.HasKey("Id")
                         .HasName("pk_currencies");
 
-                    b.HasIndex("CommissionsStackId");
-
                     b.ToTable("currencies");
                 });
 
-            modelBuilder.Entity("WalletProject.PersonalCommission", b =>
+            modelBuilder.Entity("Wallet.Database.Models.Operations.OperationRecord", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text")
                         .HasColumnName("id");
 
-                    b.Property<string>("CommissionsStackId")
-                        .HasColumnType("text")
-                        .HasColumnName("commissions_stack_id");
+                    b.Property<double>("Commission")
+                        .HasColumnType("double precision")
+                        .HasColumnName("commission");
 
-                    b.Property<string>("CurrencyId")
+                    b.Property<string>("TargetWalletId")
                         .HasColumnType("text")
-                        .HasColumnName("currency_id");
+                        .HasColumnName("target_wallet_id");
 
-                    b.Property<string>("UserId")
+                    b.Property<int>("Type")
+                        .HasColumnType("integer")
+                        .HasColumnName("type");
+
+                    b.Property<double>("Value")
+                        .HasColumnType("double precision")
+                        .HasColumnName("value");
+
+                    b.Property<string>("WalletId")
                         .HasColumnType("text")
-                        .HasColumnName("user_id");
+                        .HasColumnName("wallet_id");
 
                     b.HasKey("Id")
-                        .HasName("pk_personal_commissions");
+                        .HasName("pk_operations");
 
-                    b.HasIndex("CommissionsStackId");
+                    b.HasIndex("TargetWalletId");
 
-                    b.HasIndex("CurrencyId");
+                    b.HasIndex("WalletId");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("personal_commissions");
+                    b.ToTable("operations");
                 });
 
-            modelBuilder.Entity("WalletProject.User", b =>
+            modelBuilder.Entity("Wallet.Database.Models.UserRecord", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text")
@@ -379,19 +390,19 @@ namespace Wallet.Migrations
                     b.ToTable("asp_net_users");
                 });
 
-            modelBuilder.Entity("WalletProject.WalletProject", b =>
+            modelBuilder.Entity("Wallet.Database.Models.WalletRecord", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text")
                         .HasColumnName("id");
 
-                    b.Property<string>("AccountId")
+                    b.Property<string>("AccountRecordId")
                         .HasColumnType("text")
-                        .HasColumnName("account_id");
+                        .HasColumnName("account_record_id");
 
-                    b.Property<string>("CurrencyId")
+                    b.Property<string>("CurrencyRecordId")
                         .HasColumnType("text")
-                        .HasColumnName("currency_id");
+                        .HasColumnName("currency_record_id");
 
                     b.Property<double>("Value")
                         .HasColumnType("double precision")
@@ -400,45 +411,11 @@ namespace Wallet.Migrations
                     b.HasKey("Id")
                         .HasName("pk_wallets");
 
-                    b.HasIndex("AccountId");
+                    b.HasIndex("AccountRecordId");
 
-                    b.HasIndex("CurrencyId");
+                    b.HasIndex("CurrencyRecordId");
 
                     b.ToTable("wallets");
-                });
-
-            modelBuilder.Entity("WalletProject.AbsoluteCommission", b =>
-                {
-                    b.HasBaseType("WalletProject.Commission");
-
-                    b.Property<double>("Commission")
-                        .HasColumnType("double precision")
-                        .HasColumnName("commission");
-
-                    b.ToTable("commissions");
-
-                    b.HasDiscriminator().HasValue("AbsoluteCommission");
-                });
-
-            modelBuilder.Entity("WalletProject.RelativeCommission", b =>
-                {
-                    b.HasBaseType("WalletProject.Commission");
-
-                    b.Property<double>("MaximalCommission")
-                        .HasColumnType("double precision")
-                        .HasColumnName("maximal_commission");
-
-                    b.Property<double>("MinimalCommission")
-                        .HasColumnType("double precision")
-                        .HasColumnName("minimal_commission");
-
-                    b.Property<double>("Rate")
-                        .HasColumnType("double precision")
-                        .HasColumnName("rate");
-
-                    b.ToTable("commissions");
-
-                    b.HasDiscriminator().HasValue("RelativeCommission");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -453,7 +430,7 @@ namespace Wallet.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("WalletProject.User", null)
+                    b.HasOne("Wallet.Database.Models.UserRecord", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .HasConstraintName("fk_asp_net_user_claims_asp_net_users_user_id")
@@ -463,7 +440,7 @@ namespace Wallet.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("WalletProject.User", null)
+                    b.HasOne("Wallet.Database.Models.UserRecord", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .HasConstraintName("fk_asp_net_user_logins_asp_net_users_user_id")
@@ -480,7 +457,7 @@ namespace Wallet.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WalletProject.User", null)
+                    b.HasOne("Wallet.Database.Models.UserRecord", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .HasConstraintName("fk_asp_net_user_roles_asp_net_users_user_id")
@@ -490,7 +467,7 @@ namespace Wallet.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("WalletProject.User", null)
+                    b.HasOne("Wallet.Database.Models.UserRecord", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .HasConstraintName("fk_asp_net_user_tokens_asp_net_users_user_id")
@@ -498,9 +475,9 @@ namespace Wallet.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WalletProject.Account", b =>
+            modelBuilder.Entity("Wallet.Database.Models.AccountRecord", b =>
                 {
-                    b.HasOne("WalletProject.User", "User")
+                    b.HasOne("Wallet.Database.Models.UserRecord", "User")
                         .WithMany("Accounts")
                         .HasForeignKey("UserId")
                         .HasConstraintName("fk_accounts_asp_net_users_user_id");
@@ -508,87 +485,68 @@ namespace Wallet.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WalletProject.CommissionsStack", b =>
+            modelBuilder.Entity("Wallet.Database.Models.Commissions.CommissionRecord", b =>
                 {
-                    b.HasOne("WalletProject.Commission", "InCommission")
-                        .WithMany()
-                        .HasForeignKey("InCommissionId")
-                        .HasConstraintName("fk_commissions_stack_commissions_in_commission_id");
-
-                    b.HasOne("WalletProject.Commission", "OutCommission")
-                        .WithMany()
-                        .HasForeignKey("OutCommissionId")
-                        .HasConstraintName("fk_commissions_stack_commissions_out_commission_id");
-
-                    b.HasOne("WalletProject.Commission", "TransferCommission")
-                        .WithMany()
-                        .HasForeignKey("TransferCommissionId")
-                        .HasConstraintName("fk_commissions_stack_commissions_transfer_commission_id");
-
-                    b.Navigation("InCommission");
-
-                    b.Navigation("OutCommission");
-
-                    b.Navigation("TransferCommission");
-                });
-
-            modelBuilder.Entity("WalletProject.Currency", b =>
-                {
-                    b.HasOne("WalletProject.CommissionsStack", "CommissionsStack")
-                        .WithMany()
-                        .HasForeignKey("CommissionsStackId")
-                        .HasConstraintName("fk_currencies_commissions_stack_commissions_stack_id");
-
-                    b.Navigation("CommissionsStack");
-                });
-
-            modelBuilder.Entity("WalletProject.PersonalCommission", b =>
-                {
-                    b.HasOne("WalletProject.CommissionsStack", "CommissionsStack")
-                        .WithMany()
-                        .HasForeignKey("CommissionsStackId")
-                        .HasConstraintName("fk_personal_commissions_commissions_stack_commissions_stack_id");
-
-                    b.HasOne("WalletProject.Currency", "Currency")
-                        .WithMany()
+                    b.HasOne("Wallet.Database.Models.CurrencyRecord", "Currency")
+                        .WithMany("Commissions")
                         .HasForeignKey("CurrencyId")
-                        .HasConstraintName("fk_personal_commissions_currencies_currency_id");
+                        .HasConstraintName("fk_commissions_currencies_currency_id");
 
-                    b.HasOne("WalletProject.User", "User")
+                    b.HasOne("Wallet.Database.Models.UserRecord", "User")
                         .WithMany("PersonalCommissions")
                         .HasForeignKey("UserId")
-                        .HasConstraintName("fk_personal_commissions_asp_net_users_user_id");
-
-                    b.Navigation("CommissionsStack");
+                        .HasConstraintName("fk_commissions_asp_net_users_user_id");
 
                     b.Navigation("Currency");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WalletProject.WalletProject", b =>
+            modelBuilder.Entity("Wallet.Database.Models.Operations.OperationRecord", b =>
                 {
-                    b.HasOne("WalletProject.Account", "Account")
-                        .WithMany("Wallets")
-                        .HasForeignKey("AccountId")
-                        .HasConstraintName("fk_wallets_accounts_account_id");
-
-                    b.HasOne("WalletProject.Currency", "Currency")
+                    b.HasOne("Wallet.Database.Models.WalletRecord", "TargetWallet")
                         .WithMany()
-                        .HasForeignKey("CurrencyId")
-                        .HasConstraintName("fk_wallets_currencies_currency_id");
+                        .HasForeignKey("TargetWalletId")
+                        .HasConstraintName("fk_operations_wallets_target_wallet_id");
 
-                    b.Navigation("Account");
+                    b.HasOne("Wallet.Database.Models.WalletRecord", "Wallet")
+                        .WithMany()
+                        .HasForeignKey("WalletId")
+                        .HasConstraintName("fk_operations_wallets_wallet_id");
 
-                    b.Navigation("Currency");
+                    b.Navigation("TargetWallet");
+
+                    b.Navigation("Wallet");
                 });
 
-            modelBuilder.Entity("WalletProject.Account", b =>
+            modelBuilder.Entity("Wallet.Database.Models.WalletRecord", b =>
+                {
+                    b.HasOne("Wallet.Database.Models.AccountRecord", "AccountRecord")
+                        .WithMany("Wallets")
+                        .HasForeignKey("AccountRecordId")
+                        .HasConstraintName("fk_wallets_accounts_account_record_id");
+
+                    b.HasOne("Wallet.Database.Models.CurrencyRecord", "CurrencyRecord")
+                        .WithMany()
+                        .HasForeignKey("CurrencyRecordId")
+                        .HasConstraintName("fk_wallets_currencies_currency_record_id");
+
+                    b.Navigation("AccountRecord");
+
+                    b.Navigation("CurrencyRecord");
+                });
+
+            modelBuilder.Entity("Wallet.Database.Models.AccountRecord", b =>
                 {
                     b.Navigation("Wallets");
                 });
 
-            modelBuilder.Entity("WalletProject.User", b =>
+            modelBuilder.Entity("Wallet.Database.Models.CurrencyRecord", b =>
+                {
+                    b.Navigation("Commissions");
+                });
+
+            modelBuilder.Entity("Wallet.Database.Models.UserRecord", b =>
                 {
                     b.Navigation("Accounts");
 

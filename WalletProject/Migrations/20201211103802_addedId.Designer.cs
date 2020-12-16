@@ -9,7 +9,7 @@ using Wallet.Database;
 
 namespace Wallet.Migrations
 {
-    [DbContext(typeof(WalletDbContext))]
+    [DbContext(typeof(WalletContext))]
     [Migration("20201211103802_addedId")]
     partial class addedId
     {

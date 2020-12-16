@@ -23,10 +23,10 @@ namespace Wallet.Models
         public AccountRecord ToRecord() => new AccountRecord
             {Id = Id, Name = Name};
 
-        public async Task<List<Wallet>> Wallets(WalletDbContext context) =>
+        public async Task<List<Wallet>> Wallets(WalletContext context) =>
             await context.Wallets
-                .Where(w => w.AccountRecordId == Id)
-                .Include(w => w.CurrencyRecord)
+                .Where(w => w.AccountId == Id)
+                .Include(w => w.Currency)
                 .Select(w => w.ToWallet())
                 .ToListAsync();
 

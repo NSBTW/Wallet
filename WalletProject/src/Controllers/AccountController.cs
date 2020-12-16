@@ -41,7 +41,7 @@ namespace Wallet.Controllers
         [Authorize]
         [HttpGet("{accountName}")]
         public async Task<List<Models.Wallet>> Get([FromRoute] string accountName,
-            [FromServices] WalletDbContext context)
+            [FromServices] WalletContext context)
         {
             var account = await _accountsManager.GetAccount(_userManager.GetUserId(User), accountName);
             if (account == null)
@@ -52,7 +52,7 @@ namespace Wallet.Controllers
         [Authorize]
         [HttpPost("Deposit")]
         public async Task<IActionResult> Deposit([FromQuery] double value, [FromQuery] string accountName,
-            [FromQuery] string currencyName, [FromServices] WalletDbContext context)
+            [FromQuery] string currencyName, [FromServices] WalletContext context)
         {
             var currency = await context.Currencies
                 .FirstOrDefaultAsync(c => c.Name == currencyName);
@@ -73,7 +73,7 @@ namespace Wallet.Controllers
         [Authorize]
         [HttpPost("Withdraw")]
         public async Task<IActionResult> Withdraw([FromQuery] double value, [FromQuery] string accountName,
-            [FromQuery] string currencyName, [FromServices] WalletDbContext context)
+            [FromQuery] string currencyName, [FromServices] WalletContext context)
         {
             var currency = await context.Currencies
                 .FirstOrDefaultAsync(c => c.Name == currencyName);
@@ -94,7 +94,7 @@ namespace Wallet.Controllers
         [HttpPost("Transfer")]
         public async Task<IActionResult> Transfer([FromQuery] double value, [FromQuery] string userName,
             [FromQuery] string accountName, [FromQuery] string fromAccountName, [FromQuery] string currencyName,
-            [FromServices] WalletDbContext context)
+            [FromServices] WalletContext context)
         {
             var currency = await context.Currencies
                 .FirstOrDefaultAsync(c => c.Name == currencyName);

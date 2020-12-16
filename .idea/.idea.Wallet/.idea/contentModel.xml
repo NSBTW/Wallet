@@ -35,6 +35,14 @@
           <e p="20201211135743_refactorOperations.cs" t="Include" />
           <e p="20201211170610_addCommissionInOperation.Designer.cs" t="Include" />
           <e p="20201211170610_addCommissionInOperation.cs" t="Include" />
+          <e p="20201216085402_DeleteRecordInNames.Designer.cs" t="Include" />
+          <e p="20201216085402_DeleteRecordInNames.cs" t="Include" />
+          <e p="20201216093149_MoveMaxOperationValueToCommissionRecord.Designer.cs" t="Include" />
+          <e p="20201216093149_MoveMaxOperationValueToCommissionRecord.cs" t="Include" />
+          <e p="20201216134203_RefactorSeeding.Designer.cs" t="Include" />
+          <e p="20201216134203_RefactorSeeding.cs" t="Include" />
+          <e p="20201216134728_RefactorSeeding2.Designer.cs" t="Include" />
+          <e p="20201216134728_RefactorSeeding2.cs" t="Include" />
           <e p="WalletDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />
@@ -73,7 +81,6 @@
             <e p="UserController.cs" t="Include" />
           </e>
           <e p="Database" t="Include">
-            <e p="DbInitializer.cs" t="Include" />
             <e p="Models" t="Include">
               <e p="AccountRecord.cs" t="Include" />
               <e p="Commissions" t="Include">
@@ -88,11 +95,12 @@
               <e p="UserRecord.cs" t="Include" />
               <e p="WalletRecord.cs" t="Include" />
             </e>
-            <e p="WalletDbContext.cs" t="Include" />
+            <e p="WalletContext.cs" t="Include" />
           </e>
           <e p="Helpers" t="Include">
             <e p="CommissionCreator.cs" t="Include" />
             <e p="DbContextExtensions.cs" t="Include" />
+            <e p="ModelBuilderExtensions.cs" t="Include" />
             <e p="RecordExtensions.cs" t="Include" />
             <e p="StringExtensions.cs" t="Include" />
           </e>

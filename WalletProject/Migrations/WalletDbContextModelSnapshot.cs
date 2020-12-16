@@ -8,7 +8,7 @@ using Wallet.Database;
 
 namespace Wallet.Migrations
 {
-    [DbContext(typeof(WalletDbContext))]
+    [DbContext(typeof(WalletContext))]
     partial class WalletDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -47,6 +47,22 @@ namespace Wallet.Migrations
                         .IsUnique();
 
                     b.ToTable("asp_net_roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "3d0664a0-ffee-47f7-9a7b-b8f8813aaa97",
+                            ConcurrencyStamp = "bfa449b2-10f2-4962-99b2-c7a26c570d31",
+                            Name = "admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "da56c4d0-2533-4bd5-8d3e-7146ea3f0a28",
+                            ConcurrencyStamp = "25e5344f-4cae-419b-a84e-b4954c969944",
+                            Name = "user",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -150,6 +166,18 @@ namespace Wallet.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("asp_net_user_roles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "b85a693e-5aca-4414-9e26-7a7e644586a1",
+                            RoleId = "3d0664a0-ffee-47f7-9a7b-b8f8813aaa97"
+                        },
+                        new
+                        {
+                            UserId = "a83f2088-3678-43be-b7a7-d94bf99e783e",
+                            RoleId = "da56c4d0-2533-4bd5-8d3e-7146ea3f0a28"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -186,16 +214,36 @@ namespace Wallet.Migrations
                         .HasColumnType("text")
                         .HasColumnName("name");
 
-                    b.Property<string>("UserRecordId")
+                    b.Property<string>("UserId")
                         .HasColumnType("text")
-                        .HasColumnName("user_record_id");
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id")
                         .HasName("pk_accounts");
 
-                    b.HasIndex("UserRecordId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("accounts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "cc19109b-bddc-418f-a6c8-862d5d6148c4",
+                            Name = "main",
+                            UserId = "a83f2088-3678-43be-b7a7-d94bf99e783e"
+                        },
+                        new
+                        {
+                            Id = "063e5fe5-ae5c-4f70-9a8e-2c05f3ae35a0",
+                            Name = "second",
+                            UserId = "a83f2088-3678-43be-b7a7-d94bf99e783e"
+                        },
+                        new
+                        {
+                            Id = "5cfb6c19-4e97-47d5-8f3e-0eb581e4abf2",
+                            Name = "admin",
+                            UserId = "b85a693e-5aca-4414-9e26-7a7e644586a1"
+                        });
                 });
 
             modelBuilder.Entity("Wallet.Database.Models.Commissions.CommissionRecord", b =>
@@ -204,21 +252,21 @@ namespace Wallet.Migrations
                         .HasColumnType("text")
                         .HasColumnName("id");
 
-                    b.Property<string>("CurrencyRecordId")
+                    b.Property<string>("CurrencyId")
                         .HasColumnType("text")
-                        .HasColumnName("currency_record_id");
+                        .HasColumnName("currency_id");
 
-                    b.Property<bool>("IsUserCommission")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_user_commission");
+                    b.Property<double>("MaxCommission")
+                        .HasColumnType("double precision")
+                        .HasColumnName("max_commission");
 
                     b.Property<double>("MaxValue")
                         .HasColumnType("double precision")
                         .HasColumnName("max_value");
 
-                    b.Property<double>("MinValue")
+                    b.Property<double>("MinCommission")
                         .HasColumnType("double precision")
-                        .HasColumnName("min_value");
+                        .HasColumnName("min_commission");
 
                     b.Property<int>("OperationType")
                         .HasColumnType("integer")
@@ -232,9 +280,9 @@ namespace Wallet.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("type");
 
-                    b.Property<string>("UserRecordId")
+                    b.Property<string>("UserId")
                         .HasColumnType("text")
-                        .HasColumnName("user_record_id");
+                        .HasColumnName("user_id");
 
                     b.Property<double>("Value")
                         .HasColumnType("double precision")
@@ -243,11 +291,98 @@ namespace Wallet.Migrations
                     b.HasKey("Id")
                         .HasName("pk_commissions");
 
-                    b.HasIndex("CurrencyRecordId");
+                    b.HasIndex("CurrencyId");
 
-                    b.HasIndex("UserRecordId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("commissions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "8a163ba1-4897-4080-87b4-ec46645faf7a",
+                            CurrencyId = "dd14f582-9985-4d55-8206-60c9fa793b3c",
+                            MaxCommission = 0.0,
+                            MaxValue = 100.0,
+                            MinCommission = 0.0,
+                            OperationType = 0,
+                            Rate = 0.0,
+                            Type = 0,
+                            Value = 1.0
+                        },
+                        new
+                        {
+                            Id = "b86d8ba8-8805-4b29-a585-1083892e0d02",
+                            CurrencyId = "dd14f582-9985-4d55-8206-60c9fa793b3c",
+                            MaxCommission = 0.0,
+                            MaxValue = 100.0,
+                            MinCommission = 0.0,
+                            OperationType = 2,
+                            Rate = 0.0,
+                            Type = 0,
+                            Value = 1.0
+                        },
+                        new
+                        {
+                            Id = "f4d1cdae-2055-4cdb-b702-9b6bf3a5df5a",
+                            CurrencyId = "dd14f582-9985-4d55-8206-60c9fa793b3c",
+                            MaxCommission = 0.0,
+                            MaxValue = 100.0,
+                            MinCommission = 0.0,
+                            OperationType = 1,
+                            Rate = 0.0,
+                            Type = 0,
+                            Value = 1.0
+                        },
+                        new
+                        {
+                            Id = "d9412aa4-21c9-47c0-a821-b77a24c3521e",
+                            CurrencyId = "0431b13e-bd9c-4b60-a5ee-33d341dc296f",
+                            MaxCommission = 10.0,
+                            MaxValue = 50.0,
+                            MinCommission = 0.5,
+                            OperationType = 0,
+                            Rate = 0.10000000000000001,
+                            Type = 1,
+                            Value = 0.0
+                        },
+                        new
+                        {
+                            Id = "4190c1c3-40cc-4794-876e-2ddb90788afd",
+                            CurrencyId = "0431b13e-bd9c-4b60-a5ee-33d341dc296f",
+                            MaxCommission = 10.0,
+                            MaxValue = 50.0,
+                            MinCommission = 0.5,
+                            OperationType = 2,
+                            Rate = 0.10000000000000001,
+                            Type = 1,
+                            Value = 0.0
+                        },
+                        new
+                        {
+                            Id = "26f91435-fd47-43de-98bf-13945cd0a655",
+                            CurrencyId = "0431b13e-bd9c-4b60-a5ee-33d341dc296f",
+                            MaxCommission = 10.0,
+                            MaxValue = 50.0,
+                            MinCommission = 0.5,
+                            OperationType = 1,
+                            Rate = 0.10000000000000001,
+                            Type = 1,
+                            Value = 0.0
+                        },
+                        new
+                        {
+                            Id = "fbbf5787-ebd7-4980-8b86-32eacdee4c96",
+                            CurrencyId = "0431b13e-bd9c-4b60-a5ee-33d341dc296f",
+                            MaxCommission = 0.0,
+                            MaxValue = 100.0,
+                            MinCommission = 0.0,
+                            OperationType = 0,
+                            Rate = 0.0,
+                            Type = 0,
+                            UserId = "b85a693e-5aca-4414-9e26-7a7e644586a1",
+                            Value = 1.0
+                        });
                 });
 
             modelBuilder.Entity("Wallet.Database.Models.CurrencyRecord", b =>
@@ -255,18 +390,6 @@ namespace Wallet.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("text")
                         .HasColumnName("id");
-
-                    b.Property<double>("MaxDeposit")
-                        .HasColumnType("double precision")
-                        .HasColumnName("max_deposit");
-
-                    b.Property<double>("MaxTransfer")
-                        .HasColumnType("double precision")
-                        .HasColumnName("max_transfer");
-
-                    b.Property<double>("MaxWithdrawal")
-                        .HasColumnType("double precision")
-                        .HasColumnName("max_withdrawal");
 
                     b.Property<string>("Name")
                         .HasColumnType("text")
@@ -276,6 +399,18 @@ namespace Wallet.Migrations
                         .HasName("pk_currencies");
 
                     b.ToTable("currencies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "dd14f582-9985-4d55-8206-60c9fa793b3c",
+                            Name = "usd"
+                        },
+                        new
+                        {
+                            Id = "0431b13e-bd9c-4b60-a5ee-33d341dc296f",
+                            Name = "eur"
+                        });
                 });
 
             modelBuilder.Entity("Wallet.Database.Models.Operations.OperationRecord", b =>
@@ -288,9 +423,9 @@ namespace Wallet.Migrations
                         .HasColumnType("double precision")
                         .HasColumnName("commission");
 
-                    b.Property<string>("TargetWalletRecordId")
+                    b.Property<string>("TargetWalletId")
                         .HasColumnType("text")
-                        .HasColumnName("target_wallet_record_id");
+                        .HasColumnName("target_wallet_id");
 
                     b.Property<int>("Type")
                         .HasColumnType("integer")
@@ -300,16 +435,16 @@ namespace Wallet.Migrations
                         .HasColumnType("double precision")
                         .HasColumnName("value");
 
-                    b.Property<string>("WalletRecordId")
+                    b.Property<string>("WalletId")
                         .HasColumnType("text")
-                        .HasColumnName("wallet_record_id");
+                        .HasColumnName("wallet_id");
 
                     b.HasKey("Id")
                         .HasName("pk_operations");
 
-                    b.HasIndex("TargetWalletRecordId");
+                    b.HasIndex("TargetWalletId");
 
-                    b.HasIndex("WalletRecordId");
+                    b.HasIndex("WalletId");
 
                     b.ToTable("operations");
                 });
@@ -390,6 +525,36 @@ namespace Wallet.Migrations
                         .IsUnique();
 
                     b.ToTable("asp_net_users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a83f2088-3678-43be-b7a7-d94bf99e783e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "4d17553e-4e5f-4448-b1ed-97647d61a2d1",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "USER",
+                            PasswordHash = "AQAAAAEAACcQAAAAENJg/vQW+ytvDEt6dyKXiPDPolsMpbA9Toy+WVSPVJjR3wMM6sarGqsyvwGtbW62Ng==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "3d78e872-e53b-4bb9-8d91-df7cd3ab362c",
+                            TwoFactorEnabled = false,
+                            UserName = "user"
+                        },
+                        new
+                        {
+                            Id = "b85a693e-5aca-4414-9e26-7a7e644586a1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "75b6f325-3113-4632-bf48-0c49a76a1b95",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIDRO4mxxM4Qt1kA4c+rZDUuCHo6B38OMzASDMcAAwifVBkHyTJHKcm6O9znngz8+w==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "97b1fe8d-c806-4efd-98bc-008e53d68fd0",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("Wallet.Database.Models.WalletRecord", b =>
@@ -398,13 +563,13 @@ namespace Wallet.Migrations
                         .HasColumnType("text")
                         .HasColumnName("id");
 
-                    b.Property<string>("AccountRecordId")
+                    b.Property<string>("AccountId")
                         .HasColumnType("text")
-                        .HasColumnName("account_record_id");
+                        .HasColumnName("account_id");
 
-                    b.Property<string>("CurrencyRecordId")
+                    b.Property<string>("CurrencyId")
                         .HasColumnType("text")
-                        .HasColumnName("currency_record_id");
+                        .HasColumnName("currency_id");
 
                     b.Property<double>("Value")
                         .HasColumnType("double precision")
@@ -413,11 +578,41 @@ namespace Wallet.Migrations
                     b.HasKey("Id")
                         .HasName("pk_wallets");
 
-                    b.HasIndex("AccountRecordId");
+                    b.HasIndex("AccountId");
 
-                    b.HasIndex("CurrencyRecordId");
+                    b.HasIndex("CurrencyId");
 
                     b.ToTable("wallets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "fd9dfcf6-e555-4004-83e5-821f904d9c56",
+                            AccountId = "cc19109b-bddc-418f-a6c8-862d5d6148c4",
+                            CurrencyId = "dd14f582-9985-4d55-8206-60c9fa793b3c",
+                            Value = 1000.0
+                        },
+                        new
+                        {
+                            Id = "3bfb64ad-c4b4-4aec-83d2-df24bd318638",
+                            AccountId = "063e5fe5-ae5c-4f70-9a8e-2c05f3ae35a0",
+                            CurrencyId = "0431b13e-bd9c-4b60-a5ee-33d341dc296f",
+                            Value = 2000.0
+                        },
+                        new
+                        {
+                            Id = "6f3838bd-da31-477a-b84a-a6821621feb6",
+                            AccountId = "5cfb6c19-4e97-47d5-8f3e-0eb581e4abf2",
+                            CurrencyId = "dd14f582-9985-4d55-8206-60c9fa793b3c",
+                            Value = 666.0
+                        },
+                        new
+                        {
+                            Id = "e639ec3d-9c11-4ced-9a20-287b7aaa49fd",
+                            AccountId = "5cfb6c19-4e97-47d5-8f3e-0eb581e4abf2",
+                            CurrencyId = "0431b13e-bd9c-4b60-a5ee-33d341dc296f",
+                            Value = 1408.0
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -479,63 +674,63 @@ namespace Wallet.Migrations
 
             modelBuilder.Entity("Wallet.Database.Models.AccountRecord", b =>
                 {
-                    b.HasOne("Wallet.Database.Models.UserRecord", "UserRecord")
+                    b.HasOne("Wallet.Database.Models.UserRecord", "User")
                         .WithMany("Accounts")
-                        .HasForeignKey("UserRecordId")
-                        .HasConstraintName("fk_accounts_asp_net_users_user_record_id");
+                        .HasForeignKey("UserId")
+                        .HasConstraintName("fk_accounts_asp_net_users_user_id");
 
-                    b.Navigation("UserRecord");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Wallet.Database.Models.Commissions.CommissionRecord", b =>
                 {
-                    b.HasOne("Wallet.Database.Models.CurrencyRecord", "CurrencyRecord")
+                    b.HasOne("Wallet.Database.Models.CurrencyRecord", "Currency")
                         .WithMany("Commissions")
-                        .HasForeignKey("CurrencyRecordId")
-                        .HasConstraintName("fk_commissions_currencies_currency_record_id");
+                        .HasForeignKey("CurrencyId")
+                        .HasConstraintName("fk_commissions_currencies_currency_id");
 
-                    b.HasOne("Wallet.Database.Models.UserRecord", "UserRecord")
+                    b.HasOne("Wallet.Database.Models.UserRecord", "User")
                         .WithMany("PersonalCommissions")
-                        .HasForeignKey("UserRecordId")
-                        .HasConstraintName("fk_commissions_asp_net_users_user_record_id");
+                        .HasForeignKey("UserId")
+                        .HasConstraintName("fk_commissions_asp_net_users_user_id");
 
-                    b.Navigation("CurrencyRecord");
+                    b.Navigation("Currency");
 
-                    b.Navigation("UserRecord");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Wallet.Database.Models.Operations.OperationRecord", b =>
                 {
-                    b.HasOne("Wallet.Database.Models.WalletRecord", "TargetWalletRecord")
+                    b.HasOne("Wallet.Database.Models.WalletRecord", "TargetWallet")
                         .WithMany()
-                        .HasForeignKey("TargetWalletRecordId")
-                        .HasConstraintName("fk_operations_wallets_target_wallet_record_id");
+                        .HasForeignKey("TargetWalletId")
+                        .HasConstraintName("fk_operations_wallets_target_wallet_id");
 
-                    b.HasOne("Wallet.Database.Models.WalletRecord", "WalletRecord")
+                    b.HasOne("Wallet.Database.Models.WalletRecord", "Wallet")
                         .WithMany()
-                        .HasForeignKey("WalletRecordId")
-                        .HasConstraintName("fk_operations_wallets_wallet_record_id");
+                        .HasForeignKey("WalletId")
+                        .HasConstraintName("fk_operations_wallets_wallet_id");
 
-                    b.Navigation("TargetWalletRecord");
+                    b.Navigation("TargetWallet");
 
-                    b.Navigation("WalletRecord");
+                    b.Navigation("Wallet");
                 });
 
             modelBuilder.Entity("Wallet.Database.Models.WalletRecord", b =>
                 {
-                    b.HasOne("Wallet.Database.Models.AccountRecord", "AccountRecord")
+                    b.HasOne("Wallet.Database.Models.AccountRecord", "Account")
                         .WithMany("Wallets")
-                        .HasForeignKey("AccountRecordId")
-                        .HasConstraintName("fk_wallets_accounts_account_record_id");
+                        .HasForeignKey("AccountId")
+                        .HasConstraintName("fk_wallets_accounts_account_id");
 
-                    b.HasOne("Wallet.Database.Models.CurrencyRecord", "CurrencyRecord")
+                    b.HasOne("Wallet.Database.Models.CurrencyRecord", "Currency")
                         .WithMany()
-                        .HasForeignKey("CurrencyRecordId")
-                        .HasConstraintName("fk_wallets_currencies_currency_record_id");
+                        .HasForeignKey("CurrencyId")
+                        .HasConstraintName("fk_wallets_currencies_currency_id");
 
-                    b.Navigation("AccountRecord");
+                    b.Navigation("Account");
 
-                    b.Navigation("CurrencyRecord");
+                    b.Navigation("Currency");
                 });
 
             modelBuilder.Entity("Wallet.Database.Models.AccountRecord", b =>

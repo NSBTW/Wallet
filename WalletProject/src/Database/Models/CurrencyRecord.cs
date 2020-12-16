@@ -6,12 +6,9 @@ namespace Wallet.Database.Models
 {
     public class CurrencyRecord
     {
-        public  string Id { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
 
         public List<CommissionRecord> Commissions { get; set; }
-        public string Name { get; set; }
-        public double MaxTransfer { get; set; }
-        public double MaxDeposit { get; set; }
-        public double MaxWithdrawal { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace Wallet
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddIdentity<UserRecord, IdentityRole>().AddEntityFrameworkStores<WalletDbContext>();
+            services.AddIdentity<UserRecord, IdentityRole>().AddEntityFrameworkStores<WalletContext>();
             services.ConfigureApplicationCookie(options => options.LoginPath = "/User/Login");
             services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/User/Login");
 
@@ -39,7 +39,7 @@ namespace Wallet
             services.AddSingleton<RelativeCommissionRecordReader>();
 
             services.AddEntityFrameworkNpgsql();
-            services.AddDbContext<WalletDbContext>((provider, options) =>
+            services.AddDbContext<WalletContext>((provider, options) =>
             {
                 options.UseNpgsql(Configuration["Database:ConnectionString"]);
             });

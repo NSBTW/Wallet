@@ -6,16 +6,19 @@ namespace Wallet.Models.Commissions
     {
         private readonly string _id;
         private readonly double _value;
+        public double MaxOperationValue { get; }
 
-        public AbsoluteCommission(string id, double value)
+
+        public AbsoluteCommission(string id, double value, double maxValue)
         {
             _id = id;
             _value = value;
+            MaxOperationValue = maxValue;
         }
 
         public double Calculate(double value) => _value;
 
-        public CommissionRecord ToRecord() => 
-            new CommissionRecord {Type = CommissionType.Absolute, Value = _value, Id = _id};
+        public CommissionRecord ToRecord() =>
+            new CommissionRecord {Type = CommissionType.Absolute, Value = _value, Id = _id, MaxValue = MaxOperationValue};
     }
 }

@@ -6,10 +6,10 @@ namespace Wallet.Database.Models
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public string UserId { get; set; }
 
-        public UserRecord UserRecord { get; set; }
-        public string UserRecordId { get; set; }
-        
+
+        public UserRecord User { get; set; }
         public List<WalletRecord> Wallets { get; set; }
     }
 }

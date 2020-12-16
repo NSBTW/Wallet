@@ -7,6 +7,6 @@ namespace Wallet.Models.Commissions
         public CommissionType CommissionType => CommissionType.Absolute;
 
         public AbsoluteCommission ReadFromRecord(CommissionRecord record) =>
-            new AbsoluteCommission(record.Id,record.Value);
+            new AbsoluteCommission(record.Id,record.Value, record.MaxValue);
     }
 }

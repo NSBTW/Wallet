@@ -13,9 +13,9 @@ namespace Wallet.Services
 {
     public class CurrencyManager
     {
-        private readonly WalletDbContext _context;
+        private readonly WalletContext _context;
 
-        public CurrencyManager(WalletDbContext context)
+        public CurrencyManager(WalletContext context)
         {
             _context = context;
         }
