@@ -98,7 +98,6 @@
             <e p="WalletContext.cs" t="Include" />
           </e>
           <e p="Helpers" t="Include">
-            <e p="CommissionCreator.cs" t="Include" />
             <e p="DbContextExtensions.cs" t="Include" />
             <e p="ModelBuilderExtensions.cs" t="Include" />
             <e p="RecordExtensions.cs" t="Include" />
@@ -106,15 +105,6 @@
           </e>
           <e p="Models" t="Include">
             <e p="Account.cs" t="Include" />
-            <e p="Commissions" t="Include">
-              <e p="AbsoluteCommission.cs" t="Include" />
-              <e p="AbsoluteCommissionRecordReader.cs" t="Include" />
-              <e p="ICommission.cs" t="Include" />
-              <e p="ICommissionRecordReader.cs" t="Include" />
-              <e p="IRecordableCommission.cs" t="Include" />
-              <e p="RelativeCommission.cs" t="Include" />
-              <e p="RelativeCommissionRecordReader.cs" t="Include" />
-            </e>
             <e p="Operations" t="Include">
               <e p="DepositOperation.cs" t="Include" />
               <e p="IOperation.cs" t="Include" />
@@ -125,13 +115,14 @@
           </e>
           <e p="Services" t="Include">
             <e p="AccountsManager.cs" t="Include" />
+            <e p="CommissionManager.cs" t="Include" />
             <e p="CurrencyManager.cs" t="Include" />
             <e p="OperationManager.cs" t="Include" />
           </e>
           <e p="ViewModels" t="Include">
-            <e p="CommissionViewModel.cs" t="Include" />
-            <e p="LoginViewModel.cs" t="Include" />
-            <e p="RegisterViewModel.cs" t="Include" />
+            <e p="CommissionRequest.cs" t="Include" />
+            <e p="LoginRequest.cs" t="Include" />
+            <e p="RegisterRequest.cs" t="Include" />
           </e>
         </e>
         <e p="wwwroot" t="Include">

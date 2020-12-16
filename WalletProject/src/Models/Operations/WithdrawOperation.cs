@@ -18,7 +18,7 @@ namespace Wallet.Models.Operations
             _walletId = walletId;
         }
 
-        public async Task<bool> TryDoOperation(WalletContext context)
+        public async Task<bool> TryDoOperationAsync(WalletContext context)
         {
             var wallet = await context.Wallets
                 .FirstOrDefaultAsync(w => w.Id == _walletId);

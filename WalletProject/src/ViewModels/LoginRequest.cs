@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Wallet.ViewModels
 {
-    public class RegisterViewModel
+    public class LoginRequest
     {
         [Required] 
         [Display(Name = "Email")] 
@@ -13,10 +13,7 @@ namespace Wallet.ViewModels
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Required]
-        [Compare("Password", ErrorMessage = "Passwords do not match")]
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm")]
-        public string PasswordConfirm { get; set; }
+        [Display(Name = "Remember Me?")] 
+        public bool RememberMe { get; set; }
     }
 }

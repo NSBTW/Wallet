@@ -10,7 +10,7 @@ namespace Wallet.Database.Models.Operations
         public double Value { get; set; }
         public double Commission { get; set; }
         public string WalletId { get; set; }
-        public string TargetWalletId { get; set; }
+        public string TransferWalletId { get; set; }
         
         public WalletRecord Wallet { get; set; }
         public WalletRecord TargetWallet { get; set; }

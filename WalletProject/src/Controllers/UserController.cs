@@ -8,7 +8,7 @@ using Wallet.ViewModels;
 namespace Wallet.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("user")]
     public class UserController : Controller
     {
         private readonly UserManager<UserRecord> _userManager;
@@ -20,11 +20,11 @@ namespace Wallet.Controllers
             _signInManager = signInManager;
         }
 
-        [HttpGet("Register")]
+        [HttpGet("register")]
         public IActionResult Register() => View();
 
-        [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromForm] RegisterViewModel model)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterRequest model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -47,11 +47,11 @@ namespace Wallet.Controllers
             return View(model);
         }
 
-        [HttpGet("Login")]
+        [HttpGet("login")]
         public IActionResult Login() => View();
 
-        [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromForm] LoginViewModel model)
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequest model)
         {
             if (!ModelState.IsValid) return View(model);
             var result = await _signInManager
@@ -65,11 +65,7 @@ namespace Wallet.Controllers
         }
 
         [Authorize]
-        [HttpPost("Logout")]
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return Ok();
-        }
+        [HttpPost("logout")]
+        public async Task Logout() => await _signInManager.SignOutAsync();
     }
 }

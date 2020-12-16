@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Linq;
 using Wallet.Database.Models;
 using Wallet.Database.Models.Commissions;
 using Wallet.Database.Models.Operations;
@@ -11,16 +12,16 @@ namespace Wallet.Helpers
     public static class RecordExtensions
     {
         public static Account ToAccount(this AccountRecord record) =>
-            new Account(record.Id, record.Name);
+            new Account(record.Id, record.Name, record.Wallets.Select(w => w.ToWallet()).ToList());
 
         public static Models.Wallet ToWallet(this WalletRecord record) =>
             new Models.Wallet(record.Id, record.Value, record.Currency.Name);
 
         public static IOperation ToOperation(this OperationRecord record) => record.Type switch
         {
-            OperationType.Deposit => new DepositOperation(record.Value, record.Commission, record.TargetWalletId),
+            OperationType.Deposit => new DepositOperation(record.Value, record.Commission, record.TransferWalletId),
             OperationType.Transfer => new TransferOperation(record.Value, record.Commission, record.WalletId,
-                record.TargetWalletId),
+                record.TransferWalletId),
             OperationType.Withdrawal => new WithdrawOperation(record.Value, record.Commission, record.WalletId),
             _ => null
         };

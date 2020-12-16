@@ -12,23 +12,22 @@ namespace Wallet.Models
     public class Account
     {
         public readonly string Id;
-        public string Name { get; private set; }
-
+        public string Name { get; }
+        private readonly List<Wallet> _wallets;
         public Account(string id, string name)
         {
             Id = id;
             Name = name;
+            _wallets = new List<Wallet>();
+        }
+        public Account(string id, string name, List<Wallet> wallets) : this(id, name)
+        {
+            _wallets = wallets;
         }
 
-        public AccountRecord ToRecord() => new AccountRecord
-            {Id = Id, Name = Name};
+        public AccountRecord ToRecord(string userId) => new AccountRecord
+            {Id = Id, Name = Name, UserId = userId};
 
-        public async Task<List<Wallet>> Wallets(WalletContext context) =>
-            await context.Wallets
-                .Where(w => w.AccountId == Id)
-                .Include(w => w.Currency)
-                .Select(w => w.ToWallet())
-                .ToListAsync();
-
+        public IEnumerable<Wallet> GetWallets() => _wallets;
     }
 }

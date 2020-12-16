@@ -14,7 +14,8 @@ using Wallet.Services;
 namespace Wallet.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("account")]
+    [Authorize]
     public class AccountController : ControllerBase
     {
         private readonly UserManager<UserRecord> _userManager;
@@ -29,90 +30,83 @@ namespace Wallet.Controllers
             _operationManager = operationManager;
         }
 
-        [Authorize]
+        [HttpGet]
         public async Task<List<Account>> Get() =>
             await _accountsManager.Accounts(_userManager.GetUserId(User));
 
-        [Authorize]
-        [HttpPost("Create")]
-        public async Task CreateAccount([FromQuery] string name) =>
-            await _accountsManager.TryAddAccountAsync(await _userManager.GetUserAsync(User), name);
-
-        [Authorize]
         [HttpGet("{accountName}")]
-        public async Task<List<Models.Wallet>> Get([FromRoute] string accountName,
-            [FromServices] WalletContext context)
+        public async Task<List<Models.Wallet>> Get([FromRoute] string accountName)
         {
             var account = await _accountsManager.GetAccount(_userManager.GetUserId(User), accountName);
             if (account == null)
                 throw new ArgumentException();
-            return await account.Wallets(context);
+            return account.GetWallets().ToList();
         }
 
-        [Authorize]
-        [HttpPost("Deposit")]
-        public async Task<IActionResult> Deposit([FromQuery] double value, [FromQuery] string accountName,
-            [FromQuery] string currencyName, [FromServices] WalletContext context)
+        [HttpPost]
+        public async Task<IActionResult> CreateAccount([FromBody] string name) =>
+            await _accountsManager.TryAddAccountAsync((await _userManager.GetUserAsync(User)).Id, name)
+                ? (IActionResult) Ok()
+                : Content("This name already exists");
+
+        [HttpPost("deposit")]
+        public async Task Deposit([FromBody] double value, [FromBody] string accountName,
+            [FromBody] string currencyName, [FromServices] WalletContext context)
         {
             var currency = await context.Currencies
                 .FirstOrDefaultAsync(c => c.Name == currencyName);
             if (currency == null)
-                return BadRequest();
+                return;
 
             var account = await _accountsManager.GetAccount(_userManager.GetUserId(User), accountName);
             if (account == null)
-                return BadRequest();
+                return;
 
             if (await _operationManager.TryDeposit(currency.Id, account.Id, value))
-                return Ok();
-            return BadRequest();
+                return;
         }
 
 
         //refactor
-        [Authorize]
-        [HttpPost("Withdraw")]
-        public async Task<IActionResult> Withdraw([FromQuery] double value, [FromQuery] string accountName,
-            [FromQuery] string currencyName, [FromServices] WalletContext context)
+        [HttpPost("withdraw")]
+        public async Task Withdraw([FromBody] double value, [FromBody] string accountName,
+            [FromBody] string currencyName, [FromServices] WalletContext context)
         {
             var currency = await context.Currencies
                 .FirstOrDefaultAsync(c => c.Name == currencyName);
             if (currency == null)
-                return BadRequest();
+                return;
 
             var account = await _accountsManager.GetAccount(_userManager.GetUserId(User), accountName);
             if (account == null)
-                return BadRequest();
+                return;
 
             if (await _operationManager.TryWithdraw(currency.Id, account.Id, value))
-                return Ok();
-            return BadRequest();
+                return;
         }
 
         //refactor
-        [Authorize]
-        [HttpPost("Transfer")]
-        public async Task<IActionResult> Transfer([FromQuery] double value, [FromQuery] string userName,
-            [FromQuery] string accountName, [FromQuery] string fromAccountName, [FromQuery] string currencyName,
+        [HttpPost("transfer")]
+        public async Task Transfer([FromBody] double value, [FromBody] string userName,
+            [FromBody] string accountName, [FromBody] string fromAccountName, [FromBody] string currencyName,
             [FromServices] WalletContext context)
         {
             var currency = await context.Currencies
                 .FirstOrDefaultAsync(c => c.Name == currencyName);
             if (currency == null)
-                return BadRequest();
+                return;
 
             var account = await _accountsManager.GetAccount(_userManager.GetUserId(User), fromAccountName);
             if (account == null)
-                return BadRequest();
+                return;
 
             var targetAccount = await _accountsManager.GetAccount(
                 (await _userManager.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync()).Id, accountName);
             if (targetAccount == null)
-                return BadRequest();
+                return;
 
             if (await _operationManager.TryTransfer(currency.Id, account.Id, targetAccount.Id, value))
-                return Ok();
-            return BadRequest();
+                return;
         }
     }
 }

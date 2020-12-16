@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Wallet.Database;
-using Wallet.Models.Commissions;
 
 namespace Wallet.Models.Operations
 {
@@ -20,12 +19,12 @@ namespace Wallet.Models.Operations
             _targetWalletId = targetWalletId;
         }
 
-        public async Task<bool> TryDoOperation(WalletContext context)
+        public async Task<bool> TryDoOperationAsync(WalletContext context)
         {
             var wallet = await context.Wallets
                 .FirstOrDefaultAsync(w => w.Id == _walletId);
             var targetWallet = await context.Wallets
-                .FirstOrDefaultAsync(w => w.Id == _walletId);
+                .FirstOrDefaultAsync(w => w.Id == _targetWalletId);
             if(wallet.Value < _commission + _value)
                 return false;
 

@@ -3,7 +3,7 @@ using Wallet.Database.Models.Operations;
 
 namespace Wallet.ViewModels
 {
-    public class CommissionViewModel
+    public class CommissionRequest
     {
         public CommissionType Type { get; set; }
         public OperationType OperationType { get; set; }

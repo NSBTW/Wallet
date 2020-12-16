@@ -1,15 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Wallet.Database;
-using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.AspNetCore.Identity;
 using Wallet.Database.Models;
-using Wallet.Models.Commissions;
 using Wallet.Services;
 
 namespace Wallet
@@ -28,15 +25,13 @@ namespace Wallet
         {
             services.AddMvc();
             services.AddIdentity<UserRecord, IdentityRole>().AddEntityFrameworkStores<WalletContext>();
-            services.ConfigureApplicationCookie(options => options.LoginPath = "/User/Login");
-            services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/User/Login");
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/user/login");
+            services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/user/login");
 
             services.AddScoped<AccountsManager>();
             services.AddScoped<OperationManager>();
             services.AddScoped<CurrencyManager>();
-            
-            services.AddSingleton<AbsoluteCommissionRecordReader>();
-            services.AddSingleton<RelativeCommissionRecordReader>();
+            services.AddScoped<CommissionManager>();
 
             services.AddEntityFrameworkNpgsql();
             services.AddDbContext<WalletContext>((provider, options) =>

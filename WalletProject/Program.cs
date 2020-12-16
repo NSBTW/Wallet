@@ -1,18 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Wallet.Database;
-using Wallet.Database.Models;
-using Wallet.Services;
 
 namespace Wallet
 {
@@ -33,7 +23,7 @@ namespace Wallet
 
         private static string ConfigDirectoryPath()
         {
-            var exeLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            var exeLocation = Assembly.GetExecutingAssembly().Location;
             return Path.Combine(Path.GetDirectoryName(exeLocation), "Configuration");
         }
     }

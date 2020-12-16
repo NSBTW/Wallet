@@ -12,52 +12,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af8e0a30-0a7f-46c3-a15f-044ea4c01201" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/WalletProject/src/Helpers/ModelBuilderExtensions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WalletProject/src/Services/CommissionManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/dataSources/094148a8-3633-4447-ad35-71e8fb00e38f.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/dataSources/094148a8-3633-4447-ad35-71e8fb00e38f.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/dataSources/094148a8-3633-4447-ad35-71e8fb00e38f/storage_v2/_src_/database/Wallet.GUD_mQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/dataSources/094148a8-3633-4447-ad35-71e8fb00e38f/storage_v2/_src_/database/Wallet.GUD_mQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wallet/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/Migrations/20201207090516_InitialCreate.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/Migrations/20201207090516_InitialCreate.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/Migrations/20201207113312_IdentityUser.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/Migrations/20201207113312_IdentityUser.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/Migrations/20201207160422_CommissionsStack.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/Migrations/20201207160422_CommissionsStack.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/Migrations/20201207171542_DepositColumnRename.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/Migrations/20201207171542_DepositColumnRename.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/Migrations/20201207181620_MaxTransfer.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/Migrations/20201207181620_MaxTransfer.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/Migrations/20201207183235_Operations.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/Migrations/20201207183235_Operations.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/Migrations/20201207184650_OperationsIdRename.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/Migrations/20201207184650_OperationsIdRename.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/Migrations/20201209171906_Refactor.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/Migrations/20201209171906_Refactor.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/Migrations/20201211103802_addedId.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/Migrations/20201211103802_addedId.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/Migrations/20201211135743_refactorOperations.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/Migrations/20201211135743_refactorOperations.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/Migrations/20201211170610_addCommissionInOperation.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/Migrations/20201211170610_addCommissionInOperation.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/Migrations/WalletDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/Migrations/WalletDbContextModelSnapshot.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WalletProject/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WalletProject/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WalletProject/Views/User/Login.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/Views/User/Login.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WalletProject/Views/User/Register.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/Views/User/Register.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WalletProject/src/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Controllers/AccountController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WalletProject/src/Controllers/AdminController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Controllers/AdminController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/src/Database/DbInitializer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/src/Database/Models/AccountRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Database/Models/AccountRecord.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/src/Database/Models/Commissions/CommissionRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Database/Models/Commissions/CommissionRecord.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/src/Database/Models/Commissions/CommissionType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Database/Models/Commissions/CommissionType.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/src/Database/Models/CurrencyRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Database/Models/CurrencyRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WalletProject/src/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Controllers/UserController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WalletProject/src/Database/Models/Operations/OperationRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Database/Models/Operations/OperationRecord.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/src/Database/Models/Operations/OperationType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Database/Models/Operations/OperationType.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/src/Database/Models/UserRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Database/Models/UserRecord.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/src/Database/Models/WalletRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Database/Models/WalletRecord.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/src/Database/WalletDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Database/WalletContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/src/Helpers/CommissionCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Helpers/CommissionCreator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WalletProject/src/Helpers/CommissionCreator.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/WalletProject/src/Helpers/RecordExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Helpers/RecordExtensions.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WalletProject/src/Models/Account.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Models/Account.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/src/Models/Commissions/AbsoluteCommission.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Models/Commissions/AbsoluteCommission.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/src/Models/Commissions/AbsoluteCommissionRecordReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Models/Commissions/AbsoluteCommissionRecordReader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/src/Models/Commissions/ICommission.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Models/Commissions/ICommission.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/src/Models/Commissions/RelativeCommission.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Models/Commissions/RelativeCommission.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WalletProject/src/Models/Commissions/RelativeCommissionRecordReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Models/Commissions/RelativeCommissionRecordReader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WalletProject/src/Models/Commissions/AbsoluteCommission.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WalletProject/src/Models/Commissions/AbsoluteCommissionRecordReader.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WalletProject/src/Models/Commissions/ICommission.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WalletProject/src/Models/Commissions/ICommissionRecordReader.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WalletProject/src/Models/Commissions/IRecordableCommission.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WalletProject/src/Models/Commissions/RelativeCommission.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WalletProject/src/Models/Commissions/RelativeCommissionRecordReader.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/WalletProject/src/Models/Operations/DepositOperation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Models/Operations/DepositOperation.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WalletProject/src/Models/Operations/IOperation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Models/Operations/IOperation.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WalletProject/src/Models/Operations/TransferOperation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Models/Operations/TransferOperation.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WalletProject/src/Models/Operations/WithdrawOperation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Models/Operations/WithdrawOperation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WalletProject/src/Models/Wallet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Models/Wallet.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WalletProject/src/Services/AccountsManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Services/AccountsManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WalletProject/src/Services/CurrencyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Services/CurrencyManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WalletProject/src/Services/OperationManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/Services/OperationManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WalletProject/src/ViewModels/CommissionViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/ViewModels/CommissionRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WalletProject/src/ViewModels/LoginViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/ViewModels/LoginRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WalletProject/src/ViewModels/RegisterViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WalletProject/src/ViewModels/RegisterRequest.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +56,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/A646A1B6-9A6B-4695-9F2B-93D08BF1D8F7/322/IMutableModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/A646A1B6-9A6B-4695-9F2B-93D08BF1D8F7/EE/IMutableEntityType.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7BF06FD4-1C18-44BC-B81D-65D2E32A91A7/fe/a2fa943d/DataException.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WalletProject/obj/Debug/netcoreapp3.1/Razor/Views/User/Register.cshtml.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1615A5E5-9EB0-4DCB-8CAC-E02210D4E807/3/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/C53339FA-33AE-4A79-B417-6C8AF57A8C4B/1D/UserManager.cs" root0="SKIP_HIGHLIGHTING" />
@@ -80,10 +67,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Wallet/src/Services/AccountCache.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Models/Commissions/ICommissionRecordReader.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Models/Commissions/AbsoluteCommissionRecordReader.cs" />
-        <option value="$PROJECT_DIR$/Wallet/src/Models/Commissions/RelativeCommissionRecordReader.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Services/WalletsManager.cs" />
         <option value="$PROJECT_DIR$/Wallet/Program.cs" />
         <option value="$PROJECT_DIR$/Wallet/Startup.cs" />
@@ -97,40 +80,44 @@
         <option value="$PROJECT_DIR$/Wallet/src/Models/Account.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Models/Wallet.cs" />
         <option value="$PROJECT_DIR$/Wallet/src/Helpers/RecordExtensions.cs" />
-        <option value="$PROJECT_DIR$/WalletProject/src/Services/CommissionManager.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Helpers/CommissionCreater.cs" />
-        <option value="$PROJECT_DIR$/WalletProject/src/Models/Wallet.cs" />
-        <option value="$PROJECT_DIR$/WalletProject/src/Models/Account.cs" />
-        <option value="$PROJECT_DIR$/WalletProject/Startup.cs" />
-        <option value="$PROJECT_DIR$/WalletProject/src/Services/CurrencyManager.cs" />
-        <option value="$PROJECT_DIR$/WalletProject/src/Models/Operations/TransferOperation.cs" />
-        <option value="$PROJECT_DIR$/WalletProject/src/Models/Operations/DepositOperation.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Models/Operations/WithdrawOperation.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Models/Operations/IOperation.cs" />
-        <option value="$PROJECT_DIR$/WalletProject/src/ViewModels/CommissionViewModel.cs" />
-        <option value="$PROJECT_DIR$/WalletProject/src/Controllers/AccountController.cs" />
-        <option value="$PROJECT_DIR$/WalletProject/src/Controllers/AdminController.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Models/Commissions/AbsoluteCommissionRecordReader.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Models/Commissions/RelativeCommissionRecordReader.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Helpers/CommissionCreator.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Models/Commissions/ICommission.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Models/Commissions/AbsoluteCommission.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Models/Commissions/RelativeCommission.cs" />
-        <option value="$PROJECT_DIR$/WalletProject/src/Services/OperationManager.cs" />
-        <option value="$PROJECT_DIR$/WalletProject/src/Services/AccountsManager.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Database/Models/UserRecord.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Database/Models/CurrencyRecord.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Database/Models/Commissions/CommissionRecord.cs" />
-        <option value="$PROJECT_DIR$/WalletProject/src/Database/Models/Operations/OperationRecord.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Database/Models/Commissions/CommissionType.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Database/Models/Operations/OperationType.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Database/DbInitializer.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Database/Models/WalletRecord.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Database/Models/AccountRecord.cs" />
-        <option value="$PROJECT_DIR$/WalletProject/Program.cs" />
-        <option value="$PROJECT_DIR$/WalletProject/src/Helpers/RecordExtensions.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Database/WalletContext.cs" />
         <option value="$PROJECT_DIR$/WalletProject/src/Helpers/ModelBuilderExtensions.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/src/ViewModels/CommissionViewModel.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/src/ViewModels/CommissionRequest.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/src/ViewModels/LoginRequest.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/src/ViewModels/RegisterRequest.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/src/Controllers/UserController.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/src/Models/Account.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/src/Controllers/AccountController.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/src/Helpers/RecordExtensions.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/src/Models/Wallet.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/src/Models/Operations/DepositOperation.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/src/Models/Operations/TransferOperation.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/src/Controllers/AdminController.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/src/Services/CurrencyManager.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/Startup.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/Program.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/src/Services/AccountsManager.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/src/Services/CommissionManager.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/src/Database/Models/Operations/OperationRecord.cs" />
+        <option value="$PROJECT_DIR$/WalletProject/src/Services/OperationManager.cs" />
       </list>
     </option>
   </component>
@@ -492,10 +479,10 @@
       <screen x="0" y="0" width="1366" height="731" />
     </state>
     <state x="278" y="101" width="804" height="530" key="Rider.ProjectTemplateDialog.Size/0.0.1366.731@0.0.1366.731" timestamp="1607341777459" />
-    <state x="370" y="19" width="620" height="695" key="RiderGenerateDialog" timestamp="1608108275127">
+    <state x="370" y="19" width="620" height="695" key="RiderGenerateDialog" timestamp="1608129741586">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
-    <state x="370" y="19" width="620" height="695" key="RiderGenerateDialog/0.0.1366.731@0.0.1366.731" timestamp="1608108275127" />
+    <state x="370" y="19" width="620" height="695" key="RiderGenerateDialog/0.0.1366.731@0.0.1366.731" timestamp="1608129741586" />
     <state x="179" y="1" key="SettingsEditor" timestamp="1608120506367">
       <screen x="0" y="0" width="1366" height="731" />
     </state>
