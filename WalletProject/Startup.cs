@@ -26,6 +26,7 @@ namespace Wallet
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddIdentity<UserRecord, IdentityRole>().AddEntityFrameworkStores<WalletContext>();
             services.ConfigureApplicationCookie(options => options.LoginPath = "/user/login");
             services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/user/login");

@@ -4,9 +4,7 @@ namespace Wallet.ViewModels
 {
     public class RegisterRequest
     {
-        [Required] 
-        [Display(Name = "Email")] 
-        public string Email { get; set; }
+        [Required] [Display(Name = "Login")] public string Login { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

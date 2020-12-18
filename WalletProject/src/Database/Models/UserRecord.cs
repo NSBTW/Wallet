@@ -9,5 +9,6 @@ namespace Wallet.Database.Models
     {
         public List<AccountRecord> Accounts { get; set; }
         public List<CommissionRecord> PersonalCommissions { get; set; }
+        public DateTime RegistrationDate { get; set; }
     }
 }

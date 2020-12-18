@@ -23,24 +23,24 @@ namespace Wallet.Helpers
                 new IdentityUserRole<string> {RoleId = adminRole.Id, UserId = admin.Id},
                 new IdentityUserRole<string> {RoleId = userRole.Id, UserId = user.Id});
 
-            var userMainAccount = builder.CreateAccount(user, "main");
-            var userSecondAccount = builder.CreateAccount(user, "second");
-            var adminAccount = builder.CreateAccount(admin, "admin");
+            var userMainAccount = builder.CreateAccount(user, "main", 1);
+            var userSecondAccount = builder.CreateAccount(user, "second", 2);
+            var adminAccount = builder.CreateAccount(admin, "admin", 3);
 
-            var usdCurrency = builder.CreateCurrency("usd");
-            var eurCurrency = builder.CreateCurrency("eur");
+            var usdCurrency = builder.CreateCurrency("usd", 1);
+            var eurCurrency = builder.CreateCurrency("eur", 2);
 
-            builder.CreateWallet(usdCurrency, userMainAccount, 1000);
-            builder.CreateWallet(eurCurrency, userSecondAccount, 2000);
-            builder.CreateWallet(usdCurrency, adminAccount, 666);
-            builder.CreateWallet(eurCurrency, adminAccount, 1408);
+            builder.CreateWallet(usdCurrency, userMainAccount, 1000, 1);
+            builder.CreateWallet(eurCurrency, userSecondAccount, 2000, 2);
+            builder.CreateWallet(usdCurrency, adminAccount, 666, 3);
+            builder.CreateWallet(eurCurrency, adminAccount, 1408, 4);
 
-            var depositAbsoluteCommission = GetCommission(GetAbsoluteCommission(1), OperationType.Deposit, 100);
+            var depositAbsoluteCommission = GetCommission(GetAbsoluteCommission(1), OperationType.Deposit, 100, 1);
             var transferRelativeCommission =
-                GetCommission(GetRelativeCommission(0.1, 0.5, 10), OperationType.Transfer, 50);
-            builder.CreateCurrencyEqualCommissions(depositAbsoluteCommission, usdCurrency);
-            builder.CreateCurrencyEqualCommissions(transferRelativeCommission, eurCurrency);
-            builder.CreateUserCommission(admin, depositAbsoluteCommission, eurCurrency, OperationType.Deposit);
+                GetCommission(GetRelativeCommission(0.1, 0.5, 10), OperationType.Transfer, 50, 2);
+            builder.CreateCurrencyEqualCommissions(depositAbsoluteCommission, usdCurrency, 10);
+            builder.CreateCurrencyEqualCommissions(transferRelativeCommission, eurCurrency, 20);
+            builder.CreateUserCommission(admin, depositAbsoluteCommission, eurCurrency, OperationType.Deposit, 30);
         }
 
         private static IdentityRole CreateRole(this ModelBuilder builder, string name)
@@ -59,62 +59,64 @@ namespace Wallet.Helpers
                 Id = Guid.NewGuid().ToString(),
                 UserName = name,
                 NormalizedUserName = name.ToUpper(),
-                PasswordHash = passwordHasher.HashPassword(null, password)
+                PasswordHash = passwordHasher.HashPassword(null, password),
+                RegistrationDate = DateTime.Now
             };
             builder.Entity<UserRecord>().HasData(user);
             return user;
         }
 
-        private static AccountRecord CreateAccount(this ModelBuilder builder, UserRecord user, string name)
+        private static AccountRecord CreateAccount(this ModelBuilder builder, UserRecord user, string name, int id)
         {
-            var account = new AccountRecord {Id = Guid.NewGuid().ToString(), Name = name, UserId = user.Id};
+            var account = new AccountRecord {Id = id, Name = name, UserId = user.Id};
             builder.Entity<AccountRecord>().HasData(account);
             return account;
         }
 
-        private static CurrencyRecord CreateCurrency(this ModelBuilder builder, string name)
+        private static CurrencyRecord CreateCurrency(this ModelBuilder builder, string name, int id)
         {
             var currency = new CurrencyRecord
             {
-                Id = Guid.NewGuid().ToString(), Name = name
+                Id = id, Name = name
             };
             builder.Entity<CurrencyRecord>().HasData(currency);
             return currency;
         }
 
         private static void CreateWallet(this ModelBuilder builder, CurrencyRecord currency,
-            AccountRecord account, double value)
+            AccountRecord account, double value, int id)
         {
             var wallet = new WalletRecord
             {
-                Id = Guid.NewGuid().ToString(), CurrencyId = currency.Id, AccountId = account.Id,
+                Id = id, CurrencyId = currency.Id, AccountId = account.Id,
                 Value = value
             };
             builder.Entity<WalletRecord>().HasData(wallet);
         }
 
         private static void CreateUserCommission(this ModelBuilder builder, UserRecord user,
-            CommissionRecord commissionPattern, CurrencyRecord currency, OperationType type)
+            CommissionRecord commissionPattern, CurrencyRecord currency, OperationType type, int mul)
         {
-            var commission = commissionPattern.CreateSameCommission(type);
+            var commission = commissionPattern.CreateSameCommission(type, mul * commissionPattern.Id + 1);
             commission.CurrencyId = currency.Id;
             commission.UserId = user.Id;
             builder.Entity<CommissionRecord>().HasData(commission);
         }
 
         private static void CreateCurrencyEqualCommissions(this ModelBuilder builder,
-            CommissionRecord commissionPattern, CurrencyRecord currency)
+            CommissionRecord commissionPattern, CurrencyRecord currency, int mul)
         {
             commissionPattern.CurrencyId = currency.Id;
-            builder.Entity<CommissionRecord>().HasData(commissionPattern.CreateSameCommission(OperationType.Deposit),
-                commissionPattern.CreateSameCommission(OperationType.Withdrawal),
-                commissionPattern.CreateSameCommission(OperationType.Transfer));
+            builder.Entity<CommissionRecord>().HasData(
+                commissionPattern.CreateSameCommission(OperationType.Deposit, mul * commissionPattern.Id + 1),
+                commissionPattern.CreateSameCommission(OperationType.Withdrawal, mul * commissionPattern.Id + 2),
+                commissionPattern.CreateSameCommission(OperationType.Transfer, mul * commissionPattern.Id + 3));
         }
 
         private static CommissionRecord GetCommission(CommissionRecord commission,
-            OperationType operationType, double maxValue)
+            OperationType operationType, double maxValue, int id)
         {
-            commission.Id = Guid.NewGuid().ToString();
+            commission.Id = id;
             commission.OperationType = operationType;
             commission.MaxValue = maxValue;
             return commission;

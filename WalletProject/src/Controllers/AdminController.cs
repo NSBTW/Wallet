@@ -36,15 +36,15 @@ namespace Wallet.Controllers
 
         // [HttpPost("addCurrency")]
         // public async Task AddCurrency([FromQuery] string name,
-            // [FromServices] CurrencyManager currencyManager) => await currencyManager.CreateCurrency(name,
-            // CommissionCreator.CreateRelativeCommission(0.01),
-            // CommissionCreator.CreateRelativeCommission(0.01),
-            // CommissionCreator.CreateRelativeCommission(0.01));
+        // [FromServices] CurrencyManager currencyManager) => await currencyManager.CreateCurrency(name,
+        // CommissionCreator.CreateRelativeCommission(0.01),
+        // CommissionCreator.CreateRelativeCommission(0.01),
+        // CommissionCreator.CreateRelativeCommission(0.01));
 
 
         // [HttpPost("confirmOperation")]
         // public async Task ConfirmOperation([FromQuery] string operationId,
-            // [FromServices] OperationManager operationManager) => await operationManager.ConfirmOperationAsync(operationId);
+        // [FromServices] OperationManager operationManager) => await operationManager.ConfirmOperationAsync(operationId);
 
         [HttpPost("currencyCommission")]
         public async Task ChangeCurrencyCommission([FromQuery] string currencyName,

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -24,17 +25,17 @@ namespace Wallet.Controllers
         public IActionResult Register() => View();
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterRequest model)
+        public async Task<IActionResult> Register([FromForm] RegisterRequest model)
         {
             if (!ModelState.IsValid) return View(model);
 
-            var user = new UserRecord {Email = model.Email, UserName = model.Email};
+            var user = new UserRecord {UserName = model.Login, RegistrationDate = DateTime.Now};
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
-                return Ok();
+                return Redirect("~/account");
             }
             else
             {
@@ -51,16 +52,15 @@ namespace Wallet.Controllers
         public IActionResult Login() => View();
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest model)
+        public async Task<IActionResult> Login([FromForm] LoginRequest model)
         {
             if (!ModelState.IsValid) return View(model);
             var result = await _signInManager
-                .PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                .PasswordSignInAsync(model.Login, model.Password, model.RememberMe, false);
             if (result.Succeeded)
-                return Ok();
-            else
-                ModelState.AddModelError("", "Incorrect password or login");
+                return Redirect("~/account");
 
+            ModelState.AddModelError("", "Incorrect password or login");
             return View(model);
         }
 

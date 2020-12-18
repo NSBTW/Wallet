@@ -17,14 +17,14 @@ namespace Wallet.Services
             _walletContext = walletContext;
         }
 
-        public async Task<double> GetMaximalOperationValueAsync(string userId, string currencyId,
+        public async Task<double> GetMaximalOperationValueAsync(string userId, int currencyId,
             OperationType type) => (await GetCommissionAsync(userId, currencyId, type)).MaxValue;
 
-        public async Task<double> CalculateCommissionAsync(string userId, string currencyId,
+        public async Task<double> CalculateCommissionAsync(string userId, int currencyId,
             OperationType type, double value) =>
             CalculateCommissionAsync(await GetCommissionAsync(userId, currencyId, type), value);
 
-        private async Task<CommissionRecord> GetCommissionAsync(string userId, string currencyId,
+        private async Task<CommissionRecord> GetCommissionAsync(string userId, int currencyId,
             OperationType type)
         {
             var records = await _walletContext.Commissions

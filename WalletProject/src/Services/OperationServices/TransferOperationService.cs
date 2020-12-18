@@ -17,7 +17,7 @@ namespace Wallet.Services.OperationServices
         }
 
         protected override async Task<OperationRecord> CreateOperationAsync(TransferOperationRequest request,
-            string currencyId, double commission, string accountId, WalletRecord wallet)
+            int currencyId, double commission, int accountId, WalletRecord wallet)
         {
             var userId = (await Context.Users.FirstOrDefaultAsync(u => u.UserName == request.UserName)).Id;
             var toAccountId =
@@ -32,7 +32,7 @@ namespace Wallet.Services.OperationServices
             };
         }
 
-        protected override bool CheckWallet(WalletRecord wallet, OperationRecord operation) =>
+        protected override bool CheckWalletValue(WalletRecord wallet, OperationRecord operation) =>
             wallet.Value > operation.Value + operation.Commission;
 
         public override async Task<bool> TryConfirmOperationAsync(int operationId)
@@ -42,7 +42,7 @@ namespace Wallet.Services.OperationServices
                 .Include(o => o.Wallet)
                 .Include(o => o.TransferWallet)
                 .FirstOrDefaultAsync();
-            CheckWallet(operation.Wallet, operation);
+            CheckWalletValue(operation.Wallet, operation);
             operation.Wallet.Value -= operation.Value + operation.Commission;
             operation.TransferWallet.Value += operation.Value;
             operation.UpdatedAt = DateTime.Now;

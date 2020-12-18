@@ -18,7 +18,7 @@ namespace Wallet.Services.OperationServices
 
 
         protected override async Task<OperationRecord> CreateOperationAsync(OperationRequest request,
-            string currencyId, double commission, string accountId, WalletRecord wallet)
+            int currencyId, double commission, int accountId, WalletRecord wallet)
         {
             var time = DateTime.Now;
             return new OperationRecord
@@ -28,7 +28,7 @@ namespace Wallet.Services.OperationServices
             };
         }
 
-        protected override bool CheckWallet(WalletRecord wallet, OperationRecord operation) => true;
+        protected override bool CheckWalletValue(WalletRecord wallet, OperationRecord operation) => true;
 
         public override async Task<bool> TryConfirmOperationAsync(int operationId)
         {

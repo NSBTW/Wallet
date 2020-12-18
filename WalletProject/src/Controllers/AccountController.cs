@@ -31,37 +31,37 @@ namespace Wallet.Controllers
         public async Task<List<Account>> Get() =>
             await _accountManager.GetAccountsAsync(_userManager.GetUserId(User));
 
-        [HttpGet("{accountName}")]
-        public async Task<List<Models.Wallet>> Get([FromRoute] string accountName)
+        [HttpGet("{name}")]
+        public async Task<List<Models.Wallet>> Get([FromRoute] string name)
         {
-            var account = await _accountManager.GetAccountAsync(_userManager.GetUserId(User), accountName);
+            var account = await _accountManager.GetAccountAsync(_userManager.GetUserId(User), name);
             if (account == null)
                 throw new ArgumentException();
             return account.GetWallets().ToList();
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAccount([FromBody] string name) =>
+        public async Task<IActionResult> CreateAccount([FromForm] string name) =>
             await _accountManager.TryAddAccountAsync((await _userManager.GetUserAsync(User)).Id, name)
                 ? (IActionResult) Ok()
                 : Content("This name already exists");
 
         [HttpPost("deposit")]
-        public async Task<IActionResult> Deposit([FromBody] OperationRequest request,
+        public async Task<IActionResult> Deposit([FromForm] OperationRequest request,
             [FromServices] DepositOperationService operationService) =>
             await operationService.TryDoOperationAsync(_userManager.GetUserId(User), request)
                 ? (IActionResult) Ok()
                 : Content("Invalid operation");
 
         [HttpPost("withdraw")]
-        public async Task<IActionResult> Withdraw([FromBody] OperationRequest request,
+        public async Task<IActionResult> Withdraw([FromForm] OperationRequest request,
             [FromServices] WithdrawalOperationService operationService) =>
             await operationService.TryDoOperationAsync(_userManager.GetUserId(User), request)
                 ? (IActionResult) Ok()
                 : Content("Invalid operation");
 
         [HttpPost("transfer")]
-        public async Task<IActionResult> Transfer([FromBody] TransferOperationRequest request,
+        public async Task<IActionResult> Transfer([FromForm] TransferOperationRequest request,
             [FromServices] TransferOperationService operationService) =>
             await operationService.TryDoOperationAsync(_userManager.GetUserId(User), request)
                 ? (IActionResult) Ok()

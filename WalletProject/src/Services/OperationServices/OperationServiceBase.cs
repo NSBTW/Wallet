@@ -25,20 +25,21 @@ namespace Wallet.Services.OperationServices
         {
             var currencyId = (await Context.Currencies.FirstOrDefaultAsync(c => c.Name == request.CurrencyName)).Id;
             var accountId =
-                (await Context.Accounts.FirstOrDefaultAsync(a => a.Name == request.CurrencyName && a.UserId == userId))
+                (await Context.Accounts.FirstOrDefaultAsync(a => a.Name == request.AccountName && a.UserId == userId))
                 .Id;
             var commission = await CommissionManager.CalculateCommissionAsync(userId, currencyId,
                 Type, request.Value);
             var wallet = await GetOrCreateWalletAsync(currencyId, accountId);
 
             var operation = await CreateOperationAsync(request, currencyId, commission, accountId, wallet);
-
+            
             if (operation.Commission >= operation.Value)
                 return false;
-            if (CheckWallet(wallet, operation))
+            if (!CheckWalletValue(wallet, operation))
                 return false;
 
             await Context.Operations.AddAsync(operation);
+            await Context.SaveChangesAsync();
 
             var maxOperationValue =
                 await CommissionManager.GetMaximalOperationValueAsync(userId, currencyId, OperationType.Deposit);
@@ -51,18 +52,18 @@ namespace Wallet.Services.OperationServices
 
         public abstract Task<bool> TryConfirmOperationAsync(int operationId);
 
-        protected abstract Task<OperationRecord> CreateOperationAsync(TRequest request, string currencyId,
-            double commission, string accountId, WalletRecord wallet);
+        protected abstract Task<OperationRecord> CreateOperationAsync(TRequest request, int currencyId,
+            double commission, int accountId, WalletRecord wallet);
 
-        protected abstract bool CheckWallet(WalletRecord wallet, OperationRecord operation);
+        protected abstract bool CheckWalletValue(WalletRecord wallet, OperationRecord operation);
 
-        protected async Task<WalletRecord> GetOrCreateWalletAsync(string currencyId, string accountId)
+        protected async Task<WalletRecord> GetOrCreateWalletAsync(int currencyId, int accountId)
         {
             var wallet = await Context.Wallets
                 .FirstOrDefaultAsync(w => w.CurrencyId == currencyId && w.AccountId == accountId);
             if (wallet != null)
                 return wallet;
-            wallet = new WalletRecord {Id = Guid.NewGuid().ToString(), AccountId = accountId, CurrencyId = currencyId};
+            wallet = new WalletRecord {AccountId = accountId, CurrencyId = currencyId};
             await Context.Wallets.AddAsync(wallet);
             await Context.SaveChangesAsync();
             return wallet;

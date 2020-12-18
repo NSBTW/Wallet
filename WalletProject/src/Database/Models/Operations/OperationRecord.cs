@@ -9,8 +9,8 @@ namespace Wallet.Database.Models.Operations
         public OperationType Type { get; set; }
         public double Value { get; set; }
         public double Commission { get; set; }
-        public string WalletId { get; set; }
-        public string TransferWalletId { get; set; }
+        public int WalletId { get; set; }
+        public int? TransferWalletId { get; set; }
         public bool IsCompleted { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

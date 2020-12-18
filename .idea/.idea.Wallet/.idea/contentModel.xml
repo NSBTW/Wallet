@@ -13,37 +13,9 @@
           <e p="config.json" t="Include" />
         </e>
         <e p="Migrations" t="Include">
-          <e p="20201207090516_InitialCreate.Designer.cs" t="Include" />
-          <e p="20201207090516_InitialCreate.cs" t="Include" />
-          <e p="20201207113312_IdentityUser.Designer.cs" t="Include" />
-          <e p="20201207113312_IdentityUser.cs" t="Include" />
-          <e p="20201207160422_CommissionsStack.Designer.cs" t="Include" />
-          <e p="20201207160422_CommissionsStack.cs" t="Include" />
-          <e p="20201207171542_DepositColumnRename.Designer.cs" t="Include" />
-          <e p="20201207171542_DepositColumnRename.cs" t="Include" />
-          <e p="20201207181620_MaxTransfer.Designer.cs" t="Include" />
-          <e p="20201207181620_MaxTransfer.cs" t="Include" />
-          <e p="20201207183235_Operations.Designer.cs" t="Include" />
-          <e p="20201207183235_Operations.cs" t="Include" />
-          <e p="20201207184650_OperationsIdRename.Designer.cs" t="Include" />
-          <e p="20201207184650_OperationsIdRename.cs" t="Include" />
-          <e p="20201209171906_Refactor.Designer.cs" t="Include" />
-          <e p="20201209171906_Refactor.cs" t="Include" />
-          <e p="20201211103802_addedId.Designer.cs" t="Include" />
-          <e p="20201211103802_addedId.cs" t="Include" />
-          <e p="20201211135743_refactorOperations.Designer.cs" t="Include" />
-          <e p="20201211135743_refactorOperations.cs" t="Include" />
-          <e p="20201211170610_addCommissionInOperation.Designer.cs" t="Include" />
-          <e p="20201211170610_addCommissionInOperation.cs" t="Include" />
-          <e p="20201216085402_DeleteRecordInNames.Designer.cs" t="Include" />
-          <e p="20201216085402_DeleteRecordInNames.cs" t="Include" />
-          <e p="20201216093149_MoveMaxOperationValueToCommissionRecord.Designer.cs" t="Include" />
-          <e p="20201216093149_MoveMaxOperationValueToCommissionRecord.cs" t="Include" />
-          <e p="20201216134203_RefactorSeeding.Designer.cs" t="Include" />
-          <e p="20201216134203_RefactorSeeding.cs" t="Include" />
-          <e p="20201216134728_RefactorSeeding2.Designer.cs" t="Include" />
-          <e p="20201216134728_RefactorSeeding2.cs" t="Include" />
-          <e p="WalletDbContextModelSnapshot.cs" t="Include" />
+          <e p="20201218164223_NullableTransferId.Designer.cs" t="Include" />
+          <e p="20201218164223_NullableTransferId.cs" t="Include" />
+          <e p="WalletContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
@@ -105,12 +77,6 @@
           </e>
           <e p="Models" t="Include">
             <e p="Account.cs" t="Include" />
-            <e p="Operations" t="Include">
-              <e p="DepositOperation.cs" t="Include" />
-              <e p="IOperation.cs" t="Include" />
-              <e p="TransferOperation.cs" t="Include" />
-              <e p="WithdrawOperation.cs" t="Include" />
-            </e>
             <e p="Wallet.cs" t="Include" />
           </e>
           <e p="Services" t="Include">
