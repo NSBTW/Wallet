@@ -47,23 +47,23 @@ namespace Wallet.Controllers
                 : Content("This name already exists");
 
         [HttpPost("deposit")]
-        public async Task<IActionResult> Deposit([FromForm] OperationRequest request,
+        public async Task<IActionResult> Deposit([FromForm] OperationDto dto,
             [FromServices] DepositOperationService operationService) =>
-            await operationService.TryDoOperationAsync(_userManager.GetUserId(User), request)
+            await operationService.TryDoOperationAsync(_userManager.GetUserId(User), dto)
                 ? (IActionResult) Ok()
                 : Content("Invalid operation");
 
         [HttpPost("withdraw")]
-        public async Task<IActionResult> Withdraw([FromForm] OperationRequest request,
+        public async Task<IActionResult> Withdraw([FromForm] OperationDto dto,
             [FromServices] WithdrawalOperationService operationService) =>
-            await operationService.TryDoOperationAsync(_userManager.GetUserId(User), request)
+            await operationService.TryDoOperationAsync(_userManager.GetUserId(User), dto)
                 ? (IActionResult) Ok()
                 : Content("Invalid operation");
 
         [HttpPost("transfer")]
-        public async Task<IActionResult> Transfer([FromForm] TransferOperationRequest request,
+        public async Task<IActionResult> Transfer([FromForm] TransferOperationDto dto,
             [FromServices] TransferOperationService operationService) =>
-            await operationService.TryDoOperationAsync(_userManager.GetUserId(User), request)
+            await operationService.TryDoOperationAsync(_userManager.GetUserId(User), dto)
                 ? (IActionResult) Ok()
                 : Content("Invalid operation");
     }

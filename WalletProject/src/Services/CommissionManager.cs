@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Wallet.Database;
 using Wallet.Database.Models.Commissions;
 using Wallet.Database.Models.Operations;
+using Wallet.ViewModels;
 
 namespace Wallet.Services
 {
@@ -15,6 +16,26 @@ namespace Wallet.Services
         public CommissionManager(WalletContext walletContext)
         {
             _walletContext = walletContext;
+        }
+
+        public static CommissionRecord CreateCommission(int currencyId, CommissionDto commissionDto,
+            OperationType type, string userId = null)
+        {
+            var commission = new CommissionRecord
+            {
+                CurrencyId = currencyId, Type = commissionDto.Type, OperationType = type,
+                MaxValue = commissionDto.MaxOperationValue, UserId = userId
+            };
+            if (commissionDto.Type == CommissionType.Absolute)
+                commission.Value = commissionDto.Value;
+            else
+            {
+                commission.Rate = commissionDto.Rate;
+                commission.MinCommission = commissionDto.MinimalCommission;
+                commission.MaxCommission = commissionDto.MaximalCommission;
+            }
+
+            return commission;
         }
 
         public async Task<double> GetMaximalOperationValueAsync(string userId, int currencyId,

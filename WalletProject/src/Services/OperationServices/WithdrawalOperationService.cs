@@ -9,20 +9,20 @@ using Wallet.ViewModels;
 
 namespace Wallet.Services.OperationServices
 {
-    public class WithdrawalOperationService : OperationServiceBase<OperationRequest>
+    public class WithdrawalOperationService : OperationServiceBase<OperationDto>
     {
         public WithdrawalOperationService(WalletContext context, CommissionManager commissionManager) : base(context,
             commissionManager, OperationType.Withdrawal)
         {
         }
 
-        protected override async Task<OperationRecord> CreateOperationAsync(OperationRequest request,
+        protected override async Task<OperationRecord> CreateOperationAsync(OperationDto dto,
             int currencyId, double commission, int accountId, WalletRecord wallet)
         {
             var time = DateTime.Now;
             return new OperationRecord
             {
-                WalletId = wallet.Id, Type = Type, Value = request.Value,
+                WalletId = wallet.Id, Type = Type, Value = dto.Value,
                 Commission = commission, CreatedAt = time, UpdatedAt = time
             };
         }
@@ -36,7 +36,8 @@ namespace Wallet.Services.OperationServices
                 .Where(o => o.Id == operationId)
                 .Include(o => o.Wallet)
                 .FirstOrDefaultAsync();
-            CheckWalletValue(operation.Wallet, operation);
+            if (!CheckWalletValue(operation.Wallet, operation))
+                return false;
             operation.Wallet.Value -= operation.Value + operation.Commission;
             operation.UpdatedAt = DateTime.Now;
             operation.IsCompleted = true;

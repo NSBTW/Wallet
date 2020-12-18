@@ -1,12 +1,12 @@
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Wallet.Database;
-using Wallet.Database.Models.Commissions;
 using Wallet.Services;
+using Wallet.Services.OperationServices;
 using Wallet.ViewModels;
 
 namespace Wallet.Controllers
@@ -17,60 +17,69 @@ namespace Wallet.Controllers
     public class AdminController : ControllerBase
     {
         private readonly AccountManager _accountManager;
+        private readonly WalletContext _context;
 
-        public AdminController(AccountManager accountManager)
+        public AdminController(AccountManager accountManager, WalletContext context)
         {
             _accountManager = accountManager;
+            _context = context;
         }
 
-        [HttpPost("changeAccountValue")]
-        public async Task ChangeAccountValue([FromQuery] string userName, [FromQuery] string accountName,
-            [FromQuery] string currencyName, [FromQuery] double value) =>
-            await _accountManager.TryChangeAccountValueAsync(userName, accountName, currencyName, value);
+        [HttpPost("edit")]
+        public async Task Edit([FromForm] EditAccountRequest request) =>
+            await _accountManager.ChangeAccountValueAsync(request.UserName, request.AccountName,
+                request.CurrencyName, request.Value);
 
 
         [HttpPost("deleteCurrency")]
-        public async Task DeleteCurrency([FromQuery] string name,
+        public async Task DeleteCurrency([FromForm] string name, [FromServices] CurrencyManager currencyManager) =>
+            await currencyManager.DeleteCurrencyAsync(name);
+
+        [HttpPost("addCurrency")]
+        public async Task AddCurrency([FromForm] AddCurrencyRequest request,
             [FromServices] CurrencyManager currencyManager) =>
-            await currencyManager.TryDeleteCurrencyAsync(name);
-
-        // [HttpPost("addCurrency")]
-        // public async Task AddCurrency([FromQuery] string name,
-        // [FromServices] CurrencyManager currencyManager) => await currencyManager.CreateCurrency(name,
-        // CommissionCreator.CreateRelativeCommission(0.01),
-        // CommissionCreator.CreateRelativeCommission(0.01),
-        // CommissionCreator.CreateRelativeCommission(0.01));
+            await currencyManager.CreateCurrency(request.Name, request.CommissionDto);
 
 
-        // [HttpPost("confirmOperation")]
-        // public async Task ConfirmOperation([FromQuery] string operationId,
-        // [FromServices] OperationManager operationManager) => await operationManager.ConfirmOperationAsync(operationId);
-
-        [HttpPost("currencyCommission")]
-        public async Task ChangeCurrencyCommission([FromQuery] string currencyName,
-            [FromQuery] CommissionRequest model, [FromServices] WalletContext context)
+        [HttpPost("confirmOperation")]
+        public async Task<IActionResult> ConfirmOperation([FromForm] int operationId,
+            [FromServices] IEnumerable<IOperationService<TransferOperationDto>> operationServices)
         {
-            var currency = await context.Currencies
-                .Where(c => c.Name == currencyName)
-                .Include(c => c.Commissions)
-                .FirstOrDefaultAsync();
-            if (currency == null)
-                return;
-            var commission =
-                currency.Commissions.FirstOrDefault(c => c.OperationType == model.OperationType && c.UserId != null);
-            if (commission == null)
-                throw new Exception();
-            CopyCommissionViewToRecord(model, commission);
-            await context.SaveChangesAsync();
+            var type = (await _context.Operations.FirstOrDefaultAsync(o => o.Id == operationId)).Type;
+            if (!await operationServices.First(o => o.Type == type).TryConfirmOperationAsync(operationId))
+                return Content("Operation invalid");
+            return Ok();
         }
 
-        private static void CopyCommissionViewToRecord(CommissionRequest model, CommissionRecord commission)
+        [HttpPost("commission")]
+        public async Task ChangeOrCreateCommission([FromForm] ChangeCommissionRequest request)
         {
-            commission.Rate = model.Rate;
-            commission.Type = model.Type;
-            commission.Value = model.Value;
-            commission.MaxCommission = model.MaximalValue;
-            commission.MinCommission = model.MinimalValue;
+            var currencyId = (await _context.Currencies.FirstOrDefaultAsync(c => c.Name == request.CurrencyName)).Id;
+
+            var userId = request.UserName == null
+                ? null
+                : (await _context.Users.FirstOrDefaultAsync(c => c.UserName == request.UserName)).Id;
+
+            var commission = await _context.Commissions.FirstOrDefaultAsync(c =>
+                c.OperationType == request.Type && c.CurrencyId == currencyId && c.UserId == userId);
+            var dto = request.CommissionDto;
+            if (commission == null)
+            {
+                commission =
+                    CommissionManager.CreateCommission(currencyId, dto, request.Type, userId);
+                await _context.AddAsync(commission);
+            }
+            else
+            {
+                commission.Rate = dto.Rate;
+                commission.Value = dto.Value;
+                commission.MaxCommission = dto.MaximalCommission;
+                commission.MinCommission = dto.MinimalCommission;
+                commission.Type = dto.Type;
+                commission.MaxValue = dto.MaxOperationValue;
+            }
+
+            await _context.SaveChangesAsync();
         }
     }
 }

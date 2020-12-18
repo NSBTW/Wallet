@@ -92,11 +92,14 @@
             </e>
           </e>
           <e p="ViewModels" t="Include">
-            <e p="CommissionRequest.cs" t="Include" />
+            <e p="AddCurrencyRequest.cs" t="Include" />
+            <e p="ChangeCommissionRequest.cs" t="Include" />
+            <e p="CommissionDto.cs" t="Include" />
+            <e p="EditAccountRequest.cs" t="Include" />
             <e p="LoginRequest.cs" t="Include" />
-            <e p="OperationRequest.cs" t="Include" />
+            <e p="OperationDto.cs" t="Include" />
             <e p="RegisterRequest.cs" t="Include" />
-            <e p="TransferOperationRequest.cs" t="Include" />
+            <e p="TransferOperationDto.cs" t="Include" />
           </e>
         </e>
         <e p="wwwroot" t="Include">

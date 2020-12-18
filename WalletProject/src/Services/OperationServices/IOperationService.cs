@@ -4,7 +4,7 @@ using Wallet.ViewModels;
 
 namespace Wallet.Services.OperationServices
 {
-    public interface IOperationService<in TRequest> where TRequest : OperationRequest
+    public interface IOperationService<in TRequest> where TRequest : OperationDto
     {
         public OperationType Type { get; }
         public Task<bool> TryDoOperationAsync(string userName, TRequest request);

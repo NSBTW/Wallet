@@ -8,7 +8,7 @@ using Wallet.ViewModels;
 
 namespace Wallet.Services.OperationServices
 {
-    public abstract class OperationServiceBase<TRequest> : IOperationService<TRequest> where TRequest : OperationRequest
+    public abstract class OperationServiceBase<TRequest> : IOperationService<TRequest> where TRequest : OperationDto
     {
         protected readonly WalletContext Context;
         protected readonly CommissionManager CommissionManager;

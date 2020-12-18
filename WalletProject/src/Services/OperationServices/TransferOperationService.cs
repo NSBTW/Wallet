@@ -9,25 +9,25 @@ using Wallet.ViewModels;
 
 namespace Wallet.Services.OperationServices
 {
-    public class TransferOperationService : OperationServiceBase<TransferOperationRequest>
+    public class TransferOperationService : OperationServiceBase<TransferOperationDto>
     {
         public TransferOperationService(WalletContext context, CommissionManager commissionManager)
             : base(context, commissionManager, OperationType.Transfer)
         {
         }
 
-        protected override async Task<OperationRecord> CreateOperationAsync(TransferOperationRequest request,
+        protected override async Task<OperationRecord> CreateOperationAsync(TransferOperationDto dto,
             int currencyId, double commission, int accountId, WalletRecord wallet)
         {
-            var userId = (await Context.Users.FirstOrDefaultAsync(u => u.UserName == request.UserName)).Id;
+            var userId = (await Context.Users.FirstOrDefaultAsync(u => u.UserName == dto.UserName)).Id;
             var toAccountId =
-                (await Context.Accounts.FirstOrDefaultAsync(a => a.Name == request.ToAccountName && a.UserId == userId))
+                (await Context.Accounts.FirstOrDefaultAsync(a => a.Name == dto.ToAccountName && a.UserId == userId))
                 .Id;
             var toWallet = await GetOrCreateWalletAsync(currencyId, toAccountId);
             var time = DateTime.Now;
             return new OperationRecord
             {
-                WalletId = wallet.Id, Type = Type, Value = request.Value,
+                WalletId = wallet.Id, Type = Type, Value = dto.Value,
                 Commission = commission, CreatedAt = time, UpdatedAt = time, TransferWalletId = toWallet.Id
             };
         }
@@ -42,7 +42,8 @@ namespace Wallet.Services.OperationServices
                 .Include(o => o.Wallet)
                 .Include(o => o.TransferWallet)
                 .FirstOrDefaultAsync();
-            CheckWalletValue(operation.Wallet, operation);
+            if (!CheckWalletValue(operation.Wallet, operation))
+                return false;
             operation.Wallet.Value -= operation.Value + operation.Commission;
             operation.TransferWallet.Value += operation.Value;
             operation.UpdatedAt = DateTime.Now;

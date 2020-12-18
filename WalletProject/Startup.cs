@@ -34,6 +34,9 @@ namespace Wallet
             services.AddScoped<DepositOperationService>();
             services.AddScoped<WithdrawalOperationService>();
             services.AddScoped<TransferOperationService>();
+            services.AddScoped<IOperationService<TransferOperationDto>, DepositOperationService>();
+            services.AddScoped<IOperationService<TransferOperationDto>, WithdrawalOperationService>();
+            services.AddScoped<IOperationService<TransferOperationDto>, TransferOperationService>();
 
             services.AddScoped<AccountManager>();
             services.AddScoped<CurrencyManager>();

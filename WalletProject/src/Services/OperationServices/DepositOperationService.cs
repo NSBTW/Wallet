@@ -9,7 +9,7 @@ using Wallet.ViewModels;
 
 namespace Wallet.Services.OperationServices
 {
-    public class DepositOperationService : OperationServiceBase<OperationRequest>
+    public class DepositOperationService : OperationServiceBase<OperationDto>
     {
         public DepositOperationService(WalletContext context, CommissionManager commissionManager) : base(context,
             commissionManager, OperationType.Deposit)
@@ -17,13 +17,13 @@ namespace Wallet.Services.OperationServices
         }
 
 
-        protected override async Task<OperationRecord> CreateOperationAsync(OperationRequest request,
+        protected override async Task<OperationRecord> CreateOperationAsync(OperationDto dto,
             int currencyId, double commission, int accountId, WalletRecord wallet)
         {
             var time = DateTime.Now;
             return new OperationRecord
             {
-                WalletId = wallet.Id, Type = Type, Value = request.Value,
+                WalletId = wallet.Id, Type = Type, Value = dto.Value,
                 Commission = commission, CreatedAt = time, UpdatedAt = time
             };
         }

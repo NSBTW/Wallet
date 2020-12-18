@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Wallet.Database;
 using Wallet.Database.Models;
@@ -13,12 +12,10 @@ namespace Wallet.Services
     public class AccountManager
     {
         private readonly WalletContext _walletContext;
-        private readonly UserManager<UserRecord> _userManager;
 
-        public AccountManager(WalletContext walletContext, UserManager<UserRecord> userManager)
+        public AccountManager(WalletContext walletContext)
         {
             _walletContext = walletContext;
-            _userManager = userManager;
         }
 
         public async Task<List<Account>> GetAccountsAsync(string userId) =>
@@ -35,7 +32,7 @@ namespace Wallet.Services
                 a.UserId == userId && a.Name == accountName) != null)
                 return false;
             await _walletContext.Accounts.AddAsync(
-                new AccountRecord{Name = accountName, UserId = userId});
+                new AccountRecord {Name = accountName, UserId = userId});
             await _walletContext.SaveChangesAsync();
             return true;
         }
@@ -46,29 +43,27 @@ namespace Wallet.Services
                 .ThenInclude(w => w.Currency)
                 .FirstOrDefaultAsync(a => a.UserId == userId && a.Name == accountName))?
             .ToAccount();
-        
-        public async Task<bool> TryChangeAccountValueAsync(string userName, string accountName, string currencyName,
-            double value)
+
+        public async Task ChangeAccountValueAsync(string userName, string accountName,
+            string currencyName, double value)
         {
-            // var user = await _userManager.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync();
-            // var account = await GetAccountAsync(user.Id, accountName);
-            // if (account == null)
-                // return false;
-            // var currency = await _walletContext.Currencies
-                // .FirstOrDefaultAsync(c => c.Name == currencyName);
+            var accountId =
+                (await _walletContext.Accounts.FirstOrDefaultAsync(a =>
+                    a.Name == accountName && a.User.UserName == userName)).Id;
+            var currencyId = (await _walletContext.Currencies.FirstOrDefaultAsync(c =>
+                c.Name == currencyName)).Id;
+            var wallet =
+                await _walletContext.Wallets.FirstOrDefaultAsync(w =>
+                    w.CurrencyId == currencyId && w.AccountId == accountId);
+            if (wallet == null)
+            {
+                wallet = new WalletRecord {CurrencyId = currencyId, Value = value, AccountId = accountId};
+                await _walletContext.Wallets.AddAsync(wallet);
+            }
+            else
+                wallet.Value = value;
 
-            // var wallet = await _walletContext.Wallets.FirstOrDefaultAsync(w =>
-                // w.AccountId == account.Id && w.CurrencyId == currency.Id);
-            // if (wallet == null)
-            // {
-                // wallet = new WalletRecord {Currency = currency, Value = value};
-                // await _walletContext.Wallets.AddAsync(wallet);
-            // }
-            // else
-                // wallet.Value = value;
-
-            // await _walletContext.SaveChangesAsync();
-            return true;
+            await _walletContext.SaveChangesAsync();
         }
     }
 }
