@@ -2,15 +2,10 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 using Wallet.Database;
-using Wallet.Database.Models;
 using Wallet.Database.Models.Commissions;
-using Wallet.Database.Models.Operations;
-using Wallet.Helpers;
 using Wallet.Services;
 using Wallet.ViewModels;
 
@@ -47,9 +42,9 @@ namespace Wallet.Controllers
             // CommissionCreator.CreateRelativeCommission(0.01));
 
 
-        [HttpPost("confirmOperation")]
-        public async Task ConfirmOperation([FromQuery] string operationId,
-            [FromServices] OperationManager operationManager) => await operationManager.ConfirmOperationAsync(operationId);
+        // [HttpPost("confirmOperation")]
+        // public async Task ConfirmOperation([FromQuery] string operationId,
+            // [FromServices] OperationManager operationManager) => await operationManager.ConfirmOperationAsync(operationId);
 
         [HttpPost("currencyCommission")]
         public async Task ChangeCurrencyCommission([FromQuery] string currencyName,

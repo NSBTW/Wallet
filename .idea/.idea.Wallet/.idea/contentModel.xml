@@ -105,18 +105,32 @@
           </e>
           <e p="Models" t="Include">
             <e p="Account.cs" t="Include" />
+            <e p="Operations" t="Include">
+              <e p="DepositOperation.cs" t="Include" />
+              <e p="IOperation.cs" t="Include" />
+              <e p="TransferOperation.cs" t="Include" />
+              <e p="WithdrawOperation.cs" t="Include" />
+            </e>
             <e p="Wallet.cs" t="Include" />
           </e>
           <e p="Services" t="Include">
             <e p="AccountManager.cs" t="Include" />
             <e p="CommissionManager.cs" t="Include" />
             <e p="CurrencyManager.cs" t="Include" />
-            <e p="OperationManager.cs" t="Include" />
+            <e p="OperationServices" t="Include">
+              <e p="DepositOperationService.cs" t="Include" />
+              <e p="IOperationService.cs" t="Include" />
+              <e p="OperationServiceBase.cs" t="Include" />
+              <e p="TransferOperationService.cs" t="Include" />
+              <e p="WithdrawalOperationService.cs" t="Include" />
+            </e>
           </e>
           <e p="ViewModels" t="Include">
             <e p="CommissionRequest.cs" t="Include" />
             <e p="LoginRequest.cs" t="Include" />
+            <e p="OperationRequest.cs" t="Include" />
             <e p="RegisterRequest.cs" t="Include" />
+            <e p="TransferOperationRequest.cs" t="Include" />
           </e>
         </e>
         <e p="wwwroot" t="Include">

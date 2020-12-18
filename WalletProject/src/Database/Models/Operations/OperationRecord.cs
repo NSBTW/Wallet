@@ -5,14 +5,17 @@ namespace Wallet.Database.Models.Operations
 {
     public class OperationRecord
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public OperationType Type { get; set; }
         public double Value { get; set; }
         public double Commission { get; set; }
         public string WalletId { get; set; }
         public string TransferWalletId { get; set; }
-        
+        public bool IsCompleted { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+
         public WalletRecord Wallet { get; set; }
-        public WalletRecord TargetWallet { get; set; }
+        public WalletRecord TransferWallet { get; set; }
     }
 }

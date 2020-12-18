@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Wallet.Database;
 using Wallet.Database.Models;
 using Wallet.Services;
+using Wallet.Services.OperationServices;
+using Wallet.ViewModels;
 
 namespace Wallet
 {
@@ -28,8 +30,11 @@ namespace Wallet
             services.ConfigureApplicationCookie(options => options.LoginPath = "/user/login");
             services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/user/login");
 
+            services.AddScoped<DepositOperationService>();
+            services.AddScoped<WithdrawalOperationService>();
+            services.AddScoped<TransferOperationService>();
+
             services.AddScoped<AccountManager>();
-            services.AddScoped<OperationManager>();
             services.AddScoped<CurrencyManager>();
             services.AddScoped<CommissionManager>();
 

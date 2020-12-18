@@ -5,12 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Wallet.Database;
 using Wallet.Database.Models;
-using Wallet.Database.Models.Operations;
 using Wallet.Models;
 using Wallet.Services;
+using Wallet.Services.OperationServices;
+using Wallet.ViewModels;
 
 namespace Wallet.Controllers
 {
@@ -21,14 +20,11 @@ namespace Wallet.Controllers
     {
         private readonly UserManager<UserRecord> _userManager;
         private readonly AccountManager _accountManager;
-        private readonly OperationManager _operationManager;
 
-        public AccountController(UserManager<UserRecord> userManager, AccountManager accountManager,
-            OperationManager operationManager)
+        public AccountController(UserManager<UserRecord> userManager, AccountManager accountManager)
         {
             _userManager = userManager;
             _accountManager = accountManager;
-            _operationManager = operationManager;
         }
 
         [HttpGet]
@@ -51,64 +47,24 @@ namespace Wallet.Controllers
                 : Content("This name already exists");
 
         [HttpPost("deposit")]
-        public async Task Deposit([FromBody] double value, [FromBody] string accountName,
-            [FromBody] string currencyName, [FromServices] WalletContext context)
-        {
-            var currency = await context.Currencies
-                .FirstOrDefaultAsync(c => c.Name == currencyName);
-            if (currency == null)
-                return;
+        public async Task<IActionResult> Deposit([FromBody] OperationRequest request,
+            [FromServices] DepositOperationService operationService) =>
+            await operationService.TryDoOperationAsync(_userManager.GetUserId(User), request)
+                ? (IActionResult) Ok()
+                : Content("Invalid operation");
 
-            var account = await _accountManager.GetAccountAsync(_userManager.GetUserId(User), accountName);
-            if (account == null)
-                return;
-
-            if (await _operationManager.TryDoOperationAsync(currency.Id, account.Id, value, OperationType.Deposit))
-                return;
-        }
-
-
-        //refactor
         [HttpPost("withdraw")]
-        public async Task Withdraw([FromBody] double value, [FromBody] string accountName,
-            [FromBody] string currencyName, [FromServices] WalletContext context)
-        {
-            var currency = await context.Currencies
-                .FirstOrDefaultAsync(c => c.Name == currencyName);
-            if (currency == null)
-                return;
+        public async Task<IActionResult> Withdraw([FromBody] OperationRequest request,
+            [FromServices] WithdrawalOperationService operationService) =>
+            await operationService.TryDoOperationAsync(_userManager.GetUserId(User), request)
+                ? (IActionResult) Ok()
+                : Content("Invalid operation");
 
-            var account = await _accountManager.GetAccountAsync(_userManager.GetUserId(User), accountName);
-            if (account == null)
-                return;
-
-            if (await _operationManager.TryDoOperationAsync(currency.Id, account.Id, value, OperationType.Withdrawal))
-                return;
-        }
-
-        //refactor
         [HttpPost("transfer")]
-        public async Task Transfer([FromBody] double value, [FromBody] string userName,
-            [FromBody] string accountName, [FromBody] string fromAccountName, [FromBody] string currencyName,
-            [FromServices] WalletContext context)
-        {
-            var currency = await context.Currencies
-                .FirstOrDefaultAsync(c => c.Name == currencyName);
-            if (currency == null)
-                return;
-
-            var account = await _accountManager.GetAccountAsync(_userManager.GetUserId(User), fromAccountName);
-            if (account == null)
-                return;
-
-            var targetAccount = await _accountManager.GetAccountAsync(
-                (await _userManager.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync()).Id, accountName);
-            if (targetAccount == null)
-                return;
-
-            if (await _operationManager.TryDoOperationAsync(currency.Id, account.Id, value, OperationType.Transfer,
-                targetAccount.Id))
-                return;
-        }
+        public async Task<IActionResult> Transfer([FromBody] TransferOperationRequest request,
+            [FromServices] TransferOperationService operationService) =>
+            await operationService.TryDoOperationAsync(_userManager.GetUserId(User), request)
+                ? (IActionResult) Ok()
+                : Content("Invalid operation");
     }
 }
