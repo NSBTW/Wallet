@@ -11,18 +11,18 @@ using Wallet.Models;
 
 namespace Wallet.Services
 {
-    public class AccountsManager
+    public class AccountManager
     {
         private readonly WalletContext _walletContext;
         private readonly UserManager<UserRecord> _userManager;
 
-        public AccountsManager(WalletContext walletContext, UserManager<UserRecord> userManager)
+        public AccountManager(WalletContext walletContext, UserManager<UserRecord> userManager)
         {
             _walletContext = walletContext;
             _userManager = userManager;
         }
 
-        public async Task<List<Account>> Accounts(string userId) =>
+        public async Task<List<Account>> GetAccountsAsync(string userId) =>
             await _walletContext.Accounts
                 .Where(a => a.UserId == userId)
                 .Include(a => a.Wallets)
@@ -40,17 +40,17 @@ namespace Wallet.Services
             return true;
         }
 
-        public async Task<Account> GetAccount(string userId, string accountName) =>
+        public async Task<Account> GetAccountAsync(string userId, string accountName) =>
             (await _walletContext.Accounts
                 .Include(a => a.Wallets)
                 .FirstOrDefaultAsync(a => a.UserId == userId && a.Name == accountName))?
             .ToAccount();
         
-        public async Task<bool> TryChangeAccountValue(string userName, string accountName, string currencyName,
+        public async Task<bool> TryChangeAccountValueAsync(string userName, string accountName, string currencyName,
             double value)
         {
             var user = await _userManager.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync();
-            var account = await GetAccount(user.Id, accountName);
+            var account = await GetAccountAsync(user.Id, accountName);
             if (account == null)
                 return false;
             var currency = await _walletContext.Currencies

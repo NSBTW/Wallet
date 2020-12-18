@@ -12,19 +12,19 @@ namespace Wallet.Services
     {
         private readonly WalletContext _walletContext;
 
-        public CommissionManager(WalletContext walletContext, OperationManager operationManager)
+        public CommissionManager(WalletContext walletContext)
         {
             _walletContext = walletContext;
         }
 
-        public async Task<double> GetMaximalOperationValue(string userId, string currencyId,
-            OperationType type) => (await GetCommission(userId, currencyId, type)).MaxValue;
+        public async Task<double> GetMaximalOperationValueAsync(string userId, string currencyId,
+            OperationType type) => (await GetCommissionAsync(userId, currencyId, type)).MaxValue;
 
-        public async Task<double> CalculateCommission(string userId, string currencyId,
+        public async Task<double> CalculateCommissionAsync(string userId, string currencyId,
             OperationType type, double value) =>
-            CalculateCommission(await GetCommission(userId, currencyId, type), value);
+            CalculateCommissionAsync(await GetCommissionAsync(userId, currencyId, type), value);
 
-        private async Task<CommissionRecord> GetCommission(string userId, string currencyId,
+        private async Task<CommissionRecord> GetCommissionAsync(string userId, string currencyId,
             OperationType type)
         {
             var records = await _walletContext.Commissions
@@ -34,7 +34,7 @@ namespace Wallet.Services
         }
 
 
-        public static double CalculateCommission(CommissionRecord record, double value) => record.Type switch
+        public static double CalculateCommissionAsync(CommissionRecord record, double value) => record.Type switch
         {
             CommissionType.Absolute => CalculateAbsoluteCommission(record),
             CommissionType.Relative => CalculateRelativeCommission(record, value),

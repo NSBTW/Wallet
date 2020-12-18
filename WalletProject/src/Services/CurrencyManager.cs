@@ -37,7 +37,7 @@ namespace Wallet.Services
         //     await _context.SaveChangesAsync();
         // }
 
-        public async Task<bool> TryDeleteCurrency(string name)
+        public async Task<bool> TryDeleteCurrencyAsync(string name)
         {
             var currency = await _context.Currencies
                 .Where(c => c.Name == name)

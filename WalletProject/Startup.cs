@@ -28,7 +28,7 @@ namespace Wallet
             services.ConfigureApplicationCookie(options => options.LoginPath = "/user/login");
             services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/user/login");
 
-            services.AddScoped<AccountsManager>();
+            services.AddScoped<AccountManager>();
             services.AddScoped<OperationManager>();
             services.AddScoped<CurrencyManager>();
             services.AddScoped<CommissionManager>();

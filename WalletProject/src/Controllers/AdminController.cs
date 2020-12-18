@@ -21,23 +21,23 @@ namespace Wallet.Controllers
     [Route("admin")]
     public class AdminController : ControllerBase
     {
-        private readonly AccountsManager _accountsManager;
+        private readonly AccountManager _accountManager;
 
-        public AdminController(AccountsManager accountsManager)
+        public AdminController(AccountManager accountManager)
         {
-            _accountsManager = accountsManager;
+            _accountManager = accountManager;
         }
 
         [HttpPost("changeAccountValue")]
         public async Task ChangeAccountValue([FromQuery] string userName, [FromQuery] string accountName,
             [FromQuery] string currencyName, [FromQuery] double value) =>
-            await _accountsManager.TryChangeAccountValue(userName, accountName, currencyName, value);
+            await _accountManager.TryChangeAccountValueAsync(userName, accountName, currencyName, value);
 
 
         [HttpPost("deleteCurrency")]
         public async Task DeleteCurrency([FromQuery] string name,
             [FromServices] CurrencyManager currencyManager) =>
-            await currencyManager.TryDeleteCurrency(name);
+            await currencyManager.TryDeleteCurrencyAsync(name);
 
         // [HttpPost("addCurrency")]
         // public async Task AddCurrency([FromQuery] string name,

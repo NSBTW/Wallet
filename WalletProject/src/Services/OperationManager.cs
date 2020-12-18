@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Wallet.Database;
 using Wallet.Database.Models;
 using Wallet.Database.Models.Operations;
-using Wallet.Helpers;
 
 namespace Wallet.Services
 {
@@ -19,7 +18,7 @@ namespace Wallet.Services
             _commissionManager = commissionManager;
         }
 
-        public async Task<bool> TryDoOperation(string currencyId, string accountId,
+        public async Task<bool> TryDoOperationAsync(string currencyId, string accountId,
             double value, OperationType type, string targetAccountId = null)
         {
             if (type == OperationType.Transfer)
@@ -28,7 +27,7 @@ namespace Wallet.Services
 
             var userId = (await _context.Accounts.FirstOrDefaultAsync(a => a.Id == accountId)).UserId;
             var commission =
-                await _commissionManager.CalculateCommission(userId, currencyId, OperationType.Withdrawal, value);
+                await _commissionManager.CalculateCommissionAsync(userId, currencyId, OperationType.Withdrawal, value);
 
             var wallet = await GetWalletAsync(currencyId, accountId);
             if (!IsOperationValid(value, commission, wallet?.Value ?? 0, type))
@@ -40,7 +39,7 @@ namespace Wallet.Services
                   await CreateWalletAsync(currencyId, targetAccountId)
                 : null;
 
-            var maxOperationValue = await _commissionManager.GetMaximalOperationValue(userId, currencyId, type);
+            var maxOperationValue = await _commissionManager.GetMaximalOperationValueAsync(userId, currencyId, type);
             var record = new OperationRecord
             {
                 Id = Guid.NewGuid().ToString(), WalletId = wallet.Id, Type = type, Value = value,
@@ -53,12 +52,12 @@ namespace Wallet.Services
             return true;
         }
 
-        public bool IsOperationValid(double value, double commission, double walletValue, OperationType type) =>
+        private static bool IsOperationValid(double value, double commission, double walletValue, OperationType type) =>
             type switch {
-                OperationType.Deposit => ,
-                OperationType.Transfer => ,
-                OperationType.Withdrawal => ,
-                _ => 
+                OperationType.Deposit => commission < value,
+                OperationType.Transfer => commission + value < walletValue,
+                OperationType.Withdrawal => commission + value < walletValue,
+                _ => throw new ArgumentException()
             };
 
         public async Task<WalletRecord> GetWalletAsync(string currencyId, string accountId) => await _context.Wallets
