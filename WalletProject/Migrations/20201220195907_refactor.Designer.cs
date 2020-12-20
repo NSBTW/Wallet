@@ -10,8 +10,8 @@ using Wallet.Database;
 namespace Wallet.Migrations
 {
     [DbContext(typeof(WalletContext))]
-    [Migration("20201218164223_NullableTransferId")]
-    partial class NullableTransferId
+    [Migration("20201220195907_refactor")]
+    partial class refactor
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,15 +53,15 @@ namespace Wallet.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0d71f2e3-2af6-48ab-b6a7-145633ebb0a4",
-                            ConcurrencyStamp = "861d51c1-e3e3-4e27-8b86-efdbbbe93c18",
+                            Id = "8f4327f9-16d1-4e55-803a-088a69548b14",
+                            ConcurrencyStamp = "27bed53e-6c82-47c0-a2da-85c406288d5c",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "4b465d67-5641-4dd6-bc15-30516b0e5b9a",
-                            ConcurrencyStamp = "22b6a38f-0da5-45b6-ae7e-afb6d3cc427e",
+                            Id = "abaea8d9-466a-4c83-9bc7-ad7067861f7a",
+                            ConcurrencyStamp = "ae4a8567-a5d2-440e-8213-02fe835d1612",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -172,13 +172,13 @@ namespace Wallet.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "4251b32b-0e51-4021-a334-7cbef9ba653c",
-                            RoleId = "0d71f2e3-2af6-48ab-b6a7-145633ebb0a4"
+                            UserId = "dce84adb-afb0-45d6-881a-f54823d48884",
+                            RoleId = "8f4327f9-16d1-4e55-803a-088a69548b14"
                         },
                         new
                         {
-                            UserId = "a2dea8b4-79b4-4136-bafe-721b4078d0b0",
-                            RoleId = "4b465d67-5641-4dd6-bc15-30516b0e5b9a"
+                            UserId = "ac56e83a-6aee-4969-8c7d-2e063a5ce013",
+                            RoleId = "abaea8d9-466a-4c83-9bc7-ad7067861f7a"
                         });
                 });
 
@@ -236,19 +236,19 @@ namespace Wallet.Migrations
                         {
                             Id = 1,
                             Name = "main",
-                            UserId = "a2dea8b4-79b4-4136-bafe-721b4078d0b0"
+                            UserId = "ac56e83a-6aee-4969-8c7d-2e063a5ce013"
                         },
                         new
                         {
                             Id = 2,
                             Name = "second",
-                            UserId = "a2dea8b4-79b4-4136-bafe-721b4078d0b0"
+                            UserId = "ac56e83a-6aee-4969-8c7d-2e063a5ce013"
                         },
                         new
                         {
                             Id = 3,
                             Name = "admin",
-                            UserId = "4251b32b-0e51-4021-a334-7cbef9ba653c"
+                            UserId = "dce84adb-afb0-45d6-881a-f54823d48884"
                         });
                 });
 
@@ -388,7 +388,7 @@ namespace Wallet.Migrations
                             OperationType = 0,
                             Rate = 0.0,
                             Type = 0,
-                            UserId = "4251b32b-0e51-4021-a334-7cbef9ba653c",
+                            UserId = "dce84adb-afb0-45d6-881a-f54823d48884",
                             Value = 1.0
                         });
                 });
@@ -440,8 +440,10 @@ namespace Wallet.Migrations
                         .HasColumnName("commission");
 
                     b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasColumnName("created_at");
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("now()");
 
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("boolean")
@@ -456,8 +458,10 @@ namespace Wallet.Migrations
                         .HasColumnName("type");
 
                     b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp without time zone")
-                        .HasColumnName("updated_at");
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("now()");
 
                     b.Property<double>("Value")
                         .HasColumnType("double precision")
@@ -532,8 +536,10 @@ namespace Wallet.Migrations
                         .HasColumnName("phone_number_confirmed");
 
                     b.Property<DateTime>("RegistrationDate")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasColumnName("registration_date");
+                        .HasColumnName("registration_date")
+                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text")
@@ -561,31 +567,31 @@ namespace Wallet.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a2dea8b4-79b4-4136-bafe-721b4078d0b0",
+                            Id = "ac56e83a-6aee-4969-8c7d-2e063a5ce013",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1c3c66d0-4eca-426d-bc2d-86bba194086c",
+                            ConcurrencyStamp = "c0f6fcd1-a123-4b69-a596-d22e09dbb09c",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "USER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKbXTmZ53JHfBUCXwQk7xoQbhTSyFHzEVj9l4xdFhvRUyM+gASPc6Wfp7pZWlV5YnQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELZMjs6sqDHz9U211U2aUqt5ikGhrieDNKjgSbsh7Fhpqd6t9D2b0rKmopaTNJvu+A==",
                             PhoneNumberConfirmed = false,
-                            RegistrationDate = new DateTime(2020, 12, 18, 19, 42, 22, 217, DateTimeKind.Local).AddTicks(2380),
-                            SecurityStamp = "1308dbfb-b5d4-4868-9f02-5aa7a92955e2",
+                            RegistrationDate = new DateTime(2020, 12, 20, 22, 59, 6, 359, DateTimeKind.Local).AddTicks(662),
+                            SecurityStamp = "78baaa41-e1b1-4d3e-9072-7cde48d008b0",
                             TwoFactorEnabled = false,
                             UserName = "user"
                         },
                         new
                         {
-                            Id = "4251b32b-0e51-4021-a334-7cbef9ba653c",
+                            Id = "dce84adb-afb0-45d6-881a-f54823d48884",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a87a403b-9356-4f9f-aab4-0d7f0ddf7d09",
+                            ConcurrencyStamp = "f77c21a9-46b9-480a-b365-308958991b5a",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKJtkRE+Hstc1M9VDLcmdV4+Zvlkho0X+7DPcLgG/+VklE84ApzVuJH+liz3yA6FFQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJIAAgJiM2M5VgcoPFPh3dfRqeL1ioeH90TkSrnPZim8D6isLD6E1HwdONAerKyH5w==",
                             PhoneNumberConfirmed = false,
-                            RegistrationDate = new DateTime(2020, 12, 18, 19, 42, 22, 235, DateTimeKind.Local).AddTicks(4912),
-                            SecurityStamp = "5482e5ec-b827-4888-b244-e19cca005372",
+                            RegistrationDate = new DateTime(2020, 12, 20, 22, 59, 6, 392, DateTimeKind.Local).AddTicks(259),
+                            SecurityStamp = "218c0535-5996-4094-872a-7f533cdae658",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -732,7 +738,8 @@ namespace Wallet.Migrations
                     b.HasOne("Wallet.Database.Models.UserRecord", "User")
                         .WithMany("PersonalCommissions")
                         .HasForeignKey("UserId")
-                        .HasConstraintName("fk_commissions_asp_net_users_user_id");
+                        .HasConstraintName("fk_commissions_asp_net_users_user_id")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Currency");
 
@@ -742,12 +749,13 @@ namespace Wallet.Migrations
             modelBuilder.Entity("Wallet.Database.Models.Operations.OperationRecord", b =>
                 {
                     b.HasOne("Wallet.Database.Models.WalletRecord", "TransferWallet")
-                        .WithMany()
+                        .WithMany("TransferOperations")
                         .HasForeignKey("TransferWalletId")
-                        .HasConstraintName("fk_operations_wallets_transfer_wallet_id");
+                        .HasConstraintName("fk_operations_wallets_transfer_wallet_id")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Wallet.Database.Models.WalletRecord", "Wallet")
-                        .WithMany()
+                        .WithMany("Operations")
                         .HasForeignKey("WalletId")
                         .HasConstraintName("fk_operations_wallets_wallet_id")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -794,6 +802,13 @@ namespace Wallet.Migrations
                     b.Navigation("Accounts");
 
                     b.Navigation("PersonalCommissions");
+                });
+
+            modelBuilder.Entity("Wallet.Database.Models.WalletRecord", b =>
+                {
+                    b.Navigation("Operations");
+
+                    b.Navigation("TransferOperations");
                 });
 #pragma warning restore 612, 618
         }

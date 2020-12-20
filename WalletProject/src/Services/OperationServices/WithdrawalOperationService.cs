@@ -23,7 +23,7 @@ namespace Wallet.Services.OperationServices
             return new OperationRecord
             {
                 WalletId = wallet.Id, Type = Type, Value = dto.Value,
-                Commission = commission, CreatedAt = time, UpdatedAt = time
+                Commission = commission
             };
         }
 
@@ -39,7 +39,6 @@ namespace Wallet.Services.OperationServices
             if (!CheckWalletValue(operation.Wallet, operation))
                 return false;
             operation.Wallet.Value -= operation.Value + operation.Commission;
-            operation.UpdatedAt = DateTime.Now;
             operation.IsCompleted = true;
             await Context.SaveChangesAsync();
             return true;

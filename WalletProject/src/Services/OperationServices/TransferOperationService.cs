@@ -24,11 +24,10 @@ namespace Wallet.Services.OperationServices
                 (await Context.Accounts.FirstOrDefaultAsync(a => a.Name == dto.ToAccountName && a.UserId == userId))
                 .Id;
             var toWallet = await GetOrCreateWalletAsync(currencyId, toAccountId);
-            var time = DateTime.Now;
             return new OperationRecord
             {
                 WalletId = wallet.Id, Type = Type, Value = dto.Value,
-                Commission = commission, CreatedAt = time, UpdatedAt = time, TransferWalletId = toWallet.Id
+                Commission = commission, TransferWalletId = toWallet.Id
             };
         }
 
@@ -46,7 +45,6 @@ namespace Wallet.Services.OperationServices
                 return false;
             operation.Wallet.Value -= operation.Value + operation.Commission;
             operation.TransferWallet.Value += operation.Value;
-            operation.UpdatedAt = DateTime.Now;
             operation.IsCompleted = true;
             await Context.SaveChangesAsync();
             return true;

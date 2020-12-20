@@ -20,11 +20,9 @@ namespace Wallet.Services.OperationServices
         protected override async Task<OperationRecord> CreateOperationAsync(OperationDto dto,
             int currencyId, double commission, int accountId, WalletRecord wallet)
         {
-            var time = DateTime.Now;
             return new OperationRecord
             {
-                WalletId = wallet.Id, Type = Type, Value = dto.Value,
-                Commission = commission, CreatedAt = time, UpdatedAt = time
+                WalletId = wallet.Id, Type = Type, Value = dto.Value, Commission = commission
             };
         }
 
@@ -37,7 +35,6 @@ namespace Wallet.Services.OperationServices
                 .Include(o => o.Wallet)
                 .FirstOrDefaultAsync();
             operation.Wallet.Value += operation.Value - operation.Commission;
-            operation.UpdatedAt = DateTime.Now;
             operation.IsCompleted = true;
             await Context.SaveChangesAsync();
             return true;

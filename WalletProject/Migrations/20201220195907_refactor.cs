@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Wallet.Migrations
 {
-    public partial class NullableTransferId : Migration
+    public partial class refactor : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,7 +27,7 @@ namespace Wallet.Migrations
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
-                    registration_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    registration_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValueSql: "now()"),
                     user_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     normalized_user_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -211,7 +211,7 @@ namespace Wallet.Migrations
                         column: x => x.user_id,
                         principalTable: "asp_net_users",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_commissions_currencies_currency_id",
                         column: x => x.currency_id,
@@ -259,8 +259,8 @@ namespace Wallet.Migrations
                     wallet_id = table.Column<int>(type: "integer", nullable: false),
                     transfer_wallet_id = table.Column<int>(type: "integer", nullable: true),
                     is_completed = table.Column<bool>(type: "boolean", nullable: false),
-                    created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                    created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValueSql: "now()"),
+                    updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -270,7 +270,7 @@ namespace Wallet.Migrations
                         column: x => x.transfer_wallet_id,
                         principalTable: "wallets",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_operations_wallets_wallet_id",
                         column: x => x.wallet_id,
@@ -284,8 +284,8 @@ namespace Wallet.Migrations
                 columns: new[] { "id", "concurrency_stamp", "name", "normalized_name" },
                 values: new object[,]
                 {
-                    { "0d71f2e3-2af6-48ab-b6a7-145633ebb0a4", "861d51c1-e3e3-4e27-8b86-efdbbbe93c18", "admin", "ADMIN" },
-                    { "4b465d67-5641-4dd6-bc15-30516b0e5b9a", "22b6a38f-0da5-45b6-ae7e-afb6d3cc427e", "user", "USER" }
+                    { "8f4327f9-16d1-4e55-803a-088a69548b14", "27bed53e-6c82-47c0-a2da-85c406288d5c", "admin", "ADMIN" },
+                    { "abaea8d9-466a-4c83-9bc7-ad7067861f7a", "ae4a8567-a5d2-440e-8213-02fe835d1612", "user", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -293,8 +293,8 @@ namespace Wallet.Migrations
                 columns: new[] { "id", "access_failed_count", "concurrency_stamp", "email", "email_confirmed", "lockout_enabled", "lockout_end", "normalized_email", "normalized_user_name", "password_hash", "phone_number", "phone_number_confirmed", "registration_date", "security_stamp", "two_factor_enabled", "user_name" },
                 values: new object[,]
                 {
-                    { "a2dea8b4-79b4-4136-bafe-721b4078d0b0", 0, "1c3c66d0-4eca-426d-bc2d-86bba194086c", null, false, false, null, null, "USER", "AQAAAAEAACcQAAAAEKbXTmZ53JHfBUCXwQk7xoQbhTSyFHzEVj9l4xdFhvRUyM+gASPc6Wfp7pZWlV5YnQ==", null, false, new DateTime(2020, 12, 18, 19, 42, 22, 217, DateTimeKind.Local).AddTicks(2380), "1308dbfb-b5d4-4868-9f02-5aa7a92955e2", false, "user" },
-                    { "4251b32b-0e51-4021-a334-7cbef9ba653c", 0, "a87a403b-9356-4f9f-aab4-0d7f0ddf7d09", null, false, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEKJtkRE+Hstc1M9VDLcmdV4+Zvlkho0X+7DPcLgG/+VklE84ApzVuJH+liz3yA6FFQ==", null, false, new DateTime(2020, 12, 18, 19, 42, 22, 235, DateTimeKind.Local).AddTicks(4912), "5482e5ec-b827-4888-b244-e19cca005372", false, "admin" }
+                    { "ac56e83a-6aee-4969-8c7d-2e063a5ce013", 0, "c0f6fcd1-a123-4b69-a596-d22e09dbb09c", null, false, false, null, null, "USER", "AQAAAAEAACcQAAAAELZMjs6sqDHz9U211U2aUqt5ikGhrieDNKjgSbsh7Fhpqd6t9D2b0rKmopaTNJvu+A==", null, false, new DateTime(2020, 12, 20, 22, 59, 6, 359, DateTimeKind.Local).AddTicks(662), "78baaa41-e1b1-4d3e-9072-7cde48d008b0", false, "user" },
+                    { "dce84adb-afb0-45d6-881a-f54823d48884", 0, "f77c21a9-46b9-480a-b365-308958991b5a", null, false, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEJIAAgJiM2M5VgcoPFPh3dfRqeL1ioeH90TkSrnPZim8D6isLD6E1HwdONAerKyH5w==", null, false, new DateTime(2020, 12, 20, 22, 59, 6, 392, DateTimeKind.Local).AddTicks(259), "218c0535-5996-4094-872a-7f533cdae658", false, "admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -311,9 +311,9 @@ namespace Wallet.Migrations
                 columns: new[] { "id", "name", "user_id" },
                 values: new object[,]
                 {
-                    { 1, "main", "a2dea8b4-79b4-4136-bafe-721b4078d0b0" },
-                    { 2, "second", "a2dea8b4-79b4-4136-bafe-721b4078d0b0" },
-                    { 3, "admin", "4251b32b-0e51-4021-a334-7cbef9ba653c" }
+                    { 1, "main", "ac56e83a-6aee-4969-8c7d-2e063a5ce013" },
+                    { 2, "second", "ac56e83a-6aee-4969-8c7d-2e063a5ce013" },
+                    { 3, "admin", "dce84adb-afb0-45d6-881a-f54823d48884" }
                 });
 
             migrationBuilder.InsertData(
@@ -321,8 +321,8 @@ namespace Wallet.Migrations
                 columns: new[] { "role_id", "user_id" },
                 values: new object[,]
                 {
-                    { "4b465d67-5641-4dd6-bc15-30516b0e5b9a", "a2dea8b4-79b4-4136-bafe-721b4078d0b0" },
-                    { "0d71f2e3-2af6-48ab-b6a7-145633ebb0a4", "4251b32b-0e51-4021-a334-7cbef9ba653c" }
+                    { "abaea8d9-466a-4c83-9bc7-ad7067861f7a", "ac56e83a-6aee-4969-8c7d-2e063a5ce013" },
+                    { "8f4327f9-16d1-4e55-803a-088a69548b14", "dce84adb-afb0-45d6-881a-f54823d48884" }
                 });
 
             migrationBuilder.InsertData(
@@ -336,7 +336,7 @@ namespace Wallet.Migrations
                     { 41, 2, 10.0, 50.0, 0.5, 0, 0.10000000000000001, 1, null, 0.0 },
                     { 42, 2, 10.0, 50.0, 0.5, 2, 0.10000000000000001, 1, null, 0.0 },
                     { 43, 2, 10.0, 50.0, 0.5, 1, 0.10000000000000001, 1, null, 0.0 },
-                    { 31, 2, 0.0, 100.0, 0.0, 0, 0.0, 0, "4251b32b-0e51-4021-a334-7cbef9ba653c", 1.0 }
+                    { 31, 2, 0.0, 100.0, 0.0, 0, 0.0, 0, "dce84adb-afb0-45d6-881a-f54823d48884", 1.0 }
                 });
 
             migrationBuilder.InsertData(

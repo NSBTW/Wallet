@@ -1,3 +1,7 @@
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Wallet.Database.Models;
@@ -24,6 +28,10 @@ namespace Wallet.Database
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<UserRecord>()
+                .Property(u => u.RegistrationDate)
+                .HasDefaultValueSql("now()")
+                .ValueGeneratedOnAdd();
             ConfigureAccountRecord(builder);
             ConfigureOperationsRecord(builder);
             ConfigureWalletRecord(builder);
@@ -33,6 +41,27 @@ namespace Wallet.Database
             builder.SeedWalletContext();
 
             this.ApplySnakeCase(builder);
+        }
+
+        public override int SaveChanges()
+        {
+            var entries = ChangeTracker.Entries()
+                .Where(e => e.Entity is OperationRecord && e.State == EntityState.Modified);
+
+            foreach (var entityEntry in entries)
+                ((OperationRecord) entityEntry.Entity).UpdatedAt = DateTime.Now;
+
+            return base.SaveChanges();
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            var entries = ChangeTracker.Entries()
+                .Where(e => e.Entity is OperationRecord && e.State == EntityState.Modified);
+
+            foreach (var entityEntry in entries)
+                ((OperationRecord) entityEntry.Entity).UpdatedAt = DateTime.Now;
+            return (await base.SaveChangesAsync(true, cancellationToken));
         }
 
         private static void ConfigureAccountRecord(ModelBuilder builder)
@@ -45,7 +74,23 @@ namespace Wallet.Database
         {
             builder.Entity<OperationRecord>().Property(o => o.Type).IsRequired();
             builder.Entity<OperationRecord>().Property(o => o.WalletId).IsRequired();
+            builder.Entity<OperationRecord>()
+                .Property(u => u.CreatedAt)
+                .HasDefaultValueSql("now()")
+                .ValueGeneratedOnAdd();
+            builder.Entity<OperationRecord>()
+                .Property(u => u.UpdatedAt)
+                .HasDefaultValueSql("now()")
+                .ValueGeneratedOnAddOrUpdate();
 
+            builder.Entity<OperationRecord>()
+                .HasOne(o => o.Wallet)
+                .WithMany(w => w.Operations)
+                .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<OperationRecord>()
+                .HasOne(o => o.TransferWallet)
+                .WithMany(w => w.TransferOperations)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         private static void ConfigureWalletRecord(ModelBuilder builder)
@@ -65,6 +110,10 @@ namespace Wallet.Database
             builder.Entity<CommissionRecord>().Property(a => a.Type).IsRequired();
             builder.Entity<CommissionRecord>().Property(a => a.OperationType).IsRequired();
             builder.Entity<CommissionRecord>().Property(a => a.CurrencyId).IsRequired();
+            builder.Entity<CommissionRecord>()
+                .HasOne(c => c.User)
+                .WithMany(u => u.PersonalCommissions)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

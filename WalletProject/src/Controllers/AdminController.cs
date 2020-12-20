@@ -26,23 +26,23 @@ namespace Wallet.Controllers
         }
 
         [HttpPost("edit")]
-        public async Task Edit([FromForm] EditAccountRequest request) =>
+        public async Task Edit([FromBody] EditAccountRequest request) =>
             await _accountManager.ChangeAccountValueAsync(request.UserName, request.AccountName,
                 request.CurrencyName, request.Value);
 
 
         [HttpPost("deleteCurrency")]
-        public async Task DeleteCurrency([FromForm] string name, [FromServices] CurrencyManager currencyManager) =>
+        public async Task DeleteCurrency([FromBody] string name, [FromServices] CurrencyManager currencyManager) =>
             await currencyManager.DeleteCurrencyAsync(name);
 
         [HttpPost("addCurrency")]
-        public async Task AddCurrency([FromForm] AddCurrencyRequest request,
+        public async Task AddCurrency([FromBody] AddCurrencyRequest request,
             [FromServices] CurrencyManager currencyManager) =>
             await currencyManager.CreateCurrency(request.Name, request.CommissionDto);
 
 
         [HttpPost("confirmOperation")]
-        public async Task<IActionResult> ConfirmOperation([FromForm] int operationId,
+        public async Task<IActionResult> ConfirmOperation([FromBody] int operationId,
             [FromServices] IEnumerable<IOperationService<TransferOperationDto>> operationServices)
         {
             var type = (await _context.Operations.FirstOrDefaultAsync(o => o.Id == operationId)).Type;
@@ -52,7 +52,7 @@ namespace Wallet.Controllers
         }
 
         [HttpPost("commission")]
-        public async Task ChangeOrCreateCommission([FromForm] ChangeCommissionRequest request)
+        public async Task ChangeOrCreateCommission([FromBody] ChangeCommissionRequest request)
         {
             var currencyId = (await _context.Currencies.FirstOrDefaultAsync(c => c.Name == request.CurrencyName)).Id;
 

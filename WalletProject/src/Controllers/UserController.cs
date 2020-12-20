@@ -29,7 +29,7 @@ namespace Wallet.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var user = new UserRecord {UserName = model.Login, RegistrationDate = DateTime.Now};
+            var user = new UserRecord {UserName = model.Login};
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
